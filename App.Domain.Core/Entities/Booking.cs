@@ -13,7 +13,7 @@ namespace App.Domain.Core.Entities
 		public int Id { get; set; }
 		public int ServiceId { get; set; } 
 		public int ClientId { get; set; }
-        public decimal TotalPrice { get; set; }
+        public int TotalPrice { get; set; }
         public DateTime BookingDate { get; set; }
 		public DateTime ServiceDate { get; set; }
 		public StatusEnum Status { get; set; }
@@ -26,5 +26,4 @@ namespace App.Domain.Core.Entities
 		public Client Client { get; set; }
 		#endregion
 	}
-
 }

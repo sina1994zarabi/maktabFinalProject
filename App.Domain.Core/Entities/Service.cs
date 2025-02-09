@@ -12,7 +12,7 @@ namespace App.Domain.Core.Entities
 		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
-		public decimal Price { get; set; }
+		public int Price { get; set; }
 		public int ServiceProviderId { get; set; }
         public int SubCategoryId { get; set; }
         #endregion

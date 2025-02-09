@@ -18,10 +18,12 @@ namespace App.Infra.DataAccess.EfCore
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Subcategory> Subcategories { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base (options)
-        {
-            
-        }
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+		{
+
+		}
+
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
