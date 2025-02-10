@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entities;
+﻿using App.Domain.Core.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Configurations
 {
-	public class ServiceProviderConfig : IEntityTypeConfiguration<ServiceProvider>
+    public class ServiceProviderConfig : IEntityTypeConfiguration<ServiceProvider>
 	{
 		public void Configure(EntityTypeBuilder<ServiceProvider> builder)
 		{
-			builder.HasMany(p => p.Services)
-			.WithOne(s => s.ServiceProvider)
-			.HasForeignKey(s => s.ServiceProviderId)
-			.OnDelete(DeleteBehavior.Cascade);
+
+			builder.HasMany(sp => sp.ServiceOfferings)
+				   .WithOne(so => so.ServiceProvider);
+
+			builder.HasMany(sp => sp.Skills)
+				   .WithMany(s => s.ServiceProviders);
 
 			builder.HasData(
 				new ServiceProvider

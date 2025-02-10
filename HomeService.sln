@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Core", "App.Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infra.DataAccess.EfCore", "App.Infra.DataAccess.EfCore\App.Infra.DataAccess.EfCore.csproj", "{EF8D25CD-A9AF-4FB7-B3F3-C256CE5FA921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.EndPoints.MVC", "App.EndPoints.MVC\App.EndPoints.MVC.csproj", "{222F3CF5-9827-4C3D-A732-2C37B82B883D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.EndPoints.MVC", "App.EndPoints.MVC\App.EndPoints.MVC.csproj", "{222F3CF5-9827-4C3D-A732-2C37B82B883D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

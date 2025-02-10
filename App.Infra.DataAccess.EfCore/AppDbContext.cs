@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities;
+﻿using App.Domain.Core.Entities.Services;
+using App.Domain.Core.Entities.User;
 using App.Infra.DataAccess.EfCore.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore
 {
-	public class AppDbContext : DbContext
+    public class AppDbContext : DbContext
 	{
 		public DbSet<Client> Clients { get; set; }
 		public DbSet<ServiceProvider> ServiceProviders { get; set; }
 		public DbSet<Service> Services { get; set; }
-		public DbSet<Booking> Bookings { get; set; }
+		public DbSet<ServiceRequest> Orders { get; set; }
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Subcategory> Subcategories { get; set; }
 
@@ -32,7 +33,7 @@ namespace App.Infra.DataAccess.EfCore
 			modelBuilder.ApplyConfiguration(new ServiceConfig());
 			modelBuilder.ApplyConfiguration(new CategoryConfig());
 			modelBuilder.ApplyConfiguration(new SubCategoryConfig());
-			modelBuilder.ApplyConfiguration(new BookingConfig());
+			
 		}
 	}
 }

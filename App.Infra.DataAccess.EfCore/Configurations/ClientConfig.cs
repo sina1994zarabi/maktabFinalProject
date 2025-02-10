@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entities;
+﻿using App.Domain.Core.Entities.User;
 using App.Domain.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,14 +10,18 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Configurations
 {
-	public class ClientConfig : IEntityTypeConfiguration<Client>
+    public class ClientConfig : IEntityTypeConfiguration<Client>
 	{
 		public void Configure(EntityTypeBuilder<Client> builder)
 		{
-			builder.HasMany(c => c.Bookings)
-				   .WithOne(b => b.Client)
-		           .HasForeignKey(b => b.ClientId)
-		           .OnDelete(DeleteBehavior.Restrict);
+
+			builder.HasMany(c => c.ServiceRequests)
+				   .WithOne(c => c.Client);
+
+
+			builder.HasMany(c => c.Reviews)
+				.WithOne(r => r.Client);
+			
 
 			builder.HasData(
 				new Client
@@ -29,7 +33,8 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Gender = Gender.male,
 					PhoneNumber = "09xxxxxxxxx",
 					Address = "آدرس یک",
-					DateRegistered = DateTime.Now
+					DateRegistered = DateTime.Now,
+					AccountBalance = 10000,
 				},
 				new Client
 				{
@@ -40,7 +45,8 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Gender = Gender.male,
 					PhoneNumber = "09yyyyyyyy",
 					Address = "آدرس دو",
-					DateRegistered = DateTime.Now
+					DateRegistered = DateTime.Now,
+					AccountBalance = 100000
 				}
 				);
 		}

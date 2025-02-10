@@ -1,4 +1,4 @@
-﻿using App.Domain.Core.Entities;
+﻿using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Configurations
 {
-	public class SubCategoryConfig : IEntityTypeConfiguration<Subcategory>
+    public class SubCategoryConfig : IEntityTypeConfiguration<Subcategory>
 	{
 		public void Configure(EntityTypeBuilder<Subcategory> builder)
 		{
@@ -18,15 +18,19 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			.WithMany(c => c.Subcategories)
 			.HasForeignKey(sc => sc.CategoryId);
 
+			builder.HasMany(sc => sc.Services)
+				   .WithOne(s => s.Subcategory)
+				   .HasForeignKey(sc => sc.SubCategoryId);
+
 			builder.HasData(new Subcategory
 			{
 				Id = 1,
-				Name = "نظافت منزل",
+				Title = "نظافت منزل",
 				CategoryId =1
 			}
 			, new Subcategory
 			{   Id = 2,
-				Name = "نظافت راه پله",
+				Title = "نظافت راه پله",
 				CategoryId =1
 			}
 			);

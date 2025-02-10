@@ -19,7 +19,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,6 +32,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountBalance = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -53,6 +54,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    AccountBalance = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -73,7 +75,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -84,7 +86,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,83 +98,129 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
-                    ServiceProviderId = table.Column<int>(type: "int", nullable: false),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Services", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Services_ServiceProviders_ServiceProviderId",
-                        column: x => x.ServiceProviderId,
-                        principalTable: "ServiceProviders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Services_Subcategories_SubCategoryId",
                         column: x => x.SubCategoryId,
                         principalTable: "Subcategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookings",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    TotalPrice = table.Column<int>(type: "int", nullable: false),
                     BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    PaymentStatus = table.Column<int>(type: "int", nullable: false)
+                    IsCompleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Clients_ClientId",
+                        name: "FK_Orders_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Bookings_Services_ServiceId",
+                        name: "FK_Orders_Services_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "Services",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceServiceProvider",
+                columns: table => new
+                {
+                    ServiceProvidersId = table.Column<int>(type: "int", nullable: false),
+                    SkillsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceServiceProvider", x => new { x.ServiceProvidersId, x.SkillsId });
+                    table.ForeignKey(
+                        name: "FK_ServiceServiceProvider_ServiceProviders_ServiceProvidersId",
+                        column: x => x.ServiceProvidersId,
+                        principalTable: "ServiceProviders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceServiceProvider_Services_SkillsId",
+                        column: x => x.SkillsId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceOffering",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ServiceProviderId = table.Column<int>(type: "int", nullable: false),
+                    ServiceRequestId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceOffering", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceOffering_Orders_ServiceRequestId",
+                        column: x => x.ServiceRequestId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceOffering_ServiceProviders_ServiceProviderId",
+                        column: x => x.ServiceProviderId,
+                        principalTable: "ServiceProviders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "خدمات منزل" });
+                columns: new[] { "Id", "Title" },
+                values: new object[] { 1, "نضافت منزل" });
 
             migrationBuilder.InsertData(
                 table: "Clients",
-                columns: new[] { "Id", "Address", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "Role", "Username" },
+                columns: new[] { "Id", "AccountBalance", "Address", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "آدرس یک", new DateTime(2025, 2, 9, 15, 43, 50, 965, DateTimeKind.Local).AddTicks(6153), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", 0, "User1Name" },
-                    { 2, "آدرس دو", new DateTime(2025, 2, 9, 15, 43, 50, 965, DateTimeKind.Local).AddTicks(6170), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", 0, "User2Name" }
+                    { 1, 10000, "آدرس یک", new DateTime(2025, 2, 10, 18, 56, 30, 67, DateTimeKind.Local).AddTicks(5299), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", 0, "User1Name" },
+                    { 2, 100000, "آدرس دو", new DateTime(2025, 2, 10, 18, 56, 30, 67, DateTimeKind.Local).AddTicks(5319), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", 0, "User2Name" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ServiceProviders",
-                columns: new[] { "Id", "Address", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "Role", "Username" },
+                columns: new[] { "Id", "AccountBalance", "Address", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, "آدرس کارشناس یک", new DateTime(2025, 2, 9, 12, 13, 50, 965, DateTimeKind.Utc).AddTicks(8920), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", 0, "ServiceProvider1Username" },
-                    { 2, "آدرس کارشناس دو", new DateTime(2025, 2, 9, 12, 13, 50, 965, DateTimeKind.Utc).AddTicks(8925), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", 0, "ServiceProvider2Username" }
+                    { 1, 0, "آدرس کارشناس یک", new DateTime(2025, 2, 10, 15, 26, 30, 68, DateTimeKind.Utc).AddTicks(953), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", 0, "ServiceProvider1Username" },
+                    { 2, 0, "آدرس کارشناس دو", new DateTime(2025, 2, 10, 15, 26, 30, 68, DateTimeKind.Utc).AddTicks(959), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", 0, "ServiceProvider2Username" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Subcategories",
-                columns: new[] { "Id", "CategoryId", "Name" },
+                columns: new[] { "Id", "CategoryId", "Title" },
                 values: new object[,]
                 {
                     { 1, 1, "نظافت منزل" },
@@ -181,33 +229,38 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "Id", "Description", "Price", "ServiceProviderId", "SubCategoryId", "Title" },
-                values: new object[] { 1, "توضیحات خدمت شماره یک ", 1000, 1, 1, "عنوان خدمت شماره یک" });
-
-            migrationBuilder.InsertData(
-                table: "Bookings",
-                columns: new[] { "Id", "BookingDate", "ClientId", "PaymentStatus", "ServiceDate", "ServiceId", "Status", "TotalPrice" },
-                values: new object[] { 1, new DateTime(2025, 2, 9, 15, 43, 50, 966, DateTimeKind.Local).AddTicks(7558), 1, 1, new DateTime(2025, 2, 11, 15, 43, 50, 966, DateTimeKind.Local).AddTicks(7570), 1, 2, 0 });
+                columns: new[] { "Id", "Description", "Price", "SubCategoryId", "Title" },
+                values: new object[] { 1, "توضیحات خدمت شماره یک ", 1000, 1, "عنوان خدمت شماره یک" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_ClientId",
-                table: "Bookings",
+                name: "IX_Orders_ClientId",
+                table: "Orders",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_ServiceId",
-                table: "Bookings",
+                name: "IX_Orders_ServiceId",
+                table: "Orders",
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_ServiceProviderId",
-                table: "Services",
+                name: "IX_ServiceOffering_ServiceProviderId",
+                table: "ServiceOffering",
                 column: "ServiceProviderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceOffering_ServiceRequestId",
+                table: "ServiceOffering",
+                column: "ServiceRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_SubCategoryId",
                 table: "Services",
                 column: "SubCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceServiceProvider_SkillsId",
+                table: "ServiceServiceProvider",
+                column: "SkillsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Subcategories_CategoryId",
@@ -219,16 +272,22 @@ namespace App.Infra.DataAccess.EfCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bookings");
+                name: "ServiceOffering");
+
+            migrationBuilder.DropTable(
+                name: "ServiceServiceProvider");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "ServiceProviders");
 
             migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Services");
-
-            migrationBuilder.DropTable(
-                name: "ServiceProviders");
 
             migrationBuilder.DropTable(
                 name: "Subcategories");

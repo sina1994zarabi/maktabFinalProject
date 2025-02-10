@@ -8,9 +8,10 @@ namespace App.Domain.Core.Enums
 {
 	public enum StatusEnum
 	{
-		PendingClientConfirmation = 1,     
-		PendingProviderConfirmation = 2,   
-		Completed = 3,   
-		Cancelled = 4    
+		AwaitingOfferReveives = 1,
+		PendingClientConfirmation = 2,     
+		PendingProviderConfirmation = 3,   
+		Completed = 4,   
+		Cancelled = 5    
 	}
 }
