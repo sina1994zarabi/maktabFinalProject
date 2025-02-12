@@ -14,12 +14,15 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 		public void Configure(EntityTypeBuilder<Review> builder)
 		{
 			builder.HasOne(r => r.ServiceOffering)
-				.WithMany(sr => sr.Reviews)
-				.HasForeignKey(r => r.ServiceOfferingId);
+				.WithMany()
+				.HasForeignKey(r => r.ServiceOfferingId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.HasOne(r => r.Client)
-				.WithMany(c => c.Reviews)
+				.WithMany()
 				.HasForeignKey(r => r.ClientId);
+
+			
 		}
 	}
 }

@@ -15,7 +15,7 @@ namespace App.Domain.Core.Entities.User
         #endregion
 
         #region Navigation Properties
-        public List<Service> Skills { get; set; }
+        public List<Service> Services { get; set; }
         public List<ServiceOffering> ServiceOfferings { get; set; }
         #endregion
     }

@@ -22,7 +22,6 @@ namespace App.Domain.Core.Entities.Services
         #region Navigation Properties
         public ServiceProvider ServiceProvider { get; set; }
         public ServiceRequest ServiceRequest { get; set; }
-        public List<Review> Reviews { get; set; }
         #endregion
     }
 }

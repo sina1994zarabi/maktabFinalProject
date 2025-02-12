@@ -21,7 +21,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 				   .WithOne(sr => sr.Service);
 
 			builder.HasMany(s => s.ServiceProviders)
-				   .WithMany(sp => sp.Skills);
+				   .WithMany(sp => sp.Services);
 			
 
 			builder.HasData( 

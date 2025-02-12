@@ -17,9 +17,6 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasMany(sp => sp.ServiceOfferings)
 				   .WithOne(so => so.ServiceProvider);
 
-			builder.HasMany(sp => sp.Skills)
-				   .WithMany(s => s.ServiceProviders);
-
 			builder.HasData(
 				new ServiceProvider
 				{
@@ -28,7 +25,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Email = "ServiceProvider1Email@gmail.com",
 					FullName = "نام و نام خانوادگی کارشناس یک",
 					PhoneNumber = "09xxxxxxxxx",
-					Address = "آدرس کارشناس یک",
+					AddressId = 2,
 					DateRegistered = DateTime.UtcNow,
 					IsApproved = true
 				},
@@ -39,7 +36,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Email = "ServiceProvider2Email@gmail.com",
 					FullName = "نام و نام خانوادگی کارشناس دو",
 					PhoneNumber = "09yyyyyyyyy",
-					Address = "آدرس کارشناس دو",
+					AddressId = 2,
 					DateRegistered = DateTime.UtcNow,
 					IsApproved = true
 				}

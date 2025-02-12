@@ -1,7 +1,9 @@
-﻿using App.Domain.Core.Enums;
+﻿using App.Domain.Core.Entities.BaseEntity;
+using App.Domain.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,14 +11,21 @@ namespace App.Domain.Core.Entities.User
 {
     public abstract class UserBase
     {
-        public int Id { get; set; }
+		#region Property
+		public int Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
-        public string Address { get; set; }
+        public int? AddressId { get; set; }
         public DateTime DateRegistered { get; set; }
         public Gender Gender { get; set; }
         public UserRole Role { get; set; }
+        public string? ProfilePicture { get; set; }
+        #endregion
+
+        #region Navigation Properties
+        public Address Address { get; set; }
+        #endregion
     }
 }

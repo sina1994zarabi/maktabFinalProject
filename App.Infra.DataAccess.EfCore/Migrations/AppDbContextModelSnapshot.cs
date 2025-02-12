@@ -22,6 +22,72 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityId = 1,
+                            Description = "آدرس فرضی شماره یک",
+                            PostalCode = "xxxxxxxxxxxxxxxx"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 1,
+                            Description = "آدرس فرضی شماره دو",
+                            PostalCode = "yyyyyyyyyyyyyyyy"
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "تهران"
+                        });
+                });
+
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -44,6 +110,39 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             Title = "نضافت منزل"
                         });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.Services.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ServiceOfferingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ServiceOfferingId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Service", b =>
@@ -115,7 +214,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasIndex("ServiceRequestId");
 
-                    b.ToTable("ServiceOffering");
+                    b.ToTable("ServiceOfferings");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.ServiceRequest", b =>
@@ -155,7 +254,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("ServiceRequests");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Subcategory", b =>
@@ -194,7 +293,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.User.Client", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Admin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -202,12 +301,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountBalance")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");
@@ -227,6 +322,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -236,6 +334,70 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateRegistered = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@gmail.com",
+                            FullName = "adminName",
+                            Gender = 1,
+                            PhoneNumber = "1234567890",
+                            Role = 2,
+                            Username = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountBalance")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateRegistered")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
                     b.ToTable("Clients");
 
                     b.HasData(
@@ -243,8 +405,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 10000,
-                            Address = "آدرس یک",
-                            DateRegistered = new DateTime(2025, 2, 10, 18, 56, 30, 67, DateTimeKind.Local).AddTicks(5299),
+                            AddressId = 1,
+                            DateRegistered = new DateTime(2025, 2, 11, 23, 58, 26, 504, DateTimeKind.Local).AddTicks(7465),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -256,8 +418,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 2,
                             AccountBalance = 100000,
-                            Address = "آدرس دو",
-                            DateRegistered = new DateTime(2025, 2, 10, 18, 56, 30, 67, DateTimeKind.Local).AddTicks(5319),
+                            AddressId = 1,
+                            DateRegistered = new DateTime(2025, 2, 11, 23, 58, 26, 504, DateTimeKind.Local).AddTicks(7482),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -278,9 +440,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<int>("AccountBalance")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");
@@ -303,6 +464,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -312,6 +476,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.ToTable("ServiceProviders");
 
                     b.HasData(
@@ -319,8 +485,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0,
-                            Address = "آدرس کارشناس یک",
-                            DateRegistered = new DateTime(2025, 2, 10, 15, 26, 30, 68, DateTimeKind.Utc).AddTicks(953),
+                            AddressId = 2,
+                            DateRegistered = new DateTime(2025, 2, 11, 20, 28, 26, 505, DateTimeKind.Utc).AddTicks(3520),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
@@ -333,8 +499,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 2,
                             AccountBalance = 0,
-                            Address = "آدرس کارشناس دو",
-                            DateRegistered = new DateTime(2025, 2, 10, 15, 26, 30, 68, DateTimeKind.Utc).AddTicks(959),
+                            AddressId = 2,
+                            DateRegistered = new DateTime(2025, 2, 11, 20, 28, 26, 505, DateTimeKind.Utc).AddTicks(3524),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,
@@ -350,14 +516,44 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<int>("ServiceProvidersId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SkillsId")
+                    b.Property<int>("ServicesId")
                         .HasColumnType("int");
 
-                    b.HasKey("ServiceProvidersId", "SkillsId");
+                    b.HasKey("ServiceProvidersId", "ServicesId");
 
-                    b.HasIndex("SkillsId");
+                    b.HasIndex("ServicesId");
 
                     b.ToTable("ServiceServiceProvider");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Address", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.BaseEntity.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.Services.Review", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.User.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Domain.Core.Entities.Services.ServiceOffering", "ServiceOffering")
+                        .WithMany()
+                        .HasForeignKey("ServiceOfferingId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("ServiceOffering");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Service", b =>
@@ -376,7 +572,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasOne("App.Domain.Core.Entities.User.ServiceProvider", "ServiceProvider")
                         .WithMany("ServiceOfferings")
                         .HasForeignKey("ServiceProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("App.Domain.Core.Entities.Services.ServiceRequest", "ServiceRequest")
@@ -420,6 +616,33 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Admin", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Client", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.User.ServiceProvider", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("ServiceServiceProvider", b =>
                 {
                     b.HasOne("App.Domain.Core.Entities.User.ServiceProvider", null)
@@ -430,7 +653,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasOne("App.Domain.Core.Entities.Services.Service", null)
                         .WithMany()
-                        .HasForeignKey("SkillsId")
+                        .HasForeignKey("ServicesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

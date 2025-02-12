@@ -15,14 +15,12 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 		{
 			builder.HasOne(so => so.ServiceProvider)
 				   .WithMany(sp => sp.ServiceOfferings)
-			       .HasForeignKey(so => so.ServiceProviderId);
+			       .HasForeignKey(so => so.ServiceProviderId)
+				   .OnDelete(DeleteBehavior.NoAction);
 
 			builder.HasOne(so => so.ServiceRequest)
 				   .WithMany(sr => sr.ServiceOfferings)
 				   .HasForeignKey(so => so.ServiceRequestId);
-
-			builder.HasMany(so => so.Reviews)
-				   .WithOne(r => r.ServiceOffering);
 		}
 	}
 }

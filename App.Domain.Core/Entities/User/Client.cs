@@ -9,13 +9,12 @@ namespace App.Domain.Core.Entities.User
 {
     public class Client : UserBase
     {
-        #region
+        #region Properties
         public int AccountBalance { get; set; }
         #endregion
 
         #region Navigation properties
         public List<ServiceRequest> ServiceRequests { get; set; }
-        public List<Review> Reviews { get; set; }
         #endregion
     }
 }
