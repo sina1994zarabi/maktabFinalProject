@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.Client;
 using App.Domain.Core.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,9 +19,18 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(Client client)
+        public async Task Add(CreateClientDto client)
 		{
-			_context.Clients.AddAsync(client);
+			var newClient = new Client
+			{
+				FullName = client.FullName,
+				Email = client.Email,
+				Username = client.Username,
+				//Password = client.Password,
+				PhoneNumber = client.PhoneNumber,
+				Gender = client.Gender
+			};
+			await _context.Clients.AddAsync(newClient);
 			await _context.SaveChangesAsync();
 		}
 
@@ -44,16 +54,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.Clients.ToListAsync();
 		}
 
-		public async Task Update(int id, Client client)
+		public async Task Update(UpdateClientDto client)
 		{
-		     var clientToUpdate = await Get(id);
+		    var clientToUpdate = await Get(client.Id);
 			if (clientToUpdate != null)
 			{
 				clientToUpdate.Email = client.Email;
-				clientToUpdate.ProfilePicture = client.ProfilePicture;
 				clientToUpdate.AddressId = client.AddressId;
 				clientToUpdate.PhoneNumber  = client.PhoneNumber;
-				clientToUpdate.AccountBalance = client.AccountBalance;
 				clientToUpdate.FullName = client.FullName;
 				clientToUpdate.Username = client.Username;
 				await _context.SaveChangesAsync();

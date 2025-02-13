@@ -13,9 +13,9 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 	{
 		public void Configure(EntityTypeBuilder<ServiceOffering> builder)
 		{
-			builder.HasOne(so => so.ServiceProvider)
+			builder.HasOne(so => so.Expert)
 				   .WithMany(sp => sp.ServiceOfferings)
-			       .HasForeignKey(so => so.ServiceProviderId)
+			       .HasForeignKey(so => so.ExpertId)
 				   .OnDelete(DeleteBehavior.NoAction);
 
 			builder.HasOne(so => so.ServiceRequest)

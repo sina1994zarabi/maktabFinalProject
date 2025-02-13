@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.SubCategoryDto;
 using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,9 +19,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(Subcategory subcategory)
+        public async Task Add(CreateSubCategoryDto subcategory)
 		{
-			_context.Subcategories.Add(subcategory);
+			var newSubCategory = new SubCategory
+			{
+				Title = subcategory.Title,
+				CategoryId = subcategory.CategoryId,
+			};
+			await _context.Subcategories.AddAsync(newSubCategory);
 			await _context.SaveChangesAsync();
 		}
 
@@ -34,19 +40,19 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			}
 		}
 
-		public async Task<Subcategory> Get(int id)
+		public async Task<SubCategory> Get(int id)
 		{
 			return await _context.Subcategories.FindAsync(id);
 		}
 
-		public async Task<List<Subcategory>> GetAll()
+		public async Task<List<SubCategory>> GetAll()
 		{
 			return await _context.Subcategories.ToListAsync();
 		}
 
-		public async Task Update(int id, Subcategory subcategory)
+		public async Task Update(UpdateSubCategoryDto subcategory)
 		{
-			var subcategoryToUpdate = await Get(id);
+			var subcategoryToUpdate = await Get(subcategory.Id);
 			if (subcategoryToUpdate != null)
 			{
 				subcategoryToUpdate.Title = subcategory.Title;

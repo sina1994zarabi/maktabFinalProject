@@ -14,14 +14,14 @@ namespace App.Domain.Core.Entities.Services
         public string Title { get; set; }
         public string Description { get; set; }
         // could implement a range price
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public int SubCategoryId { get; set; }
         #endregion
 
         #region Navgation Property
-        public Subcategory Subcategory { get; set; }
-        public List<ServiceRequest> ServiceRequests { get; set; }
-        public List<ServiceProvider> ServiceProviders { get; set; }
+        public SubCategory Subcategory { get; set; }
+        public List<ServiceRequest> ServiceRequests { get; set; } = new List<ServiceRequest>();
+        public List<Expert> Experts { get; set; } = new List<Expert>();
         #endregion
     }
 }

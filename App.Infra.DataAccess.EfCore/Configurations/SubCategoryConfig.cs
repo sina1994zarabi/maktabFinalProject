@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Configurations
 {
-    public class SubCategoryConfig : IEntityTypeConfiguration<Subcategory>
+    public class SubCategoryConfig : IEntityTypeConfiguration<SubCategory>
 	{
-		public void Configure(EntityTypeBuilder<Subcategory> builder)
+		public void Configure(EntityTypeBuilder<SubCategory> builder)
 		{
 
 			builder.HasOne(sc => sc.Category)
@@ -22,13 +22,13 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 				   .WithOne(s => s.Subcategory)
 				   .HasForeignKey(sc => sc.SubCategoryId);
 
-			builder.HasData(new Subcategory
+			builder.HasData(new SubCategory
 			{
 				Id = 1,
 				Title = "نظافت منزل",
 				CategoryId =1
 			}
-			, new Subcategory
+			, new SubCategory
 			{   Id = 2,
 				Title = "نظافت راه پله",
 				CategoryId =1

@@ -96,6 +96,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -157,8 +160,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
@@ -178,7 +181,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             Description = "توضیحات خدمت شماره یک ",
-                            Price = 1000,
+                            Price = 1000m,
                             SubCategoryId = 1,
                             Title = "عنوان خدمت شماره یک"
                         });
@@ -199,7 +202,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceProviderId")
+                    b.Property<int>("ExpertId")
                         .HasColumnType("int");
 
                     b.Property<int>("ServiceRequestId")
@@ -210,7 +213,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceProviderId");
+                    b.HasIndex("ExpertId");
 
                     b.HasIndex("ServiceRequestId");
 
@@ -257,7 +260,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.ToTable("ServiceRequests");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.Services.Subcategory", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.Services.SubCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -267,6 +270,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -300,6 +306,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("AccountBalance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -342,7 +351,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            DateRegistered = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AccountBalance = 0m,
+                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 170, DateTimeKind.Local).AddTicks(7463),
                             Email = "admin@gmail.com",
                             FullName = "adminName",
                             Gender = 1,
@@ -360,8 +370,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountBalance")
-                        .HasColumnType("int");
+                    b.Property<decimal>("AccountBalance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -404,9 +414,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            AccountBalance = 10000,
+                            AccountBalance = 10000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 11, 23, 58, 26, 504, DateTimeKind.Local).AddTicks(7465),
+                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7915),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -417,9 +427,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 2,
-                            AccountBalance = 100000,
+                            AccountBalance = 100000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 11, 23, 58, 26, 504, DateTimeKind.Local).AddTicks(7482),
+                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7923),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -429,7 +439,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.User.ServiceProvider", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Expert", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -437,8 +447,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountBalance")
-                        .HasColumnType("int");
+                    b.Property<decimal>("AccountBalance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
@@ -478,15 +488,15 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("ServiceProviders");
+                    b.ToTable("Experts");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AccountBalance = 0,
+                            AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 11, 20, 28, 26, 505, DateTimeKind.Utc).AddTicks(3520),
+                            DateRegistered = new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6786),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
@@ -498,9 +508,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 2,
-                            AccountBalance = 0,
+                            AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 11, 20, 28, 26, 505, DateTimeKind.Utc).AddTicks(3524),
+                            DateRegistered = new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6790),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,
@@ -511,19 +521,19 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ServiceServiceProvider", b =>
+            modelBuilder.Entity("ExpertService", b =>
                 {
-                    b.Property<int>("ServiceProvidersId")
+                    b.Property<int>("ExpertsId")
                         .HasColumnType("int");
 
                     b.Property<int>("ServicesId")
                         .HasColumnType("int");
 
-                    b.HasKey("ServiceProvidersId", "ServicesId");
+                    b.HasKey("ExpertsId", "ServicesId");
 
                     b.HasIndex("ServicesId");
 
-                    b.ToTable("ServiceServiceProvider");
+                    b.ToTable("ExpertService");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Address", b =>
@@ -558,7 +568,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Service", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entities.Services.Subcategory", "Subcategory")
+                    b.HasOne("App.Domain.Core.Entities.Services.SubCategory", "Subcategory")
                         .WithMany("Services")
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -569,9 +579,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.ServiceOffering", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entities.User.ServiceProvider", "ServiceProvider")
+                    b.HasOne("App.Domain.Core.Entities.User.Expert", "Expert")
                         .WithMany("ServiceOfferings")
-                        .HasForeignKey("ServiceProviderId")
+                        .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -581,7 +591,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ServiceProvider");
+                    b.Navigation("Expert");
 
                     b.Navigation("ServiceRequest");
                 });
@@ -605,7 +615,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.Services.Subcategory", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.Services.SubCategory", b =>
                 {
                     b.HasOne("App.Domain.Core.Entities.Services.Category", "Category")
                         .WithMany("Subcategories")
@@ -634,7 +644,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.User.ServiceProvider", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Expert", b =>
                 {
                     b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
                         .WithMany()
@@ -643,11 +653,11 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("ServiceServiceProvider", b =>
+            modelBuilder.Entity("ExpertService", b =>
                 {
-                    b.HasOne("App.Domain.Core.Entities.User.ServiceProvider", null)
+                    b.HasOne("App.Domain.Core.Entities.User.Expert", null)
                         .WithMany()
-                        .HasForeignKey("ServiceProvidersId")
+                        .HasForeignKey("ExpertsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -673,7 +683,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("ServiceOfferings");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.Services.Subcategory", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.Services.SubCategory", b =>
                 {
                     b.Navigation("Services");
                 });
@@ -683,7 +693,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Navigation("ServiceRequests");
                 });
 
-            modelBuilder.Entity("App.Domain.Core.Entities.User.ServiceProvider", b =>
+            modelBuilder.Entity("App.Domain.Core.Entities.User.Expert", b =>
                 {
                     b.Navigation("ServiceOfferings");
                 });

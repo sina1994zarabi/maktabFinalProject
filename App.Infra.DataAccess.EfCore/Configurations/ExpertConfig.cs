@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Configurations
 {
-    public class ServiceProviderConfig : IEntityTypeConfiguration<ServiceProvider>
+    public class ExpertConfig : IEntityTypeConfiguration<Expert>
 	{
-		public void Configure(EntityTypeBuilder<ServiceProvider> builder)
+		public void Configure(EntityTypeBuilder<Expert> builder)
 		{
 
 			builder.HasMany(sp => sp.ServiceOfferings)
-				   .WithOne(so => so.ServiceProvider);
+				   .WithOne(so => so.Expert);
 
 			builder.HasData(
-				new ServiceProvider
+				new Expert
 				{
 					Id = 1,
 					Username = "ServiceProvider1Username",
@@ -29,7 +29,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					DateRegistered = DateTime.UtcNow,
 					IsApproved = true
 				},
-				new ServiceProvider
+				new Expert
 				{
 					Id = 2,
 					Username = "ServiceProvider2Username",

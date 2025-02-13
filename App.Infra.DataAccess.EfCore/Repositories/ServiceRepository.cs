@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.ServiceDto;
 using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,16 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(Service service)
+        public async Task Add(CreateServiceDto service)
 		{
-			_context.Services.Add(service);
+			var newService = new Service
+			{
+				Title = service.Title,
+				Description = service.Description,
+				Price = service.Price,
+				SubCategoryId = service.SubCategoryId,
+			};
+			await _context.Services.AddAsync(newService);
 			await _context.SaveChangesAsync();
 		}
 
@@ -45,14 +53,15 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.Services.ToListAsync();
 		}
 
-		public async Task Update(int id, Service service)
+		public async Task Update(UpdateServiceDto service)
 		{
-			var serviceToEdit = await Get(id);
+			var serviceToEdit = await Get(service.Id);
 			if (serviceToEdit != null)
 			{
 				serviceToEdit.Title = service.Title;
 				serviceToEdit.Description = service.Description;
 				serviceToEdit.Price = service.Price;
+				serviceToEdit.SubCategoryId = service.SubCategoryId;
 				await _context.SaveChangesAsync();
 			}
 		}

@@ -20,7 +20,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasMany(s => s.ServiceRequests)
 				   .WithOne(sr => sr.Service);
 
-			builder.HasMany(s => s.ServiceProviders)
+			builder.HasMany(s => s.Experts)
 				   .WithMany(sp => sp.Services);
 			
 

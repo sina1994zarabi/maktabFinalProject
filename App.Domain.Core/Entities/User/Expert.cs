@@ -7,16 +7,15 @@ using App.Domain.Core.Entities.Services;
 
 namespace App.Domain.Core.Entities.User
 {
-    public class ServiceProvider : UserBase
+    public class Expert : UserBase
     {
         #region Properties
-        public bool IsApproved { get; set; }
-        public int AccountBalance { get; set; }
+        public bool IsApproved { get; set; } = false;
         #endregion
 
         #region Navigation Properties
-        public List<Service> Services { get; set; }
-        public List<ServiceOffering> ServiceOfferings { get; set; }
+        public List<Service> Services { get; set; } = new List<Service>();
+        public List<ServiceOffering> ServiceOfferings { get; set; } = new List<ServiceOffering>();
         #endregion
     }
 

@@ -14,13 +14,13 @@ namespace App.Infra.DataAccess.EfCore
     public class AppDbContext : DbContext
 	{
 		public DbSet<Client> Clients { get; set; }
-		public DbSet<ServiceProvider> ServiceProviders { get; set; }
+		public DbSet<Expert> Experts { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Service> Services { get; set; }
 		public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceOffering> ServiceOfferings { get; set; }
         public DbSet<Category> Categories { get; set; }
-		public DbSet<Subcategory> Subcategories { get; set; }
+		public DbSet<SubCategory> Subcategories { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Review> Reviews { get; set; }
@@ -30,13 +30,11 @@ namespace App.Infra.DataAccess.EfCore
 
 		}
 
-
-
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new ClientConfig());
 			modelBuilder.ApplyConfiguration(new ServiceRequestConfig());
-			modelBuilder.ApplyConfiguration(new ServiceProviderConfig());
+			modelBuilder.ApplyConfiguration(new ExpertConfig());
 			modelBuilder.ApplyConfiguration(new AdminConfig());
 			modelBuilder.ApplyConfiguration(new AddressConfig());
 			modelBuilder.ApplyConfiguration(new CityConfig());

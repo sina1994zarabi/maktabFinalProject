@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.CategoryDto;
 using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(Category category)
+        public async Task Add(CreateCategoryDto category)
 		{
-			_context.Categories.Add(category);
+			var newCategory = new Category
+			{
+				Title = category.Title,
+				Image = category.ImagePath
+			};
+			await _context.Categories.AddAsync(newCategory);
 			await _context.SaveChangesAsync();
 		}
 
@@ -45,12 +51,13 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.Categories.ToListAsync();
 		}
 
-		public async Task Update(int id, Category category)
+		public async Task Update(UpdateCategoryDto category)
 		{
-			var categoryToUpdate = await Get(id);
+			var categoryToUpdate = await Get(category.Id);
 			if (categoryToUpdate != null)
 			{
 				categoryToUpdate.Title = category.Title;
+				categoryToUpdate.Image = category.ImagePath;
 				await _context.SaveChangesAsync();
 			}
 		}

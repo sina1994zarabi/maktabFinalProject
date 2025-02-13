@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities.Services;
+﻿using App.Domain.Core.DTOs.CategoryDto;
+using App.Domain.Core.Entities.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface ICategoryRepository
 	{
-		Task Add(Category category);
+		Task Add(CreateCategoryDto category);
 		Task<Category> Get(int id);
 		Task<List<Category>> GetAll();
 		Task Delete(int id);
-		Task Update(int id, Category category);
+		Task Update(UpdateCategoryDto category);
 	}
 }

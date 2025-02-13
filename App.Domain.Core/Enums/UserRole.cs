@@ -9,7 +9,7 @@ namespace App.Domain.Core.Enums
 	public enum UserRole
 	{
 		Client,
-		Provider,
+		Expert,
 		Admin
 	}
 }

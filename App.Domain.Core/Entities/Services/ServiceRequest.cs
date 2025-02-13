@@ -15,7 +15,7 @@ namespace App.Domain.Core.Entities.Services
         public string Title { get; set; }
         public string Description { get; set; }
         public int ServiceId { get; set; }
-        public int ClientId      { get; set; }
+        public int ClientId  { get; set; }
         public DateTime BookingDate { get; set; }
         public StatusEnum Status { get; set; }
         public bool IsCompleted { get; set; }
@@ -25,7 +25,7 @@ namespace App.Domain.Core.Entities.Services
         #region Navigation Properties
         public Service Service { get; set; }
         public Client Client { get; set; }
-        public List<ServiceOffering> ServiceOfferings { get; set; }
+        public List<ServiceOffering> ServiceOfferings { get; set; } = new List<ServiceOffering>();
         #endregion
     }
 }

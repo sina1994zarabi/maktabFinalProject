@@ -11,10 +11,11 @@ namespace App.Domain.Core.Entities.Services
         #region Properties
         public int Id { get; set; }
         public string Title { get; set; }
+        public string? Image { get; set; }
         #endregion
 
         #region Navigation Property
-        public List<Subcategory> Subcategories { get; set; }
+        public List<SubCategory> Subcategories { get; set; } = new List<SubCategory>();
         #endregion
     }
 
