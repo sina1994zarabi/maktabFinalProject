@@ -41,6 +41,18 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "statuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_statuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subcategories",
                 columns: table => new
                 {
@@ -300,7 +312,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
             migrationBuilder.InsertData(
                 table: "Admins",
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
-                values: new object[] { 1, 0m, null, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(9337), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
+                values: new object[] { 1, 0m, null, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(5760), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -311,6 +323,18 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 table: "Cities",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 1, "تهران" });
+
+            migrationBuilder.InsertData(
+                table: "statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "در انتظار دریافت پیشنهادات" },
+                    { 2, "در انتظار تایید مشتری" },
+                    { 3, "در انتظار تایید کارشناس" },
+                    { 4, "تایید شده" },
+                    { 5, "لغو شده" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
@@ -335,8 +359,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, 10000m, 1, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4284), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
-                    { 2, 100000m, 1, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4307), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
+                    { 1, 10000m, 1, new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1955), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
+                    { 2, 100000m, 1, new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1977), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
                 });
 
             migrationBuilder.InsertData(
@@ -344,8 +368,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "ProfilePicture", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, 0m, 2, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8743), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 0, "ServiceProvider1Username" },
-                    { 2, 0m, 2, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8752), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 0, "ServiceProvider2Username" }
+                    { 1, 0m, 2, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4477), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 0, "ServiceProvider1Username" },
+                    { 2, 0m, 2, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4499), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 0, "ServiceProvider2Username" }
                 });
 
             migrationBuilder.InsertData(
@@ -356,17 +380,17 @@ namespace App.Infra.DataAccess.EfCore.Migrations
             migrationBuilder.InsertData(
                 table: "ServiceRequests",
                 columns: new[] { "Id", "BookingDate", "ClientId", "Description", "IsCompleted", "ServiceId", "Status", "Title" },
-                values: new object[] { 1, new DateTime(2025, 2, 16, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(7084), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" });
+                values: new object[] { 1, new DateTime(2025, 2, 16, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(9690), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" });
 
             migrationBuilder.InsertData(
                 table: "ServiceOfferings",
                 columns: new[] { "Id", "CreatedAt", "Description", "ExpertId", "ServiceRequestId", "Status" },
-                values: new object[] { 1, new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(2660), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 });
+                values: new object[] { 1, new DateTime(2025, 2, 14, 14, 34, 39, 265, DateTimeKind.Local).AddTicks(7755), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "Id", "ClientId", "Comment", "Rating", "ReviewDate", "ServiceOfferingId" },
-                values: new object[] { 1, 1, "خوب بود", 4, new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(435), 1 });
+                values: new object[] { 1, 1, "خوب بود", 4, new DateTime(2025, 2, 14, 14, 34, 39, 263, DateTimeKind.Local).AddTicks(5404), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CityId",
@@ -445,6 +469,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "statuses");
 
             migrationBuilder.DropTable(
                 name: "ServiceOfferings");

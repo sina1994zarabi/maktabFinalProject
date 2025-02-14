@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities.BaseEntity;
+﻿using App.Domain.Core.Entities;
+using App.Domain.Core.Entities.BaseEntity;
 using App.Domain.Core.Entities.Services;
 using App.Domain.Core.Entities.User;
 using App.Infra.DataAccess.EfCore.Configurations;
@@ -25,6 +26,8 @@ namespace App.Infra.DataAccess.EfCore
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+		public DbSet<Status> statuses { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{
 
@@ -43,6 +46,8 @@ namespace App.Infra.DataAccess.EfCore
 			modelBuilder.ApplyConfiguration(new SubCategoryConfig());			
 			modelBuilder.ApplyConfiguration(new ReviewConfig());
 			modelBuilder.ApplyConfiguration(new ServiceOfferingConfig());
+
+			modelBuilder.ApplyConfiguration(new StatusConfig());
 		}
 	}
 }

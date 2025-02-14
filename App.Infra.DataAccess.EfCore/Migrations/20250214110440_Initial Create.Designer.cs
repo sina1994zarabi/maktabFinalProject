@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.DataAccess.EfCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250214102424_Initial Create")]
+    [Migration("20250214110440_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -157,7 +157,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             ClientId = 1,
                             Comment = "خوب بود",
                             Rating = 4,
-                            ReviewDate = new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(435),
+                            ReviewDate = new DateTime(2025, 2, 14, 14, 34, 39, 263, DateTimeKind.Local).AddTicks(5404),
                             ServiceOfferingId = 1
                         });
                 });
@@ -237,7 +237,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(2660),
+                            CreatedAt = new DateTime(2025, 2, 14, 14, 34, 39, 265, DateTimeKind.Local).AddTicks(7755),
                             Description = "می توانم این کار را برای شما انجام دهم",
                             ExpertId = 1,
                             ServiceRequestId = 1,
@@ -288,7 +288,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            BookingDate = new DateTime(2025, 2, 16, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(7084),
+                            BookingDate = new DateTime(2025, 2, 16, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(9690),
                             ClientId = 1,
                             Description = "نضافت حیاط و راه پله",
                             IsCompleted = false,
@@ -334,6 +334,47 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             CategoryId = 1,
                             Title = "نظافت راه پله"
+                        });
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Name = "در انتظار تایید کارشناس"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "در انتظار تایید مشتری"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "در انتظار دریافت پیشنهادات"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "تایید شده"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "لغو شده"
                         });
                 });
 
@@ -390,7 +431,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(9337),
+                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(5760),
                             Email = "admin@gmail.com",
                             FullName = "adminName",
                             Gender = 1,
@@ -454,7 +495,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccountBalance = 10000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4284),
+                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1955),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -467,7 +508,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccountBalance = 100000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4307),
+                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1977),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -534,7 +575,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8743),
+                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4477),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
@@ -548,7 +589,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8752),
+                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4499),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,
