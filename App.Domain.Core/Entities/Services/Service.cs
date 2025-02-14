@@ -16,6 +16,7 @@ namespace App.Domain.Core.Entities.Services
         // could implement a range price
         public decimal Price { get; set; }
         public int SubCategoryId { get; set; }
+        public string? Image { get; set; }
         #endregion
 
         #region Navgation Property

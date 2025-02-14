@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities.User;
+﻿using App.Domain.Core.Entities.BaseEntity;
+using App.Domain.Core.Entities.User;
 using App.Domain.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace App.Domain.Core.Entities.Services
         public Service Service { get; set; }
         public Client Client { get; set; }
         public List<ServiceOffering> ServiceOfferings { get; set; } = new List<ServiceOffering>();
+        public List<Image> Images { get; set; }
         #endregion
     }
 }

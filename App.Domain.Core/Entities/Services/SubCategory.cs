@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Domain.Core.Entities.BaseEntity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace App.Domain.Core.Entities.Services
         public int Id { get; set; }
         public string Title { get; set; }
         public int CategoryId { get; set; }
-        public string? Image { get; set; }
+        public Image? Image { get; set; }
         #endregion
 
         #region Navigation Properties

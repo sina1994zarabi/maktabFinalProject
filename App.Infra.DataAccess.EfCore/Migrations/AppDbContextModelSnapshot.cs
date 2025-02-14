@@ -46,6 +46,28 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ServiceRequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceRequestId");
+
+                    b.ToTable("Image");
+                });
+
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -112,7 +134,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             ClientId = 1,
                             Comment = "خوب بود",
                             Rating = 4,
-                            ReviewDate = new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(1975),
+                            ReviewDate = new DateTime(2025, 2, 14, 22, 3, 31, 429, DateTimeKind.Local).AddTicks(4707),
                             ServiceOfferingId = 1
                         });
                 });
@@ -127,6 +149,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -192,7 +217,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(5996),
+                            CreatedAt = new DateTime(2025, 2, 14, 22, 3, 31, 429, DateTimeKind.Local).AddTicks(7666),
                             Description = "می توانم این کار را برای شما انجام دهم",
                             ExpertId = 1,
                             ServiceRequestId = 1,
@@ -243,7 +268,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            BookingDate = new DateTime(2025, 2, 16, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(2162),
+                            BookingDate = new DateTime(2025, 2, 16, 22, 3, 31, 427, DateTimeKind.Local).AddTicks(7105),
                             ClientId = 1,
                             Description = "نضافت حیاط و راه پله",
                             IsCompleted = false,
@@ -264,8 +289,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -274,6 +299,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Subcategories");
 
@@ -381,7 +408,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(6297),
+                            DateRegistered = new DateTime(2025, 2, 14, 22, 3, 31, 428, DateTimeKind.Local).AddTicks(631),
                             Email = "admin@gmail.com",
                             FullName = "adminName",
                             Gender = 1,
@@ -439,7 +466,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 10000m,
-                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8445),
+                            DateRegistered = new DateTime(2025, 2, 14, 22, 3, 31, 427, DateTimeKind.Local).AddTicks(3439),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -451,7 +478,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 2,
                             AccountBalance = 100000m,
-                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8467),
+                            DateRegistered = new DateTime(2025, 2, 14, 22, 3, 31, 427, DateTimeKind.Local).AddTicks(3457),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -512,7 +539,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5516),
+                            DateRegistered = new DateTime(2025, 2, 14, 22, 3, 31, 427, DateTimeKind.Local).AddTicks(9454),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
@@ -525,7 +552,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 2,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5533),
+                            DateRegistered = new DateTime(2025, 2, 14, 22, 3, 31, 427, DateTimeKind.Local).AddTicks(9467),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,
@@ -549,6 +576,13 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasIndex("ServicesId");
 
                     b.ToTable("ExpertService");
+                });
+
+            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Image", b =>
+                {
+                    b.HasOne("App.Domain.Core.Entities.Services.ServiceRequest", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ServiceRequestId");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Review", b =>
@@ -627,7 +661,13 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("ExpertService", b =>
@@ -657,6 +697,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.ServiceRequest", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("ServiceOfferings");
                 });
 
