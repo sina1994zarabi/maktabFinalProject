@@ -23,10 +23,9 @@ namespace App.Infra.DataAccess.EfCore
         public DbSet<Category> Categories { get; set; }
 		public DbSet<SubCategory> Subcategories { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
-		public DbSet<Status> statuses { get; set; }
+        public DbSet<Status> statuses { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{
@@ -39,7 +38,6 @@ namespace App.Infra.DataAccess.EfCore
 			modelBuilder.ApplyConfiguration(new ServiceRequestConfig());
 			modelBuilder.ApplyConfiguration(new ExpertConfig());
 			modelBuilder.ApplyConfiguration(new AdminConfig());
-			modelBuilder.ApplyConfiguration(new AddressConfig());
 			modelBuilder.ApplyConfiguration(new CityConfig());
 			modelBuilder.ApplyConfiguration(new ServiceConfig());
 			modelBuilder.ApplyConfiguration(new CategoryConfig());

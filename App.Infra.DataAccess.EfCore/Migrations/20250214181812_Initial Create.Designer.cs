@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.DataAccess.EfCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250214110440_Initial Create")]
+    [Migration("20250214181812_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,48 +24,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CityId = 1,
-                            Description = "آدرس فرضی شماره یک",
-                            PostalCode = "xxxxxxxxxxxxxxxx"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CityId = 1,
-                            Description = "آدرس فرضی شماره دو",
-                            PostalCode = "yyyyyyyyyyyyyyyy"
-                        });
-                });
 
             modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.City", b =>
                 {
@@ -157,7 +115,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             ClientId = 1,
                             Comment = "خوب بود",
                             Rating = 4,
-                            ReviewDate = new DateTime(2025, 2, 14, 14, 34, 39, 263, DateTimeKind.Local).AddTicks(5404),
+                            ReviewDate = new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(1975),
                             ServiceOfferingId = 1
                         });
                 });
@@ -237,7 +195,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 14, 14, 34, 39, 265, DateTimeKind.Local).AddTicks(7755),
+                            CreatedAt = new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(5996),
                             Description = "می توانم این کار را برای شما انجام دهم",
                             ExpertId = 1,
                             ServiceRequestId = 1,
@@ -288,7 +246,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            BookingDate = new DateTime(2025, 2, 16, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(9690),
+                            BookingDate = new DateTime(2025, 2, 16, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(2162),
                             ClientId = 1,
                             Description = "نضافت حیاط و راه پله",
                             IsCompleted = false,
@@ -389,9 +347,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<decimal>("AccountBalance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");
 
@@ -422,8 +377,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Admins");
 
                     b.HasData(
@@ -431,7 +384,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(5760),
+                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(6297),
                             Email = "admin@gmail.com",
                             FullName = "adminName",
                             Gender = 1,
@@ -452,9 +405,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<decimal>("AccountBalance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");
 
@@ -485,8 +435,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Clients");
 
                     b.HasData(
@@ -494,8 +442,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 10000m,
-                            AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1955),
+                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8445),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -507,8 +454,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 2,
                             AccountBalance = 100000m,
-                            AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1977),
+                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8467),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -528,9 +474,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.Property<decimal>("AccountBalance")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");
@@ -565,8 +508,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Experts");
 
                     b.HasData(
@@ -574,28 +515,26 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4477),
+                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5516),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
                             IsApproved = true,
                             PhoneNumber = "09xxxxxxxxx",
-                            Role = 0,
+                            Role = 1,
                             Username = "ServiceProvider1Username"
                         },
                         new
                         {
                             Id = 2,
                             AccountBalance = 0m,
-                            AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4499),
+                            DateRegistered = new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5533),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,
                             IsApproved = true,
                             PhoneNumber = "09yyyyyyyyy",
-                            Role = 0,
+                            Role = 1,
                             Username = "ServiceProvider2Username"
                         });
                 });
@@ -613,17 +552,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasIndex("ServicesId");
 
                     b.ToTable("ExpertService");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entities.BaseEntity.Address", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entities.BaseEntity.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Review", b =>
@@ -703,33 +631,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entities.User.Admin", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entities.User.Client", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("App.Domain.Core.Entities.User.Expert", b =>
-                {
-                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("ExpertService", b =>

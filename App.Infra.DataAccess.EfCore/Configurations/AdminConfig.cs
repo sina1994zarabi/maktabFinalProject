@@ -14,6 +14,9 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Admin> builder)
 		{
+
+
+
 			builder.HasData(
 				new Admin {
 					Id =1,

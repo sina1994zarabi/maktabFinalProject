@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities.User;
+using App.Domain.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -25,7 +26,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Email = "ServiceProvider1Email@gmail.com",
 					FullName = "نام و نام خانوادگی کارشناس یک",
 					PhoneNumber = "09xxxxxxxxx",
-					AddressId = 2,
+					Role = UserRole.Expert,
 					IsApproved = true
 				},
 				new Expert
@@ -35,7 +36,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Email = "ServiceProvider2Email@gmail.com",
 					FullName = "نام و نام خانوادگی کارشناس دو",
 					PhoneNumber = "09yyyyyyyyy",
-					AddressId = 2,
+					Role = UserRole.Expert,
 					IsApproved = true
 				}
 				);

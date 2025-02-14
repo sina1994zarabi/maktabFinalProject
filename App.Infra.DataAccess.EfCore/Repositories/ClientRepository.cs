@@ -60,7 +60,6 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			if (clientToUpdate != null)
 			{
 				clientToUpdate.Email = client.Email;
-				clientToUpdate.AddressId = client.AddressId;
 				clientToUpdate.PhoneNumber  = client.PhoneNumber;
 				clientToUpdate.FullName = client.FullName;
 				clientToUpdate.Username = client.Username;

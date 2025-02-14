@@ -27,7 +27,6 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				FullName = expert.FullName,
 				Username = expert.Username,
 				Email = expert.Email,
-				AddressId = expert.AddressId,
 				PhoneNumber = expert.PhoneNumber,
 				ProfilePicture = expert.ImagePath,
 				Gender = expert.Gender,
@@ -68,7 +67,6 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				expertToEdit.Username = expert.Username;
 				expertToEdit.Email = expert.Email;
 				expertToEdit.ProfilePicture = expert.ImagePath;
-				expertToEdit.AddressId = expert.AddressId;
 				expertToEdit.PhoneNumber = expert.PhoneNumber;
 				expertToEdit.FullName = expert.FullName;
 				await _context.SaveChangesAsync();

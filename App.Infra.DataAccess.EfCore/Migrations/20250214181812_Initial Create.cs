@@ -14,6 +14,27 @@ namespace App.Infra.DataAccess.EfCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -38,6 +59,49 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Experts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Experts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,27 +138,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Addresses_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
@@ -117,85 +160,27 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Admins",
+                name: "ExpertService",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ExpertsId = table.Column<int>(type: "int", nullable: false),
+                    ServicesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.PrimaryKey("PK_ExpertService", x => new { x.ExpertsId, x.ServicesId });
                     table.ForeignKey(
-                        name: "FK_Admins_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
+                        name: "FK_ExpertService_Experts_ExpertsId",
+                        column: x => x.ExpertsId,
+                        principalTable: "Experts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Clients_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Experts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsApproved = table.Column<bool>(type: "bit", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: true),
-                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccountBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Experts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Experts_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id");
+                        name: "FK_ExpertService_Services_ServicesId",
+                        column: x => x.ServicesId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,30 +209,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     table.ForeignKey(
                         name: "FK_ServiceRequests_Services_ServiceId",
                         column: x => x.ServiceId,
-                        principalTable: "Services",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExpertService",
-                columns: table => new
-                {
-                    ExpertsId = table.Column<int>(type: "int", nullable: false),
-                    ServicesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExpertService", x => new { x.ExpertsId, x.ServicesId });
-                    table.ForeignKey(
-                        name: "FK_ExpertService_Experts_ExpertsId",
-                        column: x => x.ExpertsId,
-                        principalTable: "Experts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExpertService_Services_ServicesId",
-                        column: x => x.ServicesId,
                         principalTable: "Services",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -311,8 +272,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Admins",
-                columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
-                values: new object[] { 1, 0m, null, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(5760), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
+                columns: new[] { "Id", "AccountBalance", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
+                values: new object[] { 1, 0m, new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(6297), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -323,6 +284,24 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 table: "Cities",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 1, "تهران" });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "Id", "AccountBalance", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
+                values: new object[,]
+                {
+                    { 1, 10000m, new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8445), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
+                    { 2, 100000m, new DateTime(2025, 2, 14, 21, 48, 11, 932, DateTimeKind.Local).AddTicks(8467), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Experts",
+                columns: new[] { "Id", "AccountBalance", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "ProfilePicture", "Role", "Username" },
+                values: new object[,]
+                {
+                    { 1, 0m, new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5516), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 1, "ServiceProvider1Username" },
+                    { 2, 0m, new DateTime(2025, 2, 14, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(5533), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 1, "ServiceProvider2Username" }
+                });
 
             migrationBuilder.InsertData(
                 table: "statuses",
@@ -337,39 +316,12 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Addresses",
-                columns: new[] { "Id", "CityId", "Description", "PostalCode" },
-                values: new object[,]
-                {
-                    { 1, 1, "آدرس فرضی شماره یک", "xxxxxxxxxxxxxxxx" },
-                    { 2, 1, "آدرس فرضی شماره دو", "yyyyyyyyyyyyyyyy" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Subcategories",
                 columns: new[] { "Id", "CategoryId", "Image", "Title" },
                 values: new object[,]
                 {
                     { 1, 1, null, "نظافت منزل" },
                     { 2, 1, null, "نظافت راه پله" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Clients",
-                columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
-                values: new object[,]
-                {
-                    { 1, 10000m, 1, new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1955), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
-                    { 2, 100000m, 1, new DateTime(2025, 2, 14, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(1977), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Experts",
-                columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "ProfilePicture", "Role", "Username" },
-                values: new object[,]
-                {
-                    { 1, 0m, 2, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4477), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 0, "ServiceProvider1Username" },
-                    { 2, 0m, 2, new DateTime(2025, 2, 14, 14, 34, 39, 258, DateTimeKind.Local).AddTicks(4499), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 0, "ServiceProvider2Username" }
                 });
 
             migrationBuilder.InsertData(
@@ -380,37 +332,17 @@ namespace App.Infra.DataAccess.EfCore.Migrations
             migrationBuilder.InsertData(
                 table: "ServiceRequests",
                 columns: new[] { "Id", "BookingDate", "ClientId", "Description", "IsCompleted", "ServiceId", "Status", "Title" },
-                values: new object[] { 1, new DateTime(2025, 2, 16, 14, 34, 39, 257, DateTimeKind.Local).AddTicks(9690), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" });
+                values: new object[] { 1, new DateTime(2025, 2, 16, 21, 48, 11, 933, DateTimeKind.Local).AddTicks(2162), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" });
 
             migrationBuilder.InsertData(
                 table: "ServiceOfferings",
                 columns: new[] { "Id", "CreatedAt", "Description", "ExpertId", "ServiceRequestId", "Status" },
-                values: new object[] { 1, new DateTime(2025, 2, 14, 14, 34, 39, 265, DateTimeKind.Local).AddTicks(7755), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 });
+                values: new object[] { 1, new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(5996), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "Id", "ClientId", "Comment", "Rating", "ReviewDate", "ServiceOfferingId" },
-                values: new object[] { 1, 1, "خوب بود", 4, new DateTime(2025, 2, 14, 14, 34, 39, 263, DateTimeKind.Local).AddTicks(5404), 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Addresses_CityId",
-                table: "Addresses",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Admins_AddressId",
-                table: "Admins",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_AddressId",
-                table: "Clients",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Experts_AddressId",
-                table: "Experts",
-                column: "AddressId");
+                values: new object[] { 1, 1, "خوب بود", 4, new DateTime(2025, 2, 14, 21, 48, 11, 935, DateTimeKind.Local).AddTicks(1975), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExpertService_ServicesId",
@@ -465,6 +397,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 name: "Admins");
 
             migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
                 name: "ExpertService");
 
             migrationBuilder.DropTable(
@@ -489,13 +424,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 name: "Services");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
                 name: "Subcategories");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Categories");

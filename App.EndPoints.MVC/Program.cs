@@ -21,7 +21,6 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
-builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 
 
