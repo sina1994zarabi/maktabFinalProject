@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities.Services;
+using App.Domain.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -21,6 +22,18 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasOne(so => so.ServiceRequest)
 				   .WithMany(sr => sr.ServiceOfferings)
 				   .HasForeignKey(so => so.ServiceRequestId);
+
+			builder.HasData(
+				new ServiceOffering
+				{
+					Id = 1,
+					Description = "می توانم این کار را برای شما انجام دهم",
+					Status = StatusEnum.PendingClientConfirmation,
+					ExpertId = 1,
+					ServiceRequestId = 1,
+					CreatedAt = DateTime.Now
+				}
+				);
 		}
 	}
 }

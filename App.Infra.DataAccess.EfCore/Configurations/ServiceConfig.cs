@@ -14,8 +14,8 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 		public void Configure(EntityTypeBuilder<Service> builder)
 		{
 			builder.HasOne(s => s.Subcategory)
-			.WithMany(sc => sc.Services)
-			.HasForeignKey(s => s.SubCategoryId);
+				   .WithMany(sc => sc.Services)
+				   .HasForeignKey(s => s.SubCategoryId);
 
 			builder.HasMany(s => s.ServiceRequests)
 				   .WithOne(sr => sr.Service);

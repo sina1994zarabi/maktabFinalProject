@@ -18,7 +18,7 @@ namespace App.Domain.Core.Entities.Services
         public int ClientId  { get; set; }
         public DateTime BookingDate { get; set; }
         public StatusEnum Status { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
         #endregion
 
 

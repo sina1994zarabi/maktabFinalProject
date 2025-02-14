@@ -21,6 +21,19 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasOne(r => r.Client)
 				.WithMany()
 				.HasForeignKey(r => r.ClientId);
+
+
+			builder.HasData(
+				new Review
+				{
+					Id = 1,
+					ClientId = 1,
+					ServiceOfferingId = 1,
+					Rating = 4,
+					Comment = "خوب بود",
+					ReviewDate = DateTime.Now,
+
+				});
 		}
 	}
 }

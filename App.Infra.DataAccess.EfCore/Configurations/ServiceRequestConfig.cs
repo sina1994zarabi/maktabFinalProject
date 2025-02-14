@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Entities.Services;
+using App.Domain.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -20,6 +21,19 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasOne(sr => sr.Client)
 				   .WithMany(c => c.ServiceRequests)
 				   .HasForeignKey(sr => sr.ClientId);
+
+			builder.HasData(
+				new ServiceRequest
+				{
+					Id = 1,
+					Title = "نظافت و شتشوی آپارتمان",
+					Description = "نضافت حیاط و راه پله",
+					ServiceId = 1,
+					ClientId = 1,
+					Status = StatusEnum.AwaitingOfferReveives,
+					BookingDate = DateTime.Now.AddDays(2),
+				}
+				);
 		}
 	}
 }

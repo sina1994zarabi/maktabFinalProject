@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Infra.DataAccess.EfCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250213181919_Initial Create")]
+    [Migration("20250214102424_Initial Create")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -149,6 +149,17 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasIndex("ServiceOfferingId");
 
                     b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientId = 1,
+                            Comment = "خوب بود",
+                            Rating = 4,
+                            ReviewDate = new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(435),
+                            ServiceOfferingId = 1
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.Service", b =>
@@ -221,6 +232,17 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasIndex("ServiceRequestId");
 
                     b.ToTable("ServiceOfferings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(2660),
+                            Description = "می توانم این کار را برای شما انجام دهم",
+                            ExpertId = 1,
+                            ServiceRequestId = 1,
+                            Status = 2
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.ServiceRequest", b =>
@@ -261,6 +283,19 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("ServiceRequests");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BookingDate = new DateTime(2025, 2, 16, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(7084),
+                            ClientId = 1,
+                            Description = "نضافت حیاط و راه پله",
+                            IsCompleted = false,
+                            ServiceId = 1,
+                            Status = 1,
+                            Title = "نظافت و شتشوی آپارتمان"
+                        });
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.Services.SubCategory", b =>
@@ -355,7 +390,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             AccountBalance = 0m,
-                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 170, DateTimeKind.Local).AddTicks(7463),
+                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(9337),
                             Email = "admin@gmail.com",
                             FullName = "adminName",
                             Gender = 1,
@@ -419,7 +454,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccountBalance = 10000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7915),
+                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4284),
                             Email = "User1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر یک",
                             Gender = 1,
@@ -432,7 +467,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccountBalance = 100000m,
                             AddressId = 1,
-                            DateRegistered = new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7923),
+                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4307),
                             Email = "User2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کاربر دو",
                             Gender = 1,
@@ -499,7 +534,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6786),
+                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8743),
                             Email = "ServiceProvider1Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس یک",
                             Gender = 0,
@@ -513,7 +548,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccountBalance = 0m,
                             AddressId = 2,
-                            DateRegistered = new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6790),
+                            DateRegistered = new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8752),
                             Email = "ServiceProvider2Email@gmail.com",
                             FullName = "نام و نام خانوادگی کارشناس دو",
                             Gender = 0,

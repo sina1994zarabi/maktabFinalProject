@@ -300,7 +300,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
             migrationBuilder.InsertData(
                 table: "Admins",
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
-                values: new object[] { 1, 0m, null, new DateTime(2025, 2, 13, 21, 49, 18, 170, DateTimeKind.Local).AddTicks(7463), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
+                values: new object[] { 1, 0m, null, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(9337), "admin@gmail.com", "adminName", 1, "1234567890", null, 2, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -335,8 +335,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "PhoneNumber", "ProfilePicture", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, 10000m, 1, new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7915), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
-                    { 2, 100000m, 1, new DateTime(2025, 2, 13, 21, 49, 18, 169, DateTimeKind.Local).AddTicks(7923), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
+                    { 1, 10000m, 1, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4284), "User1Email@gmail.com", "نام و نام خانوادگی کاربر یک", 1, "09xxxxxxxxx", null, 0, "User1Name" },
+                    { 2, 100000m, 1, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(4307), "User2Email@gmail.com", "نام و نام خانوادگی کاربر دو", 1, "09yyyyyyyy", null, 0, "User2Name" }
                 });
 
             migrationBuilder.InsertData(
@@ -344,14 +344,29 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "AccountBalance", "AddressId", "DateRegistered", "Email", "FullName", "Gender", "IsApproved", "PhoneNumber", "ProfilePicture", "Role", "Username" },
                 values: new object[,]
                 {
-                    { 1, 0m, 2, new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6786), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 0, "ServiceProvider1Username" },
-                    { 2, 0m, 2, new DateTime(2025, 2, 13, 18, 19, 18, 170, DateTimeKind.Utc).AddTicks(6790), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 0, "ServiceProvider2Username" }
+                    { 1, 0m, 2, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8743), "ServiceProvider1Email@gmail.com", "نام و نام خانوادگی کارشناس یک", 0, true, "09xxxxxxxxx", null, 0, "ServiceProvider1Username" },
+                    { 2, 0m, 2, new DateTime(2025, 2, 14, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(8752), "ServiceProvider2Email@gmail.com", "نام و نام خانوادگی کارشناس دو", 0, true, "09yyyyyyyyy", null, 0, "ServiceProvider2Username" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Services",
                 columns: new[] { "Id", "Description", "Price", "SubCategoryId", "Title" },
                 values: new object[] { 1, "توضیحات خدمت شماره یک ", 1000m, 1, "عنوان خدمت شماره یک" });
+
+            migrationBuilder.InsertData(
+                table: "ServiceRequests",
+                columns: new[] { "Id", "BookingDate", "ClientId", "Description", "IsCompleted", "ServiceId", "Status", "Title" },
+                values: new object[] { 1, new DateTime(2025, 2, 16, 13, 54, 24, 201, DateTimeKind.Local).AddTicks(7084), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" });
+
+            migrationBuilder.InsertData(
+                table: "ServiceOfferings",
+                columns: new[] { "Id", "CreatedAt", "Description", "ExpertId", "ServiceRequestId", "Status" },
+                values: new object[] { 1, new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(2660), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "Id", "ClientId", "Comment", "Rating", "ReviewDate", "ServiceOfferingId" },
+                values: new object[] { 1, 1, "خوب بود", 4, new DateTime(2025, 2, 14, 13, 54, 24, 203, DateTimeKind.Local).AddTicks(435), 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CityId",

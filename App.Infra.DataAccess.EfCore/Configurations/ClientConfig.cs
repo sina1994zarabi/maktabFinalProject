@@ -29,7 +29,6 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Gender = Gender.male,
 					PhoneNumber = "09xxxxxxxxx",
 					AddressId = 1,
-					DateRegistered = DateTime.Now,
 					AccountBalance = 10000,
 				},
 				new Client
@@ -41,7 +40,6 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Gender = Gender.male,
 					PhoneNumber = "09yyyyyyyy",
 					AddressId = 1,
-					DateRegistered = DateTime.Now,
 					AccountBalance = 100000
 				}
 				);

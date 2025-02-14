@@ -26,7 +26,6 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					FullName = "نام و نام خانوادگی کارشناس یک",
 					PhoneNumber = "09xxxxxxxxx",
 					AddressId = 2,
-					DateRegistered = DateTime.UtcNow,
 					IsApproved = true
 				},
 				new Expert
@@ -37,7 +36,6 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					FullName = "نام و نام خانوادگی کارشناس دو",
 					PhoneNumber = "09yyyyyyyyy",
 					AddressId = 2,
-					DateRegistered = DateTime.UtcNow,
 					IsApproved = true
 				}
 				);
