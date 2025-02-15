@@ -14,20 +14,21 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Admin> builder)
 		{
-
+			builder.HasOne(a => a.AppUser)
+				   .WithOne(u => u.AdminProfile)
+				   .HasForeignKey<Admin>(a => a.AppUserId)
+				   .OnDelete(DeleteBehavior.NoAction);
 
 
 			builder.HasData(
-				new Admin {
-					Id =1,
-					Username = "admin",
-					FullName = "adminName",
-					Email = "admin@gmail.com",
-					PhoneNumber = "1234567890",
+				new Admin
+				{
+					Id = 1,
+					FullName = "سینا ضرابی",
 					Gender = Gender.male,
-					Role = UserRole.Admin
+					AppUserId = 1
 				}
-				); ;
+				);
 		}
 	}
 }

@@ -18,26 +18,23 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasMany(sp => sp.ServiceOfferings)
 				   .WithOne(so => so.Expert);
 
+
 			builder.HasData(
 				new Expert
 				{
 					Id = 1,
-					Username = "ServiceProvider1Username",
-					Email = "ServiceProvider1Email@gmail.com",
-					FullName = "نام و نام خانوادگی کارشناس یک",
+					FullName = "نام و نام خانوادگی کارشناس شماره یک",
 					PhoneNumber = "09xxxxxxxxx",
-					Role = UserRole.Expert,
-					IsApproved = true
+					Gender = Gender.male,
+					AppUserId = 4
 				},
 				new Expert
 				{
 					Id = 2,
-					Username = "ServiceProvider2Username",
-					Email = "ServiceProvider2Email@gmail.com",
-					FullName = "نام و نام خانوادگی کارشناس دو",
+					FullName = "نام و نام خانوادگی کارشناس شماره دو",
 					PhoneNumber = "09yyyyyyyyy",
-					Role = UserRole.Expert,
-					IsApproved = true
+					Gender = Gender.male,
+					AppUserId = 5
 				}
 				);
 		}

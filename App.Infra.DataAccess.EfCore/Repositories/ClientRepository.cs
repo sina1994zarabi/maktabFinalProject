@@ -24,9 +24,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			var newClient = new Client
 			{
 				FullName = client.FullName,
-				Email = client.Email,
-				Username = client.Username,
-				//Password = client.Password,
+				//Email = client.Email,
+				//UserName = client.Username,
+				//PasswordHash = client.Password,
 				PhoneNumber = client.PhoneNumber,
 				Gender = client.Gender
 			};
@@ -59,10 +59,10 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 		    var clientToUpdate = await _context.Clients.FindAsync(client.Id, cancellation);
 			if (clientToUpdate != null)
 			{
-				clientToUpdate.Email = client.Email;
+				//clientToUpdate.Email = client.Email;
 				clientToUpdate.PhoneNumber  = client.PhoneNumber;
 				clientToUpdate.FullName = client.FullName;
-				clientToUpdate.Username = client.Username;
+				//clientToUpdate.UserName = client.Username;
 				await _context.SaveChangesAsync();
 			}
 		}

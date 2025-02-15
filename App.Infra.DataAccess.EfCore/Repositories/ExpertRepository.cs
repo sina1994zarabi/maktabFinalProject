@@ -25,13 +25,11 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			var newExpert = new Expert
 			{
 				FullName = expert.FullName,
-				Username = expert.Username,
-				Email = expert.Email,
+				//UserName = expert.Username,
+				//Email = expert.Email,
 				PhoneNumber = expert.PhoneNumber,
-				ProfilePicture = expert.ImagePath,
-				Gender = expert.Gender,
-				Role = UserRole.Expert,
-				
+				//ProfilePicture = expert.ImagePath,
+				Gender = expert.Gender
 			};
 
 			await _context.Experts.AddAsync(newExpert,cancellation);
@@ -64,9 +62,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			var expertToEdit = await _context.Experts.FindAsync(expert.Id, cancellation);
 			if (expertToEdit != null)
 			{
-				expertToEdit.Username = expert.Username;
-				expertToEdit.Email = expert.Email;
-				expertToEdit.ProfilePicture = expert.ImagePath;
+				//expertToEdit.UserName = expert.Username;
+				//expertToEdit.Email = expert.Email;
+				//expertToEdit.ProfilePicture = expert.ImagePath;
 				expertToEdit.PhoneNumber = expert.PhoneNumber;
 				expertToEdit.FullName = expert.FullName;
 				await _context.SaveChangesAsync(cancellation);

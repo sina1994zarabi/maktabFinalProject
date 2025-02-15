@@ -1,5 +1,7 @@
 ﻿using App.Domain.Core.Entities.BaseEntity;
 using App.Domain.Core.Enums;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +11,20 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.Entities.User
 {
-    public abstract class UserBase
+    public class AppUser : IdentityUser<int>
     {
-		#region Property
-		public int Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
+        #region Property
         public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime DateRegistered { get; set; } = DateTime.Now;
         public Gender Gender { get; set; }
-        public UserRole Role { get; set; }
         public string? ProfilePicture { get; set; }
+        public DateTime DateRegistered { get; set; } = DateTime.Now;
         public decimal AccountBalance { get; set; }
         #endregion
 
         #region Navigation Properties
-        
+        public Admin? AdminProfile { get; set; }
+        public Expert? ExpertProfile { get; set; }
+        public Client? ClientProfile { get; set; }
         #endregion
     }
 }

@@ -29,7 +29,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Title = "نظافت و شتشوی آپارتمان",
 					Description = "نضافت حیاط و راه پله",
 					ServiceId = 1,
-					ClientId = 1,
+					ClientId = 2,
 					Status = StatusEnum.AwaitingOfferReveives,
 					BookingDate = DateTime.Now.AddDays(2),
 				}

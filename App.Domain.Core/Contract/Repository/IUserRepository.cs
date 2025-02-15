@@ -9,10 +9,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IUserRepository
 	{
-		Task Add(UserBase user);
-		Task<UserBase> Get(int id);
-		Task<List<UserBase>> GetAll();
+		Task Add(AppUser user);
+		Task<AppUser> Get(int id);
+		Task<List<AppUser>> GetAll();
 		Task Delete(int id);
-		Task Update(UserBase user);
+		Task Update(AppUser user);
 	}
 }

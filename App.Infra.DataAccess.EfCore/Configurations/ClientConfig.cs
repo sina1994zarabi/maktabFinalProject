@@ -17,29 +17,24 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 
 			builder.HasMany(c => c.ServiceRequests)
 				   .WithOne(c => c.Client);
-			
+
+
 			builder.HasData(
 				new Client
 				{
 					Id = 1,
-					Username = "User1Name",
-					FullName = "نام و نام خانوادگی کاربر یک",
-					Email = "User1Email@gmail.com",
+					FullName = "نام و نام خانوادگی کاربر شماره یک",
 					Gender = Gender.male,
-					PhoneNumber = "09xxxxxxxxx",
-					Role = UserRole.Client,
-					AccountBalance = 10000,
+					PhoneNumber = "09wwwwwwwwww",
+					AppUserId = 2
 				},
 				new Client
 				{
 					Id = 2,
-					Username = "User2Name",
-					FullName = "نام و نام خانوادگی کاربر دو",
-					Email = "User2Email@gmail.com",
 					Gender = Gender.male,
-					Role = UserRole.Client,
-					PhoneNumber = "09yyyyyyyy",
-					AccountBalance = 100000
+					PhoneNumber = "09zzzzzzzzz",
+					FullName = "نام و نام خانوادگی کارشناس شماره دو",
+					AppUserId = 3
 				}
 				);
 		}
