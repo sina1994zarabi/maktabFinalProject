@@ -10,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface ICategoryRepository
 	{
-		Task Add(CreateCategoryDto category);
-		Task<Category> Get(int id);
-		Task<List<Category>> GetAll();
-		Task Delete(int id);
-		Task Update(UpdateCategoryDto category);
+		Task Add(CreateCategoryDto category,CancellationToken cancellationToken);
+		Task<Category> Get(int id,CancellationToken cancellationToken);
+		Task<List<Category>> GetAll(CancellationToken cancellationToken);
+		Task Delete(int id, CancellationToken cancellationToken);
+		Task Update(UpdateCategoryDto category, CancellationToken cancellationToken);
 	}
 }

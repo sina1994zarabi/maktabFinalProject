@@ -19,40 +19,40 @@ namespace App.Infra.DataAccess.EfCore.Repositories
             _context = context;
         }
 
-        public async Task Add(ServiceOffering serviceOffering)
+        public async Task Add(ServiceOffering serviceOffering,CancellationToken cancellationToken)
 		{
-			_context.ServiceOfferings.Add(serviceOffering);
-			await _context.SaveChangesAsync();
+			_context.ServiceOfferings.AddAsync(serviceOffering,cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
-			var serviceOfferingToDelete = await Get(id);
+			var serviceOfferingToDelete = await _context.ServiceOfferings.FindAsync(id,cancellationToken);
 			if (serviceOfferingToDelete != null)
 			{
 				_context.ServiceOfferings.Remove(serviceOfferingToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<ServiceOffering> Get(int id)
+		public async Task<ServiceOffering> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.ServiceOfferings.FindAsync(id);
+			return await _context.ServiceOfferings.FindAsync(id,cancellationToken);
 		}
 
-		public async Task<List<ServiceOffering>> GetAll()
+		public async Task<List<ServiceOffering>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.ServiceOfferings.ToListAsync();
+			return await _context.ServiceOfferings.ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(int id, ServiceOffering serviceOffering)
+		public async Task Update(ServiceOffering serviceOffering,CancellationToken cancellationToken)
 		{
-			var serviceOfferingToEdit = await Get(id);
+			var serviceOfferingToEdit = await _context.ServiceOfferings.FindAsync(serviceOffering.Id);
 			if (serviceOfferingToEdit != null)
 			{
 				serviceOfferingToEdit.Description = serviceOffering.Description;
 				serviceOfferingToEdit.Status = serviceOffering.Status;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

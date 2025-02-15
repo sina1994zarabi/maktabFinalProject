@@ -10,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface ISubCategoryRepository
 	{
-		Task Add(CreateSubCategoryDto subcategory);
-		Task<SubCategory> Get(int id);
-		Task<List<SubCategory>> GetAll();
-		Task Delete(int id);
-		Task Update(UpdateSubCategoryDto subcategory);
+		Task Add(CreateSubCategoryDto subcategory,CancellationToken cancellationToken);
+		Task<SubCategory> Get(int id,CancellationToken cancellationToken);
+		Task<List<SubCategory>> GetAll(CancellationToken cancellationToken);
+		Task Delete(int id, CancellationToken cancellationToken);
+		Task Update(UpdateSubCategoryDto subcategory, CancellationToken cancellationToken);
 	}
 }

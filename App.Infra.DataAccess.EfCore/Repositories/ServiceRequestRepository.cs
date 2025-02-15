@@ -18,35 +18,35 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(ServiceRequest serviceRequest)
+        public async Task Add(ServiceRequest serviceRequest,CancellationToken cancellationToken)
 		{
-			_context.ServiceRequests.Add(serviceRequest);
-			await _context.SaveChangesAsync();
+			await _context.ServiceRequests.AddAsync(serviceRequest,cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
-			var serviceRequestToDelete = await Get(id);
+			var serviceRequestToDelete = await _context.ServiceRequests.FindAsync(id,cancellationToken);
 			if (serviceRequestToDelete != null)
 			{
 				_context.ServiceRequests.Remove(serviceRequestToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<ServiceRequest> Get(int id)
+		public async Task<ServiceRequest> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.ServiceRequests.FindAsync(id);
+			return await _context.ServiceRequests.FindAsync(id,cancellationToken);
 		}
 
-		public async Task<List<ServiceRequest>> GetAll()
+		public async Task<List<ServiceRequest>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.ServiceRequests.ToListAsync();
+			return await _context.ServiceRequests.ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(int id, ServiceRequest serviceRequest)
+		public async Task Update(ServiceRequest serviceRequest,CancellationToken cancellationToken)
 		{
-			var serviceRequestToEdit = await Get(id);
+			var serviceRequestToEdit = await _context.ServiceRequests.FindAsync(serviceRequest.Id,cancellationToken);
 			if (serviceRequestToEdit != null)
 			{
 				serviceRequestToEdit.Title = serviceRequest.Title;
@@ -54,7 +54,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				serviceRequestToEdit.BookingDate = serviceRequest.BookingDate;
 				serviceRequestToEdit.Description = serviceRequest.Description;
 				serviceRequestToEdit.IsCompleted = serviceRequest.IsCompleted;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

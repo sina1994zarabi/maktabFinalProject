@@ -19,45 +19,45 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(CreateSubCategoryDto subcategory)
+        public async Task Add(CreateSubCategoryDto subcategory,CancellationToken cancellationToken)
 		{
 			var newSubCategory = new SubCategory
 			{
 				Title = subcategory.Title,
 				CategoryId = subcategory.CategoryId,
 			};
-			await _context.Subcategories.AddAsync(newSubCategory);
-			await _context.SaveChangesAsync();
+			await _context.Subcategories.AddAsync(newSubCategory,cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
-			var subCategoryToDelete = await Get(id);
+			var subCategoryToDelete = await _context.Subcategories.FindAsync(id,cancellationToken);
 			if (subCategoryToDelete != null)
 			{
 				_context.Subcategories.Remove(subCategoryToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<SubCategory> Get(int id)
+		public async Task<SubCategory> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.Subcategories.FindAsync(id);
+			return await _context.Subcategories.FindAsync(id, cancellationToken);
 		}
 
-		public async Task<List<SubCategory>> GetAll()
+		public async Task<List<SubCategory>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.Subcategories.ToListAsync();
+			return await _context.Subcategories.ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(UpdateSubCategoryDto subcategory)
+		public async Task Update(UpdateSubCategoryDto subcategory,CancellationToken cancellationToken)
 		{
-			var subcategoryToUpdate = await Get(subcategory.Id);
+			var subcategoryToUpdate = await _context.Subcategories.FindAsync(subcategory.Id,cancellationToken);
 			if (subcategoryToUpdate != null)
 			{
 				subcategoryToUpdate.Title = subcategory.Title;
 				subcategoryToUpdate.CategoryId = subcategory.CategoryId;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

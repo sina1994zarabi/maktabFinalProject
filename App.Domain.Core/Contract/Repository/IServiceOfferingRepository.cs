@@ -9,10 +9,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IServiceOfferingRepository
 	{
-		Task Add(ServiceOffering serviceOffering);
-		Task<ServiceOffering> Get(int id);
-		Task<List<ServiceOffering>> GetAll();
-		Task Delete(int id);
-		Task Update(int id,ServiceOffering serviceOffering);
+		Task Add(ServiceOffering serviceOffering,CancellationToken cancellationToken);
+		Task<ServiceOffering> Get(int id,CancellationToken cancellationToken);
+		Task<List<ServiceOffering>> GetAll(CancellationToken cancellationToken);
+		Task Delete(int id, CancellationToken cancellationToken);
+		Task Update(ServiceOffering serviceOffering, CancellationToken cancellationToken);
 	}
 }

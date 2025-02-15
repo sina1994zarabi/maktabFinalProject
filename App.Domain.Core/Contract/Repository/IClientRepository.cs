@@ -10,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IClientRepository
 	{
-		Task Add(CreateClientDto client);
-		Task<Client> Get(int id);
-		Task<List<Client>> GetAll();
-		Task Delete(int id);
-		Task Update(UpdateClientDto client);
+		Task Add(CreateClientDto client,CancellationToken cancellation);
+		Task<Client> Get(int id,CancellationToken cancellation);
+		Task<List<Client>> GetAll(CancellationToken cancellation);
+		Task Delete(int id, CancellationToken cancellation);
+		Task Update(UpdateClientDto client, CancellationToken cancellation);
 	}
 }

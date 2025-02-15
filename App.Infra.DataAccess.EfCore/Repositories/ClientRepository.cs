@@ -19,7 +19,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(CreateClientDto client)
+        public async Task Add(CreateClientDto client,CancellationToken cancellation)
 		{
 			var newClient = new Client
 			{
@@ -30,33 +30,33 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				PhoneNumber = client.PhoneNumber,
 				Gender = client.Gender
 			};
-			await _context.Clients.AddAsync(newClient);
-			await _context.SaveChangesAsync();
+			await _context.Clients.AddAsync(newClient,cancellation);
+			await _context.SaveChangesAsync(cancellation);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellation)
 		{
-			var client = await Get(id);
+			var client = await _context.Clients.FindAsync(id, cancellation);
 			if (client != null)
 			{
 				_context.Clients.Remove(client);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellation);
 			}
 		}
 
-		public async Task<Client> Get(int id)
+		public async Task<Client> Get(int id,CancellationToken cancellation)
 		{
-			return await _context.Clients.FirstOrDefaultAsync(x => x.Id == id);
+			return await _context.Clients.FirstOrDefaultAsync(x => x.Id == id, cancellation);
 		}
 
-		public async Task<List<Client>> GetAll()
+		public async Task<List<Client>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Clients.ToListAsync();
+			return await _context.Clients.ToListAsync(cancellation);
 		}
 
-		public async Task Update(UpdateClientDto client)
+		public async Task Update(UpdateClientDto client,CancellationToken cancellation)
 		{
-		    var clientToUpdate = await Get(client.Id);
+		    var clientToUpdate = await _context.Clients.FindAsync(client.Id, cancellation);
 			if (clientToUpdate != null)
 			{
 				clientToUpdate.Email = client.Email;

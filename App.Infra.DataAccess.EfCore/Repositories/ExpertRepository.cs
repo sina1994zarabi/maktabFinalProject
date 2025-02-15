@@ -20,7 +20,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(CreateExpertDto expert)
+        public async Task Add(CreateExpertDto expert,CancellationToken cancellation)
 		{
 			var newExpert = new Expert
 			{
@@ -34,34 +34,34 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				
 			};
 
-			await _context.Experts.AddAsync(newExpert);
-			await _context.SaveChangesAsync();
+			await _context.Experts.AddAsync(newExpert,cancellation);
+			await _context.SaveChangesAsync(cancellation);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellation)
 		{
-			var serviceProviderToDelete = await Get(id);
+			var serviceProviderToDelete = await _context.Experts.FindAsync(id,cancellation);
 			if (serviceProviderToDelete != null)
 			{
 				_context.Experts.Remove(serviceProviderToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellation);
 			}
 
 		}
 
-		public async Task<Expert> Get(int id)
+		public async Task<Expert> Get(int id,CancellationToken cancellation)
 		{
-			return await _context.Experts.FindAsync(id);
+			return await _context.Experts.FindAsync(id, cancellation);
 		}
 
-		public async Task<List<Expert>> GetAll()
+		public async Task<List<Expert>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Experts.ToListAsync();
+			return await _context.Experts.ToListAsync(cancellation);
 		}
 
-		public async Task Update(UpdateExpertDto expert)
+		public async Task Update(UpdateExpertDto expert,CancellationToken cancellation)
 		{
-			var expertToEdit = await Get(expert.Id);
+			var expertToEdit = await _context.Experts.FindAsync(expert.Id, cancellation);
 			if (expertToEdit != null)
 			{
 				expertToEdit.Username = expert.Username;
@@ -69,7 +69,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				expertToEdit.ProfilePicture = expert.ImagePath;
 				expertToEdit.PhoneNumber = expert.PhoneNumber;
 				expertToEdit.FullName = expert.FullName;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellation);
 			}
 		}
 	}

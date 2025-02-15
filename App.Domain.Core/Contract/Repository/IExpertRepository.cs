@@ -10,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IExpertRepository
 	{
-		Task Add(CreateExpertDto expert);
-		Task<Expert> Get(int id);
-		Task<List<Expert>> GetAll();
-		Task Delete(int id);
-		Task Update(UpdateExpertDto expert);
+		Task Add(CreateExpertDto expert,CancellationToken cancellation);
+		Task<Expert> Get(int id,CancellationToken cancellation);
+		Task<List<Expert>> GetAll(CancellationToken cancellation);
+		Task Delete(int id, CancellationToken cancellation);
+		Task Update(UpdateExpertDto expert, CancellationToken cancellation);
 	}
 }

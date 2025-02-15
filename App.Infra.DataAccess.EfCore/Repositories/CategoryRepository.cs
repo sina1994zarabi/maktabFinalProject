@@ -20,45 +20,45 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(CreateCategoryDto category)
+        public async Task Add(CreateCategoryDto category,CancellationToken cancellationToken)
 		{
 			var newCategory = new Category
 			{
 				Title = category.Title,
 				Image = category.ImagePath
 			};
-			await _context.Categories.AddAsync(newCategory);
-			await _context.SaveChangesAsync();
+			await _context.Categories.AddAsync(newCategory,cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
-			var CategoryToDelete = await Get(id);
+			var CategoryToDelete = await _context.Categories.FindAsync(id, cancellationToken);
 			if (CategoryToDelete != null)
 			{
 				_context.Categories.Remove(CategoryToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<Category> Get(int id)
+		public async Task<Category> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.Categories.FindAsync(id);
+			return await _context.Categories.FindAsync(id, cancellationToken);
 		}
 
-		public async Task<List<Category>> GetAll()
+		public async Task<List<Category>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.Categories.ToListAsync();
+			return await _context.Categories.ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(UpdateCategoryDto category)
+		public async Task Update(UpdateCategoryDto category,CancellationToken cancellationToken)
 		{
-			var categoryToUpdate = await Get(category.Id);
+			var categoryToUpdate = await _context.Categories.FindAsync(category.Id, cancellationToken);
 			if (categoryToUpdate != null)
 			{
 				categoryToUpdate.Title = category.Title;
 				categoryToUpdate.Image = category.ImagePath;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

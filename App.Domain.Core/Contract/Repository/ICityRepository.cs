@@ -9,10 +9,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface ICityRepository
 	{
-		Task Add(City city);
-		Task<City> Get(int id);
-		Task<List<City>> GetAll();
-		Task Delete(int id);
-		Task Update(int id,City city);
+		Task Add(City city, CancellationToken cancellationToken);
+		Task<City> Get(int id, CancellationToken cancellationToken);
+		Task<List<City>> GetAll(CancellationToken cancellationToken);
+		Task Delete(int id, CancellationToken cancellationToken);
+		Task Update(City city, CancellationToken cancellationToken);
 	}
 }

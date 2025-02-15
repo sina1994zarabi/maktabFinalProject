@@ -10,10 +10,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IServiceRepository
 	{
-		Task Add(CreateServiceDto service);
-		Task<Service> Get(int id);
-		Task<List<Service>> GetAll();
-		Task Delete(int id);
-		Task Update(UpdateServiceDto service);
+		Task Add(CreateServiceDto service,CancellationToken cancellationToken);
+		Task<Service> Get(int id,CancellationToken cancellationToken);
+		Task<List<Service>> GetAll(CancellationToken cancellationToken);
+		Task Delete(int id, CancellationToken cancellationToken);
+		Task Update(UpdateServiceDto service, CancellationToken cancellationToken);
 	}
 }

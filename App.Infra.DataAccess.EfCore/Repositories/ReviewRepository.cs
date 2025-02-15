@@ -20,35 +20,35 @@ namespace App.Infra.DataAccess.EfCore.Repositories
         }
 
 
-        public async Task Add(Review review)
+        public async Task Add(Review review,CancellationToken cancellation)
 		{
 			_context.Reviews.Add(review);
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(cancellation);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellation)
 		{
-			var reviewToDelete = await Get(id);
+			var reviewToDelete = await _context.Reviews.FindAsync(id,cancellation);
 			if (reviewToDelete != null)
 			{
 				_context.Reviews.Remove(reviewToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellation);
 			}
 		}
 
-		public async Task<Review> Get(int id)
+		public async Task<Review> Get(int id,CancellationToken cancellation)
 		{
-			return await _context.Reviews.FindAsync(id);
+			return await _context.Reviews.FindAsync(id,cancellation);
 		}
 
-		public async Task<List<Review>> GetAll()
+		public async Task<List<Review>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Reviews.ToListAsync();
+			return await _context.Reviews.ToListAsync(cancellation);
 		}
 
-		public async Task Update(int id,Review review)
+		public async Task Update(Review review,CancellationToken cancellation)
 		{
-			var reviewToUpdate = await Get(id);
+			var reviewToUpdate = await _context.Reviews.FindAsync(review.Id);
 			if (reviewToUpdate != null)
 			{
 				reviewToUpdate.Comment = review.Comment;

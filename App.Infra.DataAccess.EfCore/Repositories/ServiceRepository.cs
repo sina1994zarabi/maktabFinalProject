@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			_context = context;
         }
 
-        public async Task Add(CreateServiceDto service)
+        public async Task Add(CreateServiceDto service,CancellationToken cancellationToken)
 		{
 			var newService = new Service
 			{
@@ -29,40 +30,40 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				Price = service.Price,
 				SubCategoryId = service.SubCategoryId,
 			};
-			await _context.Services.AddAsync(newService);
-			await _context.SaveChangesAsync();
+			await _context.Services.AddAsync(newService,cancellationToken);
+			await _context.SaveChangesAsync(cancellationToken);
 		}
 
-		public async Task Delete(int id)
+		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
-			var serviceToDelete = await Get(id);
+			var serviceToDelete = await _context.Services.FindAsync(id, cancellationToken);
 			if (serviceToDelete != null)
 			{
 				_context.Services.Remove(serviceToDelete);
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
-		public async Task<Service> Get(int id)
+		public async Task<Service> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.Services.FindAsync(id);
+			return await _context.Services.FindAsync(id, cancellationToken);
 		}
 
-		public async Task<List<Service>> GetAll()
+		public async Task<List<Service>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.Services.ToListAsync();
+			return await _context.Services.ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(UpdateServiceDto service)
+		public async Task Update(UpdateServiceDto service,CancellationToken cancellationToken)
 		{
-			var serviceToEdit = await Get(service.Id);
+			var serviceToEdit = await _context.Services.FindAsync(service.Id, cancellationToken);
 			if (serviceToEdit != null)
 			{
 				serviceToEdit.Title = service.Title;
 				serviceToEdit.Description = service.Description;
 				serviceToEdit.Price = service.Price;
 				serviceToEdit.SubCategoryId = service.SubCategoryId;
-				await _context.SaveChangesAsync();
+				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 	}

@@ -9,10 +9,10 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IReviewRepository
 	{
-		Task Add(Review review);
-		Task<Review> Get(int id);
-		Task<List<Review>> GetAll();
-		Task Delete(int id);
-		Task Update(int id,Review review);
+		Task Add(Review review,CancellationToken cancellation);
+		Task<Review> Get(int id,CancellationToken cancellation);
+		Task<List<Review>> GetAll(CancellationToken cancellation);
+		Task Delete(int id, CancellationToken cancellation);
+		Task Update(Review review, CancellationToken cancellation);
 	}
 }
