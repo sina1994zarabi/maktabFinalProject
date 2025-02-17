@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Domain.Core.DTOs.Client
+namespace App.Domain.Core.DTOs.ClientDto
 {
-	public class CreateClientDto
-	{
+    public class CreateClientDto
+    {
         public string FullName { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }

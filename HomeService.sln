@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Infra.DataAccess.EfCore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.EndPoints.MVC", "App.EndPoints.MVC\App.EndPoints.MVC.csproj", "{222F3CF5-9827-4C3D-A732-2C37B82B883D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.Services.Services", "App.Domain.Services.Services\App.Domain.Services.Services.csproj", "{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{222F3CF5-9827-4C3D-A732-2C37B82B883D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{222F3CF5-9827-4C3D-A732-2C37B82B883D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{222F3CF5-9827-4C3D-A732-2C37B82B883D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{FCC42BE1-FE9F-43DF-8726-B540AA806270} = {C83AADAC-AF95-40BA-956B-159E958ECBB2}
 		{EF8D25CD-A9AF-4FB7-B3F3-C256CE5FA921} = {646598A4-0A15-4BB5-96C4-35C0618E661E}
 		{222F3CF5-9827-4C3D-A732-2C37B82B883D} = {F2D4497A-78DA-4F34-82CC-7BC61AFDAFA6}
+		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6} = {C83AADAC-AF95-40BA-956B-159E958ECBB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7525A6-B910-4A53-9EEE-803DAEC86593}

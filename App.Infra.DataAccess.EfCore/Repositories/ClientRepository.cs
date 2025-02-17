@@ -1,5 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
-using App.Domain.Core.DTOs.Client;
+using App.Domain.Core.DTOs.ClientDto;
 using App.Domain.Core.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace App.Infra.DataAccess.EfCore.Repositories
 {
-	public class ClientRepository : IClientRepository
+    public class ClientRepository : IClientRepository
 	{
 		private readonly AppDbContext _context;
 
