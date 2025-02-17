@@ -1,6 +1,8 @@
 using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.Entities.User;
 using App.Infra.DataAccess.EfCore;
 using App.Infra.DataAccess.EfCore.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,10 @@ builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 
+//Add Identity 
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
+	.AddEntityFrameworkStores<AppDbContext>()
+	.AddDefaultTokenProviders();
 
 
 var app = builder.Build();
@@ -42,7 +48,14 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
 
 app.Run();

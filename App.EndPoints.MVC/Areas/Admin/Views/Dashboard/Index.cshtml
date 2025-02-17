@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Admin Dashboard</h2>
+<h3>Welcome @ViewData["username"]</h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Users</div>
+            <div class="card-body">
+                <p>Manage Users</p>
+                <a href="@Url.Action("Index", "Account", new { area = "Admin" })" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Services</div>
+            <div class="card-body">
+                <p>Manage Services</p>
+                <a href="@Url.Action("Index", "Service", new { area = "Admin" })" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Categories</div>
+            <div class="card-body">
+                <p>Manage Categories</p>
+                <a href="@Url.Action("Index", "Category", new { area = "Admin" })" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+</div>
