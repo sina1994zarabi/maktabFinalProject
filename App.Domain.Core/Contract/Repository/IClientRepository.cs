@@ -13,6 +13,7 @@ namespace App.Domain.Core.Contract.Repository
 		Task Add(CreateClientDto client,CancellationToken cancellation);
 		Task<Client> Get(int id,CancellationToken cancellation);
 		Task<List<Client>> GetAll(CancellationToken cancellation);
+		Task<Client> GetClientInfo(int id, CancellationToken cancellation);
 		Task Delete(int id, CancellationToken cancellation);
 		Task Update(UpdateClientDto client, CancellationToken cancellation);
 	}

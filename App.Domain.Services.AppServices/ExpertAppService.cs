@@ -34,9 +34,14 @@ namespace App.Domain.Services.AppServices
             return await _expertService.GetAll(cancellationToken);
         }
 
-        public Task<Expert> GetExpertInfo(int id, CancellationToken cancellationToken)
+        public async Task<Expert> GetById(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _expertService.Get(id,cancellationToken);
+        }
+
+        public async Task<Expert> GetExpertInfo(int id, CancellationToken cancellationToken)
+        {
+            return await _expertService.GetExpertInfo(id,cancellationToken);
         }
 
         public async Task Update(UpdateExpertDto updateExpertDto, CancellationToken cancellationToken)

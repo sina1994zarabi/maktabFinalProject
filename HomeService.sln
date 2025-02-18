@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.EndPoints.MVC", "App.En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Services.Services", "App.Domain.Services.Services\App.Domain.Services.Services.csproj", "{DEE377B7-94AF-4652-945A-F5E7AB5B27F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.Services.AppServices", "App.Domain.Services.AppServices\App.Domain.Services.AppServices.csproj", "{AE21FF69-2214-42D8-BFB2-5A88AA842472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Services.AppServices", "App.Domain.Services.AppServices\App.Domain.Services.AppServices.csproj", "{AE21FF69-2214-42D8-BFB2-5A88AA842472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

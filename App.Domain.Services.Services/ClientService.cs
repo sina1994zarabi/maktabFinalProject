@@ -39,6 +39,11 @@ namespace App.Domain.Services.Services
             return await _clientRepository.GetAll(cancellation);
         }
 
+        public async Task<Client> GetClientInfo(int id, CancellationToken cancellation)
+        {
+            return await _clientRepository.GetClientInfo(id,cancellation);
+        }
+
         public async Task Update(UpdateClientDto client, CancellationToken cancellation)
         {
             await _clientRepository.Update(client, cancellation);

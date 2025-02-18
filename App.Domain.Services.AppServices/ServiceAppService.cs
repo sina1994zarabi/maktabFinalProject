@@ -42,7 +42,7 @@ namespace App.Domain.Services.AppServices
 
         public async Task Update(UpdateServiceDto updateServiceDto, CancellationToken cancellationToken)
         {
-            return await _serviceService.Update(updateServiceDto,cancellationToken);
+            await _serviceService.Update(updateServiceDto,cancellationToken);
         }
     }
 }

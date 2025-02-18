@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contract.Repository;
 using App.Domain.Core.Contract.Services;
+using App.Domain.Core.DTOs.ReviewDto;
 using App.Domain.Core.Entities.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace App.Domain.Services.Services
             _reviewRepository = reviewRepository;
         }
 
-        public async Task Add(Review review, CancellationToken cancellation)
+        public async Task Add(CreateReviewDto review, CancellationToken cancellation)
         {
             await _reviewRepository.Add(review, cancellation);
         }

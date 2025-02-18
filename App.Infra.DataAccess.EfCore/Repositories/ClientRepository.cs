@@ -54,7 +54,15 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.Clients.ToListAsync(cancellation);
 		}
 
-		public async Task Update(UpdateClientDto client,CancellationToken cancellation)
+        public async Task<Client> GetClientInfo(int id, CancellationToken cancellation)
+        {
+            return await _context.Clients
+				.Include(x => x.AppUser)
+				.Include(x => x.ServiceRequests)
+				.FirstAsync(x => x.Id == id);
+        }
+
+        public async Task Update(UpdateClientDto client,CancellationToken cancellation)
 		{
 		    var clientToUpdate = await _context.Clients.FindAsync(client.Id, cancellation);
 			if (clientToUpdate != null)

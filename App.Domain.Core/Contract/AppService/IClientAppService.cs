@@ -15,6 +15,6 @@ namespace App.Domain.Core.Contract.AppService
         Task<List<Client>> GetAll(CancellationToken cancellationToken);
         Task<Client> GetClientInfo(int id, CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
-        Task Update(UpdateClientDto updateClientDto, CancellationToken);
+        Task Update(UpdateClientDto updateClientDto, CancellationToken cancellationToken);
     }
 }

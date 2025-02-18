@@ -13,6 +13,7 @@ namespace App.Domain.Core.Contract.Repository
 		Task Add(CreateExpertDto expert,CancellationToken cancellation);
 		Task<Expert> Get(int id,CancellationToken cancellation);
 		Task<List<Expert>> GetAll(CancellationToken cancellation);
+		Task<Expert> GetExpertInfo(int id,CancellationToken cancellation);
 		Task Delete(int id, CancellationToken cancellation);
 		Task Update(UpdateExpertDto expert, CancellationToken cancellation);
 	}

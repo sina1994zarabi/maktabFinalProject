@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "User Management";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>مدیریت کاربران: </h2>
+
+<p>انتخاب کنید: </p>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">مدیریت مشتریان</h5>
+                <p class="card-text">مشاهده و مدیریت مشتریان</p>
+                <a href="@Url.Action("Clients", "User", new { area = "Admin" })"  class="btn btn-primary">برو به</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">کارشناسان</h5>
+                <p class="card-text">مشاهده کارشناسان</p>
+                <a href="@Url.Action("Experts", "User", new { area = "Admin" })" class="btn btn-primary">برو به</a>
+            </div>
+        </div>
+    </div>
+</div>

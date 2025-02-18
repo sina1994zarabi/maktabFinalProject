@@ -39,9 +39,9 @@ namespace App.Domain.Services.AppServices
             return await _clientService.Get(id,cancellationToken);
         }
 
-        public Task<Client> GetClientInfo(int id, CancellationToken cancellationToken)
+        public async Task<Client> GetClientInfo(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _clientService.GetClientInfo(id,cancellationToken);
         }
 
         public async Task Update(UpdateClientDto updateClientDto, CancellationToken cancellation)

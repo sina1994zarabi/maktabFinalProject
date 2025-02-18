@@ -40,6 +40,11 @@ namespace App.Domain.Services.Services
             return await _expertRepository.GetAll(cancellation);
         }
 
+        public async Task<Expert> GetExpertInfo(int id, CancellationToken cancellation)
+        {
+            return await _expertRepository.GetExpertInfo(id,cancellation);
+        }
+
         public async Task Update(UpdateExpertDto expert, CancellationToken cancellation)
         {
             await _expertRepository.Update(expert, cancellation);

@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contract.Repository;
 using App.Domain.Core.Contract.Services;
+using App.Domain.Core.DTOs.ServiceRequestDto;
 using App.Domain.Core.Entities.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace App.Domain.Services.Services
             _serviceRequestRepository = serviceRequestRepository;
         }
 
-        public async Task Add(ServiceRequest serviceRequest, CancellationToken cancellationToken)
+        public async Task Add(CreateServiceRequestDto serviceRequest, CancellationToken cancellationToken)
         {
             await _serviceRequestRepository.Add(serviceRequest, cancellationToken);
         }

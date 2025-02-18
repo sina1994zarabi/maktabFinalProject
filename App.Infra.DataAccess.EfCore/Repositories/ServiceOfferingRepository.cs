@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.ServiceOfferingDto;
 using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,16 @@ namespace App.Infra.DataAccess.EfCore.Repositories
             _context = context;
         }
 
-        public async Task Add(ServiceOffering serviceOffering,CancellationToken cancellationToken)
+        public async Task Add(CreateServiceOfferingDto serviceOffering,CancellationToken cancellationToken)
 		{
-			_context.ServiceOfferings.AddAsync(serviceOffering,cancellationToken);
+			var newServiceOfferin = new ServiceOffering
+			{
+				Description = serviceOffering.Description,
+				Status = serviceOffering.Status,
+				ExpertId = serviceOffering.ExpertId,
+				ServiceRequestId = serviceOffering.ServiceRequestId
+			};
+			_context.ServiceOfferings.AddAsync(newServiceOfferin,cancellationToken);
 			await _context.SaveChangesAsync(cancellationToken);
 		}
 

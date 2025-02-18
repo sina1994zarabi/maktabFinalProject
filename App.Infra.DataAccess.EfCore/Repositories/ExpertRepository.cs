@@ -57,7 +57,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.Experts.ToListAsync(cancellation);
 		}
 
-		public async Task Update(UpdateExpertDto expert,CancellationToken cancellation)
+        public async Task<Expert> GetExpertInfo(int id, CancellationToken cancellation)
+        {
+            return await _context.Experts
+								 .Include(x => x.AppUser)
+								 .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task Update(UpdateExpertDto expert,CancellationToken cancellation)
 		{
 			var expertToEdit = await _context.Experts.FindAsync(expert.Id, cancellation);
 			if (expertToEdit != null)

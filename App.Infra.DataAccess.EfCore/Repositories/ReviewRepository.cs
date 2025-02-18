@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.DTOs.ReviewDto;
 using App.Domain.Core.Entities.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
@@ -20,9 +21,16 @@ namespace App.Infra.DataAccess.EfCore.Repositories
         }
 
 
-        public async Task Add(Review review,CancellationToken cancellation)
+        public async Task Add(CreateReviewDto review,CancellationToken cancellation)
 		{
-			_context.Reviews.Add(review);
+			var newReview = new Review
+			{
+				ClientId = review.ClientId,
+				ServiceOfferingId = review.ServiceOfferingId,
+				Comment = review.Comment,
+				ReviewDate = review.CreatedAt
+			};
+			_context.Reviews.Add(newReview);
 			await _context.SaveChangesAsync(cancellation);
 		}
 

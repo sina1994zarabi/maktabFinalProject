@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contract.Repository;
 using App.Domain.Core.Contract.Services;
+using App.Domain.Core.DTOs.ServiceOfferingDto;
 using App.Domain.Core.Entities.Services;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace App.Domain.Services.Services
             _serviceOfferingRepository = serviceOfferingRepository;
         }
 
-        public async Task Add(ServiceOffering serviceOffering, CancellationToken cancellationToken)
+        public async Task Add(CreateServiceOfferingDto serviceOffering, CancellationToken cancellationToken)
         {
             await _serviceOfferingRepository.Add(serviceOffering, cancellationToken);
         }

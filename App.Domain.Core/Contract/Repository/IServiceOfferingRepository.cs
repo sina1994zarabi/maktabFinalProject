@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Entities.Services;
+﻿using App.Domain.Core.DTOs.ServiceOfferingDto;
+using App.Domain.Core.Entities.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace App.Domain.Core.Contract.Repository
 {
 	public interface IServiceOfferingRepository
 	{
-		Task Add(ServiceOffering serviceOffering,CancellationToken cancellationToken);
+		Task Add(CreateServiceOfferingDto serviceOffering,CancellationToken cancellationToken);
 		Task<ServiceOffering> Get(int id,CancellationToken cancellationToken);
 		Task<List<ServiceOffering>> GetAll(CancellationToken cancellationToken);
 		Task Delete(int id, CancellationToken cancellationToken);
