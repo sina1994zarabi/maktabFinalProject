@@ -5,18 +5,18 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Categories</h2>
+<h2>دسته بندی ها</h2>
 
 <p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Category</a>
+    <a asp-action="Create" class="btn btn-primary">ایجاد دسته بندی جدید</a>
 </p>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Image</th>
-            <th>Actions</th>
+            <th>عنوان </th>
+            <th>عکس </th>
+            <th>عملیات </th>
         </tr>
     </thead>
     <tbody>
@@ -26,9 +26,9 @@
                 <td>@category.Title</td>
                 <td>@category.Image</td>
                 <td>
-                    <a href="@Url.Action("Edit", new { id = category.Id })" class="btn btn-warning">Edit</a>
-                    <a href="@Url.Action("Details", new { id = category.Id })" class="btn btn-info">Details</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategoryModal-@category.Id">Delete</button>
+                    <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning">ویرایش</a>
+                    <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-info">مشاهده جزییات</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategoryModal-@category.Id">پاک کردن</button>
 
                     <!-- Delete Confirmation Modal -->
                     <div class="modal fade" id="deleteCategoryModal-@category.Id" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel-@category.Id" aria-hidden="true">

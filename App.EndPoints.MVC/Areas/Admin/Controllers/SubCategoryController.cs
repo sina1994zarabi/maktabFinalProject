@@ -26,7 +26,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var subcategory = await _subCategoryAppService.GetAll(default);
+            var subcategory = await _subCategoryAppService.GetById(id,default);
             if (subcategory == null) { return NotFound(); }
             return View(subcategory);
         }

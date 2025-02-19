@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace App.Domain.Core.DTOs.CategoryDto
 {
-	public class UpdateCategoryDto
-	{
+    public class GetCategoryDto
+    {
         public int Id { get; set; }
         public string Title { get; set; }
         public string? ImagePath { get; set; }

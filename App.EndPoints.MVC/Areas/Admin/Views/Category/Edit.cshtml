@@ -1,24 +1,24 @@
-﻿@model App.Domain.Core.Entities.Services.Category
+﻿@model App.Domain.Core.DTOs.CategoryDto.GetCategoryDto;
 
 @{
     ViewData["Title"] = "Edit Categories";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
+<form asp-action = "Edit" method = "Post">
+    <input type = "hidden" asp-for = "Id" />
 
-    <div class="form-group">
-        <label>Title:</label>
+    <div class = "form-group">
+        <label>عنوان</label>
         <input asp-for="Title" class="form-control" />
     </div>
 
     <div class="form-group">
-        <label>Image URL:</label>
-        <input asp-for="Image" class="form-control" />
+        <label>آپلود عکس</label>
+        <input asp-for="ImagePath" class="form-control" />
     </div>
 
-    <button type="submit" class="btn btn-warning">Save Changes</button>
+    <button type="submit" class="btn btn-warning">اعمال تغییرات</button>
 </form>
 
 @section Scripts {

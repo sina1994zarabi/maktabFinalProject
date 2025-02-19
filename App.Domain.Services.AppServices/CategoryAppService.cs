@@ -40,6 +40,18 @@ namespace App.Domain.Services.AppServices
             return _categoryService.Get(id,cancellationToken);
         }
 
+        public async Task<GetCategoryDto> GetCategoryDtoById(int id, CancellationToken cancellationToken)
+        {
+            var category = await _categoryService.Get(id,cancellationToken);
+            var getCategoryDto = new GetCategoryDto
+            {
+                Id = category.Id,
+                Title = category.Title,
+                ImagePath = category.Image
+            };
+            return getCategoryDto;
+        }
+
         public async Task Update(UpdateCategoryDto updateCategoryDto, CancellationToken cancellationToken)
         {
             await _categoryService.Upate(updateCategoryDto,cancellationToken);

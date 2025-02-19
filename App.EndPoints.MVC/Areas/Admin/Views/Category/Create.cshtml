@@ -6,22 +6,22 @@
 }
 
 
-<h2>Create New Category</h2>
+<h2>ایجاد دسته بندی جدید </h2>
 
 <form asp-action="Create" method="Post">
     <div class="form-group">
-        <label>Title:</label>
+        <label>عنوان </label>
         <input asp-for="Title"  class="form-control" />
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     
     <div class="form-group">
-        <label>Image URL:</label>
+        <label>آپلود عکس </label>
         <input asp-for="ImagePath" class="form-control" />
         <span asp-validation-for="ImagePath" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success">Create</button>
+    <button type="submit" class="btn btn-success">ایجاد</button>
 </form>
 
 @section Scripts {

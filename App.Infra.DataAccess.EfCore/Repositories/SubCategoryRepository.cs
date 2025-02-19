@@ -42,12 +42,15 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<SubCategory> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.Subcategories.FindAsync(id, cancellationToken);
+			return await _context.Subcategories
+				.Include(x => x.Category)
+				.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 		}
 
 		public async Task<List<SubCategory>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.Subcategories.ToListAsync(cancellationToken);
+			return await _context.Subcategories.Include(x => x.Category).
+				ToListAsync(cancellationToken);
 		}
 
 		public async Task Update(UpdateSubCategoryDto subcategory,CancellationToken cancellationToken)

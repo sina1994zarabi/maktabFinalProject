@@ -12,6 +12,7 @@ namespace App.Domain.Core.Contract.AppService
     {
         Task Create(CreateCategoryDto createCategoryDto,CancellationToken cancellationToken);
         Task<Category> GetById(int id, CancellationToken cancellationToken);
+        Task<GetCategoryDto> GetCategoryDtoById(int id, CancellationToken cancellationToken);
         Task<List<Category>> GetAll(CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(UpdateCategoryDto updateCategoryDto, CancellationToken cancellationToken);

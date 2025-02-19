@@ -43,7 +43,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var category = await _categoryAppService.GetById(id, default);
+            var category = await _categoryAppService.GetCategoryDtoById(id, default);   
             if (category == null) { return NotFound();}
             return View(category);
         }

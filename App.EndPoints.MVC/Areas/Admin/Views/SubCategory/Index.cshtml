@@ -5,12 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>All SubCategories</h2>
+<h2>دسته بندی های فرعی</h2>
 <table class="table">
     <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Actions</th>
+        <th>عنوان</th>
+        <th>دسته بندی اصلی</th>
+        <th>عملیات </th>
     </tr>
     @foreach (var subCat in Model)
     {
@@ -18,8 +18,8 @@
             <td>@subCat.Title</td>
             <td>@subCat.Category?.Title</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@subCat.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@subCat.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@subCat.Id" class="btn btn-warning">ویرایش</a> |
+                <a asp-action="Details" asp-route-id="@subCat.Id" class="btn btn-info">مشاهده جزییات</a> |
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteSubcategoryModal-@subCat.Id">پاک کردن</button>
 
 
@@ -37,14 +37,13 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-                                <a href="@Url.Action("DeleteConfirmed", new { id = subCat.Id })" class="btn btn-danger">پاک کردن</a>
+                                <a asp-action="Delete" class="btn btn-danger">پاک کردن</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </td>
         </tr>
     }
 </table>
-<a asp-action="Create" class="btn btn-primary">Create New</a>
+<a asp-action="Create" class="btn btn-primary">ایجاد</a>

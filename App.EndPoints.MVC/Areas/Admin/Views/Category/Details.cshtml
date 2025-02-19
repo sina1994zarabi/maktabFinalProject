@@ -4,13 +4,13 @@
     ViewData["Title"] = "Categories Details";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<h2>Category Details</h2>
+<h2>جزییات دسته بندی</h2>
 
 <dl>
-    <dt>Name:</dt>
+    <dt>عنوان</dt>
     <dd>@Model.Title</dd>
 
-    <dt>Image:</dt>
+    <dt>آپلود عکس </dt>
     <dd>
         @if (!string.IsNullOrEmpty(Model.Image))
         {
@@ -19,7 +19,7 @@
     </dd>
 </dl>
 
-<h4>Subcategories (@Model.Subcategories.Count)</h4>
+<h4>دسته بندی های فرعی (@Model.Subcategories.Count)</h4>
 <ul>
     @foreach (var sub in Model.Subcategories)
     {
@@ -27,7 +27,7 @@
     }
 </ul>
 
-<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<a asp-action="Index" class="btn btn-secondary">بازگشت</a>
 
 @section Scripts {
 

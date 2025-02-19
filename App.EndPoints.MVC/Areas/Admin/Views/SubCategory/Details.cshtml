@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>SubCategory Details</h2>
+<h2>جزییات دسته بندی فرعی</h2>
 
 <dl>
-    <dt>Name: </dt>
+    <dt>عنوان</dt>
     <dd>@Model.Title</dd>
 
-    <dt>Parent Category:</dt>
+    <dt>دسته بندی مادر </dt>
     <dd>@Model.Category?.Title</dd>
 </dl>
 
-<a asp-action="Index">Back to List</a>
+<a asp-action="Index">بازگشت </a>
