@@ -34,6 +34,13 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             return View(client);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteClient(int id)
+        {
+            await _clientAppService.Delete(id, default);
+            return RedirectToAction("Clients");
+        }
+
         public async Task<IActionResult> Experts()
         {
             var experts = await _expertAppService.GetAll(default);
@@ -45,5 +52,12 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             var expert = await _expertAppService.GetExpertInfo(id, default);
             return View(expert);
         }
+
+        public async Task<IActionResult> DeleteExpert(int id)
+        {
+            await _expertAppService.Delete(id, default);
+            return RedirectToAction("Experts");
+        }
+
     }
 }

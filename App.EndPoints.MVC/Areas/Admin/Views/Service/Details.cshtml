@@ -1,0 +1,44 @@
+﻿@model App.Domain.Core.Entities.Services.Service
+
+@{
+    ViewData["Title"] = "Service Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">جزییات خدمات</h6>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">عنوان</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3">توضیحات</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">قیمت</dt>
+            <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+
+            <dt class="col-sm-3">دسته بندی</dt>
+            <dd class="col-sm-9">@Model.Subcategory?.Title</dd>
+
+            @if (!string.IsNullOrEmpty(Model.Image))
+            {
+                <dt class="col-sm-3">عکس</dt>
+                <dd class="col-sm-9">
+                    <img src="@Model.Image" class="img-thumbnail" style="max-width: 300px">
+                </dd>
+            }
+        </dl>
+
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> ویرایش
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> بازگشت
+            </a>
+        </div>
+    </div>
+</div>

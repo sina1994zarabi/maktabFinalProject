@@ -1,0 +1,66 @@
+﻿@model List<App.Domain.Core.Entities.Services.Service>
+
+@{
+    ViewData["Title"] = "Services";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>خدمات</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">ایجاد خدمات جدید</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>عنوان</th>
+            <th>توضیحات</th>
+            <th>قیمت</th>
+            <th>دسته بندی</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.Title</td>
+                <td>@service.Description</td>
+                <td>@service.Price</td>
+                <td>@service.Subcategory.Title</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = service.Id })" class="btn btn-warning">ویرایش</a>
+                    <a href="@Url.Action("Details", new { id = service.Id })" class="btn btn-info">مشاهده جزییات</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteServiceModal-@service.Id">پاک کردن</button>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="deleteServiceModal-@service.Id" tabindex="-1" role="dialog" aria-labelledby="deleteServiceModalLabel-@service.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteServiceModalLabel-@service.Id">پاک کردن رکورد</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    مطمین اید می خواهید ادامه دهید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                                    <a href="@Url.Action("Delete", new { id = service.Id })" class="btn btn-danger">پاک کردن</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="~/AdminTemplate/js/jquery.min.js"></script>
+<script src="~/AdminTemplate/js/bootstrap.bundle.min.js"></script>
+<script src="~/AdminTemplate/js/jquery.easing.min.js"></script>
+<script src="~/AdminTemplate/js/sb-admin-2.min.js"></script>

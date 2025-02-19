@@ -1,0 +1,18 @@
+﻿@model App.Domain.Core.Entities.Services.SubCategory
+
+@{
+    ViewData["Title"] = "SubCategory Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>SubCategory Details</h2>
+
+<dl>
+    <dt>Name: </dt>
+    <dd>@Model.Title</dd>
+
+    <dt>Parent Category:</dt>
+    <dd>@Model.Category?.Title</dd>
+</dl>
+
+<a asp-action="Index">Back to List</a>
