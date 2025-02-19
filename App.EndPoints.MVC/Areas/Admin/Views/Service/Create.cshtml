@@ -1,30 +1,33 @@
-﻿@model App.Domain.Core.Entities.Services.Service
+﻿@model App.Domain.Core.DTOs.ServiceDto.CreateServiceDto
 
 @{
     ViewData["Title"] = "Create Service";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Create New Service</h2>
+<h2>ایجاد خدمات جدید</h2>
 
-<form asp-action="Create">
+<form asp-action="Create" method="Post">
     <div class="form-group">
-        <label>Title: </label>
-        <input asp-for="Title" class="form-control" />
+        <label>عنوان: </label>
+        <input asp-for = "Title"  class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     
     <div class="form-group">
-        <label>Description: </label>
+        <label>توضیحات: </label>
         <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label>Price: </label>
+        <label>قیمت: </label>
         <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label>Category: </label>
+        <label>دسته بندی اصلی: </label>
         <select asp-for="SubCategoryId" class="form-control">
             @foreach (var cat in ViewBag.SubCategories)
             {
@@ -33,5 +36,9 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-success">Create</button>
+    <button type="submit" class="btn btn-success">ایجاد</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

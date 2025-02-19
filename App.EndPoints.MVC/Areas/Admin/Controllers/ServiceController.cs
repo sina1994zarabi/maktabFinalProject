@@ -33,7 +33,13 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateServiceDto model)
         {
             if (!ModelState.IsValid)
+            {
+                //var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+                //TempData["ValidationErrors"] = errors;
+
+                //ViewBag.SubCategories = await _subCategoryAppService.GetAll(default);
                 return View(model);
+            }
             await _serviceAppService.Create(model, default);
             return RedirectToAction("Index");
         }

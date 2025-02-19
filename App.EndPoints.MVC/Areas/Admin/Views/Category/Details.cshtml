@@ -1,0 +1,35 @@
+﻿@model App.Domain.Core.Entities.Services.Category
+
+@{
+    ViewData["Title"] = "Categories Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Category Details</h2>
+
+<dl>
+    <dt>Name:</dt>
+    <dd>@Model.Title</dd>
+
+    <dt>Image:</dt>
+    <dd>
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <img src="@Model.Image" class="img-thumbnail" style="max-width: 200px">
+        }
+    </dd>
+</dl>
+
+<h4>Subcategories (@Model.Subcategories.Count)</h4>
+<ul>
+    @foreach (var sub in Model.Subcategories)
+    {
+        <li>@sub.Title</li>
+    }
+</ul>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

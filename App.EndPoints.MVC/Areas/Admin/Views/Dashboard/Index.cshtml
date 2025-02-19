@@ -26,10 +26,19 @@
     </div>
     <div class="col-md-4">
         <div class="card">
-            <div class="card-header">دسته بندی ها</div>
+            <div class="card-header">دسته بندی های اصلی </div>
             <div class="card-body">
                 <p>مدیریت دسته بندی ها</p>
                 <a href="@Url.Action("Index", "Category", new { area = "Admin" })" class="btn btn-primary">برو به</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">دسته بندی های فرعی</div>
+            <div class="card-body">
+                <p>مدیریت دسته بندی ها</p>
+                <a href="@Url.Action("Index", "SubCategory", new { area = "Admin" })" class="btn btn-primary">برو به</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,68 @@
+﻿@model List<App.Domain.Core.Entities.Services.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Categories</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Category</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Title</td>
+                <td>@category.Image</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = category.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Details", new { id = category.Id })" class="btn btn-info">Details</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategoryModal-@category.Id">Delete</button>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="deleteCategoryModal-@category.Id" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel-@category.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteCategoryModalLabel-@category.Id">پاک کردن رکورد</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    مطمین اید می خواهید ادامه دهید؟
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
+                                    <a href="@Url.Action("DeleteConfirmed", new { id = category.Id })" class="btn btn-danger">پاک کردن</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<script src="~/AdminTemplate/js/jquery.min.js"></script>
+<script src="~/AdminTemplate/js/bootstrap.bundle.min.js"></script>
+<script src="~/AdminTemplate/js/jquery.easing.min.js"></script>
+<script src="~/AdminTemplate/js/sb-admin-2.min.js"></script>
+*@
+
+@section Scripts {
+
+    <partial name = "_ValidationScriptsPartial" />
+}

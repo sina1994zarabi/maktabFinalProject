@@ -7,12 +7,14 @@ using App.Domain.Services.Services;
 using App.Infra.DataAccess.EfCore;
 using App.Infra.DataAccess.EfCore.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); // Ensures Razor views are compiled at runtime
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(
@@ -30,6 +32,8 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceAppService, ServiceAppService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<ISubCategoryAppService, SubCategoryAppService>();
