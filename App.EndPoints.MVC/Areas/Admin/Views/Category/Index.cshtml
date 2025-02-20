@@ -24,7 +24,7 @@
         {
             <tr>
                 <td>@category.Title</td>
-                <td>@category.Image</td>
+                <td><img src="@category.Image" alt="Category Image" class="img-fluid" style="max-width:100px; height:100px;"/></td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning">ویرایش</a>
                     <a asp-action="Edit" asp-route-id="@category.Id" class="btn btn-info">مشاهده جزییات</a>

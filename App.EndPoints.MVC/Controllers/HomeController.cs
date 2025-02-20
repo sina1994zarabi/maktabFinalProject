@@ -15,6 +15,7 @@ namespace App.EndPoints.MVC.Controllers
 
 		public IActionResult Index()
 		{
+			_logger.LogInformation("Index Of Home Page Invoked");
 			return View();
 		}
 

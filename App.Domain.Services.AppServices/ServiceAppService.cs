@@ -2,6 +2,7 @@
 using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.ServiceDto;
 using App.Domain.Core.Entities.Services;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace App.Domain.Services.AppServices
     {
 
         private readonly IServiceService _serviceService;
+        
 
         public ServiceAppService(IServiceService serviceService)
         {

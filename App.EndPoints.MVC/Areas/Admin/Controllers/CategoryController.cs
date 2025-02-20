@@ -1,6 +1,8 @@
 ﻿using App.Domain.Core.Contract.AppService;
 using App.Domain.Core.DTOs.CategoryDto;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace App.EndPoints.MVC.Areas.Admin.Controllers
 {
@@ -8,6 +10,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryAppService _categoryAppService;
+
 
         public CategoryController(ICategoryAppService categoryAppService)
         {
@@ -37,7 +40,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            await _categoryAppService.Create(model, default);
+            await _categoryAppService.Create(model,default, model.Image);
             return RedirectToAction("Index");
         }
 
@@ -53,7 +56,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            await _categoryAppService.Update(model,default);
+            await _categoryAppService.Update(model,default,model.Image);
             return RedirectToAction("Index");
         }
 

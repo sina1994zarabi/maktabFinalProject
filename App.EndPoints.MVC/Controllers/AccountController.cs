@@ -3,6 +3,7 @@ using App.EndPoints.MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using Serilog;
 
 namespace App.EndPoints.MVC.Controllers
 {
@@ -42,6 +43,7 @@ namespace App.EndPoints.MVC.Controllers
 
             if (result.Succeeded)
             {
+                Log.Information("User {} Logged In Successfully", model.Username);
                 var user = await _userManager.FindByNameAsync(model.Username);
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("Admin"))
@@ -51,7 +53,7 @@ namespace App.EndPoints.MVC.Controllers
                 else if (roles.Contains("Expert"))
                     return RedirectToAction("Index", "Dashboard", new { area = "Expert", username = user.UserName });
             }
-
+            Log.Information("Invalid Login Attempt For {Username}", model.Username);
             ModelState.AddModelError("", "ورود ناموفق");
             return View(model);
         }

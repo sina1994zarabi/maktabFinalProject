@@ -7,12 +7,18 @@
 
 <h2>ویرایش جزییات </h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
         <label>عنوان</label>
         <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image">آپلود</label>
+        <input asp-for="Image" type="file" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
     </div>
 
     <div class="form-group">

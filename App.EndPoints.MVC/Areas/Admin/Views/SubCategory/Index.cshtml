@@ -10,6 +10,7 @@
     <tr>
         <th>عنوان</th>
         <th>دسته بندی اصلی</th>
+        <th>عکس</th>
         <th>عملیات </th>
     </tr>
     @foreach (var subCat in Model)
@@ -17,6 +18,7 @@
         <tr>
             <td>@subCat.Title</td>
             <td>@subCat.Category?.Title</td>
+            <td><img src="@subCat.Image" alt="SubCategory Image" class="img-fluid" style="max-width:100px; height:100px;" /></td>
             <td>
                 <a asp-action="Edit" asp-route-id="@subCat.Id" class="btn btn-warning">ویرایش</a> |
                 <a asp-action="Details" asp-route-id="@subCat.Id" class="btn btn-info">مشاهده جزییات</a> |
@@ -46,4 +48,4 @@
         </tr>
     }
 </table>
-<a asp-action="Create" class="btn btn-primary">ایجاد</a>
+<a asp-action="Create" class="btn btn-primary">ایجاد دسته بندی جدید</a>

@@ -42,7 +42,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
                 return View(model);
-            await _subCategoryAppService.Create(model, default);
+            await _subCategoryAppService.Create(model, default,model.Image);
             return RedirectToAction("Index");
         }
 
@@ -59,7 +59,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            await _subCategoryAppService.Update(model, default);
+            await _subCategoryAppService.Update(model, default,model.Image);
             return RedirectToAction("Index");
         }
 

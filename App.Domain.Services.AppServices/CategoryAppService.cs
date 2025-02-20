@@ -2,6 +2,7 @@
 using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.CategoryDto;
 using App.Domain.Core.Entities.Services;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,19 @@ namespace App.Domain.Services.AppServices
     public class CategoryAppService : ICategoryAppService
     {
         private readonly ICategoryService _categoryService;
+        private readonly IUtilityService _utilityService;
 
-
-        public CategoryAppService(ICategoryService categoryService)
+        public CategoryAppService(ICategoryService categoryService, IUtilityService utilityService)
         {
             _categoryService = categoryService;
+            _utilityService = utilityService;
+
         }
 
-        public async Task Create(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken)
+        public async Task Create(CreateCategoryDto createCategoryDto, CancellationToken cancellationToken,IFormFile image)
         {
+            var imagePath = await _utilityService.UploadImage(image);
+            createCategoryDto.ImagePath = imagePath;
             await _categoryService.Create(createCategoryDto,cancellationToken);
         }
 
@@ -52,8 +57,10 @@ namespace App.Domain.Services.AppServices
             return getCategoryDto;
         }
 
-        public async Task Update(UpdateCategoryDto updateCategoryDto, CancellationToken cancellationToken)
+        public async Task Update(UpdateCategoryDto updateCategoryDto, CancellationToken cancellationToken,IFormFile image)
         {
+            var imagePath = await _utilityService.UploadImage(image);
+            updateCategoryDto.ImagePath = imagePath;
             await _categoryService.Upate(updateCategoryDto,cancellationToken);
         }
     }
