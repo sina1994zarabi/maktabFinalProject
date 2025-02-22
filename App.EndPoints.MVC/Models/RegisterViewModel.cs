@@ -21,7 +21,7 @@ namespace App.EndPoints.MVC.Models
         [DataType(DataType.Password)]
         [Compare("Password",ErrorMessage = "رمز عبور یکی نیست")]
         public string ConfirmedPassword { get; set; }
-        public string Role { get; set; }
+        public string? Role { get; set; }
         public Gender Gender { get; set; }
     }
 }

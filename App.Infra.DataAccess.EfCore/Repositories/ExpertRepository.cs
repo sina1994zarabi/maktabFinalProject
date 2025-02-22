@@ -25,13 +25,10 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			var newExpert = new Expert
 			{
 				FullName = expert.FullName,
-				//UserName = expert.Username,
-				//Email = expert.Email,
 				PhoneNumber = expert.PhoneNumber,
-				//ProfilePicture = expert.ImagePath,
-				Gender = expert.Gender
+				Gender = expert.Gender,
+				AppUserId = expert.AppUserId
 			};
-
 			await _context.Experts.AddAsync(newExpert,cancellation);
 			await _context.SaveChangesAsync(cancellation);
 		}

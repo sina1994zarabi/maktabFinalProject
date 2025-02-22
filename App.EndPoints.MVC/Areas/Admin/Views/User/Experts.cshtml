@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Expert Management</h2>
+<h2>مدیریت کارشناسان</h2>
 
 <table class="table table-bordered mt-4">
     <thead>
@@ -31,7 +31,7 @@
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#approveExpertModal-@expert.Id">تایید</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectExpertModal-@expert.Id">رد</button>
                     }
-                    <a href="@Url.Action("ExpertDetails", "User", new { area = "Admin", id = expert.Id })" class="btn btn-info">مشاهده جزییات</a>
+                    <a asp-action="ExpertDetails" asp-route-id = "@expert.Id" class="btn btn-info">مشاهده جزییات</a>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteExpertModal-@expert.Id">حذف</button>
                     <!-- Delete Confirmation Modal -->
                     <div class="modal fade" id="deleteExpertModal-@expert.Id" tabindex="-1" role="dialog" aria-labelledby="deleteExpertModalLabel-@expert.Id" aria-hidden="true">
@@ -58,3 +58,5 @@
         }
     </tbody>
 </table>
+
+<a asp-action="CreateExpert" class="btn btn-primary">ایجاد کارشناس جدید</a>

@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Client Management</h2>
+<h2>مشتریان</h2>
 
 <table class="table table-bordered mt-4">
     <thead>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-                                    <a href="@Url.Action("ClientDetails", "User", new { area = "Admin", id = client.Id })" class="btn btn-danger">پاک کردن</a>
+                                    <a asp-action = "DeleteClient" asp-route-id = "@client.Id" class="btn btn-danger">پاک کردن</a>
                                 </div>
                             </div>
                         </div>
@@ -51,6 +51,8 @@
         }
     </tbody>
 </table>
+<a asp-action="CreateClient" class="btn btn-primary">ایجاد مشتری جدید</a>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

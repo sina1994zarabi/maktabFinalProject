@@ -1,26 +1,35 @@
-﻿using App.Domain.Core.Entities.User;
+﻿using App.Domain.Core.Contract.AppService;
+using App.Domain.Core.DTOs.ClientDto;
+using App.Domain.Core.DTOs.ExpertDto;
+using App.Domain.Core.Entities.User;
 using App.EndPoints.MVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Serilog;
 
-namespace App.EndPoints.MVC.Controllers
+namespace App.EndPoints.MVC.Areas.Account.Controllers
 {
-    
+    [Area("Account")]
     public class AccountController : Controller
     {
 
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IClientAppService _clientAppService;
+        private readonly IExpertAppService _expertAppService;
 
 
         public AccountController(SignInManager<AppUser> signInManager,
-                                 UserManager<AppUser> userManager
+                                 UserManager<AppUser> userManager,
+                                 IClientAppService clientAppService,
+                                 IExpertAppService expertAppService
                                  )
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _clientAppService = clientAppService;
+            _expertAppService = expertAppService;
         }
 
         [HttpGet]
@@ -47,7 +56,7 @@ namespace App.EndPoints.MVC.Controllers
                 var user = await _userManager.FindByNameAsync(model.Username);
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Contains("Admin"))
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" , username = user.UserName});
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin", username = user.UserName });
                 else if (roles.Contains("Client"))
                     return RedirectToAction("Index", "Dashboard", new { area = "Client", username = user.UserName });
                 else if (roles.Contains("Expert"))
@@ -84,11 +93,30 @@ namespace App.EndPoints.MVC.Controllers
             if (result.Succeeded)
             {
                 if (model.Role == "Client")
+                {
                     await _userManager.AddToRoleAsync(user, "Client");
+                    var newClient = new CreateClientDto
+                    {
+                        FullName = model.FullName,
+                        Gender = model.Gender,
+                        PhoneNumber = model.PhoneNumber,
+                        AppUserId = user.Id
+                    };
+                    await _clientAppService.Create(newClient, default);
+                }
                 else if (model.Role == "Expert")
+                {
                     await _userManager.AddToRoleAsync(user, "Expert");
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
+                    var newExpert = new CreateExpertDto
+                    {
+                        FullName = model.FullName,
+                        Gender = model.Gender,
+                        AppUserId = user.Id,
+                        PhoneNumber = model.PhoneNumber,
+                    };
+                    await _expertAppService.Create(newExpert, default);
+                }
+                return RedirectToAction("Login", "Account");
             }
 
             foreach (var error in result.Errors)

@@ -28,7 +28,8 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				//UserName = client.Username,
 				//PasswordHash = client.Password,
 				PhoneNumber = client.PhoneNumber,
-				Gender = client.Gender
+				Gender = client.Gender,
+				AppUserId = client.AppUserId
 			};
 			await _context.Clients.AddAsync(newClient,cancellation);
 			await _context.SaveChangesAsync(cancellation);
