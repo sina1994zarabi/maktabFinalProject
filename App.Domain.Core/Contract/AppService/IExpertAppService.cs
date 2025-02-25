@@ -16,5 +16,6 @@ namespace App.Domain.Core.Contract.AppService
         Task<Expert> GetExpertInfo(int id, CancellationToken cancellation);
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(UpdateExpertDto updateExpertDto, CancellationToken cancellationToken);
+        Task ChangeStatus(int id, CancellationToken cancellationToken);
     }
 }

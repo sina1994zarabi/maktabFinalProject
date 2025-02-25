@@ -8,7 +8,7 @@
 <h2>خدمات</h2>
 
 <p>
-    <a href="@Url.Action("Create")" class="btn btn-primary">ایجاد خدمات جدید</a>
+    <a asp-action="Create" class="btn btn-primary">ایجاد خدمات جدید</a>
 </p>
 
 <table class="table table-bordered">
@@ -30,8 +30,8 @@
                 <td>@service.Price</td>
                 <td>@service.Subcategory.Title</td>
                 <td>
-                    <a href="@Url.Action("Edit", new { id = service.Id })" class="btn btn-warning">ویرایش</a>
-                    <a href="@Url.Action("Details", new { id = service.Id })" class="btn btn-info">مشاهده جزییات</a>
+                    <a asp-action="Edit" asp-route-id = "@service.Id"  class="btn btn-warning">ویرایش</a>
+                    <a asp-action="Details" asp-route-id="@service.Id" class="btn btn-info">مشاهده جزییات</a>
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteServiceModal-@service.Id">پاک کردن</button>
 
                     <!-- Delete Confirmation Modal -->
@@ -59,8 +59,10 @@
         }
     </tbody>
 </table>
+<a asp-action="Index" asp-controller = "Dashboard" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> بازگشت
+</a>
 
-<script src="~/AdminTemplate/js/jquery.min.js"></script>
-<script src="~/AdminTemplate/js/bootstrap.bundle.min.js"></script>
-<script src="~/AdminTemplate/js/jquery.easing.min.js"></script>
-<script src="~/AdminTemplate/js/sb-admin-2.min.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

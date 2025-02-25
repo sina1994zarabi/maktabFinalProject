@@ -52,7 +52,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<List<Client>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Clients.ToListAsync(cancellation);
+			return await _context.Clients.
+				Include(c => c.AppUser).
+				ToListAsync(cancellation);
 		}
 
         public async Task<Client> GetClientInfo(int id, CancellationToken cancellation)

@@ -1,5 +1,5 @@
 ﻿@using App.Domain.Core.Enums;
-@model RegisterViewModel;
+@model App.Domain.Core.DTOs.AccountDto.AccountRegisterDto;
 
 @{
     ViewData["Title"] = "Create Client";
@@ -8,7 +8,7 @@
 
 <h2>ایجاد مشتری جدید</h2>
 <div asp-validation-summary = "All" class = "text-danger"></div>
-<form asp-controller = "Account" asp-action = "Register" asp-area="Account" method = "post">
+<form asp-action = "CreateClient"  method = "post">
     <div class="form-group">
         <label asp-for = "FullName">نام و نام خانوادگی </label>
         <input asp-for = "FullName" class="form-control" />
@@ -34,13 +34,13 @@
     </div>
     <div class="col-6">
         <div class="form-group">
-            <label asp-for="ConfirmedPassword" class="mb-1">تکرار رمز عبور</label>
+            <label asp-for="ConfirmedPassword" class="mb-1"> تکرار رمز عبور </label>
             <input type="password" asp-for="ConfirmedPassword" class="form-control rounded">
             <span asp-validation-for="ConfirmedPassword" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="PhoneNumber">شماره تلفن </label>
+        <label asp-for="PhoneNumber"> شماره تلفن </label>
         <input asp-for="PhoneNumber" class="form-control" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
@@ -56,6 +56,7 @@
 
 
     <button type="submit" class="btn btn-success">ایجاد</button>
+    <a asp-action="Clients" class="btn btn-secondary">بازگشت</a>
 </form>
 
 @section Scripts {

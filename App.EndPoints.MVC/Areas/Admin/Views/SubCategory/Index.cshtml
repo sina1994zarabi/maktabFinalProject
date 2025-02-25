@@ -18,7 +18,7 @@
         <tr>
             <td>@subCat.Title</td>
             <td>@subCat.Category?.Title</td>
-            <td><img src="@subCat.Image" alt="SubCategory Image" class="img-fluid" style="max-width:100px; height:100px;" /></td>
+            <td><img src="@subCat.ImagePath" alt="Category Image" class="img-fluid" style="max-width:100px; height:100px;" /></td>
             <td>
                 <a asp-action="Edit" asp-route-id="@subCat.Id" class="btn btn-warning">ویرایش</a> |
                 <a asp-action="Details" asp-route-id="@subCat.Id" class="btn btn-info">مشاهده جزییات</a> |
@@ -49,3 +49,6 @@
     }
 </table>
 <a asp-action="Create" class="btn btn-primary">ایجاد دسته بندی جدید</a>
+<a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> بازگشت
+</a>

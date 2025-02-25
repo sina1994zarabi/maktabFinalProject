@@ -13,7 +13,7 @@ namespace App.Domain.Core.Entities.Services
         public int Id { get; set; }
         public string Title { get; set; }
         public int CategoryId { get; set; }
-        public Image? Image { get; set; }
+        public string? ImagePath { get; set; }
         #endregion
 
         #region Navigation Properties

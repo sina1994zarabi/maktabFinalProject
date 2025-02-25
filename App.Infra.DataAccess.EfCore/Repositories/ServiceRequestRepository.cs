@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Contract.Repository;
 using App.Domain.Core.DTOs.ServiceRequestDto;
 using App.Domain.Core.Entities.Services;
+using App.Domain.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,13 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			await _context.SaveChangesAsync(cancellationToken);
 		}
 
+		public async Task ChangeStatus(StatusEnum status, int id, CancellationToken cancellationToken)
+		{
+			var serviceRequest = await _context.ServiceRequests.FindAsync(id,cancellationToken);
+			serviceRequest.Status = status;
+			await _context.SaveChangesAsync(cancellationToken);
+		}
+
 		public async Task Delete(int id,CancellationToken cancellationToken)
 		{
 			var serviceRequestToDelete = await _context.ServiceRequests.FindAsync(id,cancellationToken);
@@ -48,7 +56,8 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<List<ServiceRequest>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.ServiceRequests.ToListAsync(cancellationToken);
+			return await _context.ServiceRequests
+								  .Include(x => x.Client).ToListAsync(cancellationToken);
 		}
 
 		public async Task Update(ServiceRequest serviceRequest,CancellationToken cancellationToken)

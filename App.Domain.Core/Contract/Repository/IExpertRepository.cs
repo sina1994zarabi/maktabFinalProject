@@ -16,5 +16,6 @@ namespace App.Domain.Core.Contract.Repository
 		Task<Expert> GetExpertInfo(int id,CancellationToken cancellation);
 		Task Delete(int id, CancellationToken cancellation);
 		Task Update(UpdateExpertDto expert, CancellationToken cancellation);
+		Task ChangeStatus(int id, CancellationToken cancellation);
 	}
 }

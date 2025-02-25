@@ -17,6 +17,7 @@ namespace App.Domain.Core.Entities.Services
         public DateTime ReviewDate { get; set; }
         public int ClientId { get; set; }
         public int ServiceOfferingId { get; set; }
+        public bool IsApproved { get; set; }
         #endregion
 
         #region Navigation Properties

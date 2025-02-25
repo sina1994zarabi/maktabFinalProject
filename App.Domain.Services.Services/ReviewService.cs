@@ -24,7 +24,12 @@ namespace App.Domain.Services.Services
             await _reviewRepository.Add(review, cancellation);
         }
 
-        public async Task Delete(int id, CancellationToken cancellation)
+		public async Task ConfirmOrRejectReview(int id, CancellationToken cancellation)
+		{
+			await _reviewRepository.ConfirmOrRejectRevie(id,cancellation);
+		}
+
+		public async Task Delete(int id, CancellationToken cancellation)
         {
             await _reviewRepository.Delete(id, cancellation);
         }

@@ -43,6 +43,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(
 builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IAccountAppService, AccountAppService>();
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
@@ -53,7 +54,11 @@ builder.Services.AddScoped<IExpertService, ExpertService>();
 builder.Services.AddScoped<IExpertAppService, ExpertAppService>();
 
 builder.Services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
+builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
+builder.Services.AddScoped<IServiceRequestAppService, ServiceRequestAppService>();
+
 builder.Services.AddScoped<IServiceOfferingRepository, ServiceOfferingRepository>();
+
 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
@@ -68,6 +73,9 @@ builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<ISubCategoryAppService, SubCategoryAppService>();
 
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IReviewAppService, ReviewAppService>();
+
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 
 
@@ -78,6 +86,16 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>()
 	.AddEntityFrameworkStores<AppDbContext>()
 	.AddDefaultTokenProviders();
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.SignIn.RequireConfirmedEmail = false; // <-- Important
+});
 
 
 var app = builder.Build();

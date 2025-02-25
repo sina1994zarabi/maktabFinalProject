@@ -25,6 +25,11 @@ namespace App.Domain.Services.Services
             await _expertRepository.Add(expert, cancellation);
         }
 
+        public async Task ChangeStatus(int id, CancellationToken cancellation)
+        {
+            await _expertRepository.ChangeStatus(id,cancellation);
+        }
+
         public async Task Delete(int id, CancellationToken cancellation)
         {
             await _expertRepository.Delete(id, cancellation);

@@ -19,6 +19,11 @@ namespace App.Domain.Services.AppServices
             _expertService = expertService;
         }
 
+        public async Task ChangeStatus(int id, CancellationToken cancellationToken)
+        {
+            await _expertService.ChangeStatus(id, cancellationToken);
+        }
+
         public async Task Create(CreateExpertDto createExpertDto, CancellationToken cancellationToken)
         {
             await _expertService.Add(createExpertDto,cancellationToken);

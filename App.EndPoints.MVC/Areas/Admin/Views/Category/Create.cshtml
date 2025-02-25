@@ -15,13 +15,26 @@
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Image"></label>
-        <input asp-for="Image" type="file" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
+    <div class="form-group relative">
+        <input asp-for="Image" type="file" class="form-control">
+        <label>آپلود عکس</label>
+        <div class="input-group round">
+            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success">
+                    <i class="icon-picture"></i>
+                    آپلود عکس
+                    <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                </button>
+            </span>
+        </div><!-- /.input-group -->
+        <div class="help-block"></div>
     </div>
 
     <button type="submit" class="btn btn-success">ایجاد</button>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> بازگشت
+    </a>
 </form>
 
 @section Scripts {

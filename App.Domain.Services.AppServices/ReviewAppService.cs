@@ -19,7 +19,12 @@ namespace App.Domain.Services.AppServices
             _reviewService = reviewService;
         }
 
-        public async Task Create(CreateReviewDto createReviewDto, CancellationToken cancellation)
+		public async Task ConfirmOrRejectReview(int id, CancellationToken cancellation)
+		{
+			await _reviewService.ConfirmOrRejectReview(id,cancellation);
+		}
+
+		public async Task Create(CreateReviewDto createReviewDto, CancellationToken cancellation)
         {
             await _reviewService.Add(createReviewDto,cancellation);
         }

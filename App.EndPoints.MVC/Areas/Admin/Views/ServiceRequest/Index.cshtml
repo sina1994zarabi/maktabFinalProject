@@ -1,0 +1,64 @@
+﻿@using App.Domain.Core.Enums;
+@using FrameWork;
+@model List<App.Domain.Core.Entities.Services.ServiceRequest>
+
+
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = " Service Requests";
+}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>عنوان</th>
+			<th>توضیحات</th>
+			<th>نام سفارش دهنده</th>
+			<th>نام کارشناس</th>
+			<th>تعداد پیشنهادات</th>
+			<th>وضعیت سفارش</th>
+			<th>عملیات</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var serviceRequest in Model)
+		{
+			<tr>
+				<td>@serviceRequest.Title</td>
+				<td>@serviceRequest.Description</td>
+				<td>@serviceRequest.Client.FullName</td>
+				<td>هنوز کارشناسی یافت نشد</td>
+				@if (serviceRequest.ServiceOfferings != null)
+				{
+					<td>@serviceRequest.ServiceOfferings.Count()</td>
+				}
+				else
+				{
+					<td>0</td>
+				}
+				<td>@serviceRequest.Status.ToFarsiStatus()</td>
+				<td>
+					<a class = "btn btn-success" asp-action = "Changestatus" asp-route-id = "@serviceRequest.Id">
+						<i class="bx bx-edit-alt me-1"></i>
+						تغییر وضعیت
+					</a>
+					<a asp-action="Details" asp-route-id="@serviceRequest.Id" class="btn btn-info">مشاهده جزییات</a>
+					<a asp-action="Delete" asp-route-id="@serviceRequest.Id" class="btn btn-warning" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')">
+						<i class="bx bx-trash me-1"></i> حذف
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<a asp-action="Index" asp-controller="Dashboard" class="btn btn-secondary">
+	<i class="fas fa-arrow-left"></i> بازگشت
+</a>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+
+
+

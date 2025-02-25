@@ -15,5 +15,6 @@ namespace App.Domain.Core.Contract.AppService
         Task<List<Review>> GetAll(CancellationToken cancellation);
         Task Delete(int id, CancellationToken cancellation);
         Task Update(Review reiew, CancellationToken cancellation);
+        Task ConfirmOrRejectReview(int id, CancellationToken cancellation);
     }
 }

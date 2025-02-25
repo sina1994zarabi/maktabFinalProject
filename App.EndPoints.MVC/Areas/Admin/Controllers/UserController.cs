@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contract.AppService;
+using App.Domain.Core.DTOs.AccountDto;
 using App.Domain.Core.DTOs.ClientDto;
 using App.Domain.Core.DTOs.ExpertDto;
 using App.Domain.Core.Entities.User;
@@ -6,6 +7,7 @@ using App.EndPoints.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace App.EndPoints.MVC.Areas.Admin.Controllers
 {
@@ -14,21 +16,29 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
     public class UserController : Controller
     {
 
+        #region Dependencies
         private readonly IClientAppService _clientAppService;
         private readonly IExpertAppService _expertAppService;
+        private readonly IAccountAppService _accountAppService;
         private readonly UserManager<AppUser> _userManager;
 
         public UserController(IClientAppService clientAppService,
                               IExpertAppService expertAppService,
+                              IAccountAppService accountAppService,
                               UserManager<AppUser> userManager)
         {
             _clientAppService = clientAppService;
             _expertAppService = expertAppService;
             _userManager = userManager;
+            _accountAppService = accountAppService;
         }
+        #endregion 
+
 
         public IActionResult Index() { return View(); }
-        
+
+
+        #region Clients
         public async Task<IActionResult> Clients()
         {
             var clients = await _clientAppService.GetAll(default);
@@ -41,32 +51,15 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClient(RegisterViewModel model)
+        public async Task<IActionResult> CreateClient(AccountRegisterDto model)
         {
+            model.Role = "Client";
             if (!ModelState.IsValid)
                 return View(model);
-            var user = new AppUser
-            {
-                Email = model.Email,
-                UserName = model.Username,
-                PhoneNumber = model.PhoneNumber,
-                FullName = model.FullName
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user,"Client");
-                var newCLient = new CreateClientDto
-                {
-                    FullName = model.FullName,
-                    Gender = model.Gender,
-                    PhoneNumber = model.PhoneNumber,
-                    AppUserId = user.Id
-                };
-                await _clientAppService.Create(newCLient, default);
+            var result = await _accountAppService.Register(model);
+            if (result.Count == 0)
                 return RedirectToAction("Clients");
-            }
-            foreach (var error in result.Errors)
+            foreach (var error in result)
                 ModelState.AddModelError("", error.Description);
             return View(model);
         } 
@@ -78,17 +71,49 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             return View(client);
         }
 
+        public async Task<IActionResult> EditClient(int id)
+        {
+            var client = await _clientAppService.GetClientInfo(id, default);
+            var model = new UpdateClientDto
+            {
+                Id = id,
+                AppUserId = client.AppUserId,
+                FullName = client.FullName,
+                Email = "Example@Gmail.Com",
+                PhoneNumber = client.PhoneNumber,
+            };
+            return View(model);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> EditClient(UpdateClientDto model)
+        {
+            await _clientAppService.Update(model, default);
+            var updateAccountDto = new UpdateAccountDto
+            {
+                Id = model.AppUserId,
+                FullName = model.FullName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Username = model.Username
+            };
+            await _accountAppService.UpdateUserAsync(updateAccountDto);
+            return RedirectToAction("Clients");
+        }
         
         public async Task<IActionResult> DeleteClient(int id)
         {
             var clientToDelete = await _clientAppService.GetById(id, default);
-            var user = await _userManager.FindByIdAsync(clientToDelete.AppUserId.ToString());
-            await _userManager.DeleteAsync(user);
+            await _accountAppService.DeleteUserAsync(clientToDelete.AppUserId);
             await _clientAppService.Delete(id, default);
             return RedirectToAction("Clients");
         }
 
+
+
+        #endregion
+
+        #region Experts
         public async Task<IActionResult> Experts()
         {
             var experts = await _expertAppService.GetAll(default);
@@ -101,32 +126,15 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExpert(RegisterViewModel model)
+        public async Task<IActionResult> CreateExpert(AccountRegisterDto model)
         {
+            model.Role = "Expert";
             if (!ModelState.IsValid)
                 return View(model);
-            var user = new AppUser
-            {
-                Email = model.Email,
-                UserName = model.Username,
-                PhoneNumber = model.PhoneNumber,
-                FullName = model.FullName
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, "Expert");
-                var newExpert = new CreateExpertDto
-                {
-                    FullName = model.FullName,
-                    Gender = model.Gender,
-                    PhoneNumber = model.PhoneNumber,
-                    AppUserId = user.Id
-                };
-                await _expertAppService.Create(newExpert, default);
+            var result = await _accountAppService.Register(model);
+            if (result.Count == 0)
                 return RedirectToAction("Experts");
-            }
-            foreach (var error in result.Errors)
+            foreach (var error in result)
                 ModelState.AddModelError("", error.Description);
             return View(model);
         }
@@ -137,14 +145,52 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             return View(expert);
         }
 
+        public async Task<IActionResult> EditExpert(int id)
+        {
+            var expert = await _expertAppService.GetExpertInfo(id,default);
+            var model = new UpdateExpertDto
+            {
+                Id = id,
+                AppUserId = expert.AppUserId,
+                FullName = expert.FullName,
+                Email = "Example@Gmail.Com",
+                PhoneNumber = expert.PhoneNumber
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditExpert(UpdateExpertDto model)
+        {
+            await _expertAppService.Update(model, default);
+            var updateAccountDto = new UpdateAccountDto
+            {
+                Id = model.AppUserId,
+                FullName = model.FullName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Username = model.Username
+            };
+            await _accountAppService.UpdateUserAsync(updateAccountDto);
+            return RedirectToAction("Experts");
+        }
+
+        
+        public async Task<IActionResult> ApproveOrRejectExpert(int id)
+        {
+            await _expertAppService.ChangeStatus(id, default);
+            return RedirectToAction("Experts");
+        }
 
         public async Task<IActionResult> DeleteExpert(int id)
         {
             var expertToDelete = await _expertAppService.GetById(id, default);
-            var user = await _userManager.FindByIdAsync(expertToDelete.AppUserId.ToString());
-            await _userManager.DeleteAsync(user);
+            await _accountAppService.DeleteUserAsync(expertToDelete.AppUserId);
             await _expertAppService.Delete(id, default);
             return RedirectToAction("Experts");
         }
+
+
+
+        #endregion 
     }
 }

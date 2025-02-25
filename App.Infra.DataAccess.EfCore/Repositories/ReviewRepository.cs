@@ -6,6 +6,7 @@ using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +35,13 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			await _context.SaveChangesAsync(cancellation);
 		}
 
+		public async Task ConfirmOrRejectRevie(int id, CancellationToken cancellation)
+		{
+			var review  = await _context.Reviews.FindAsync(id,cancellation);
+			review.IsApproved = !review.IsApproved;
+			await _context.SaveChangesAsync(cancellation);
+		}
+
 		public async Task Delete(int id,CancellationToken cancellation)
 		{
 			var reviewToDelete = await _context.Reviews.FindAsync(id,cancellation);
@@ -51,7 +59,11 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<List<Review>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Reviews.ToListAsync(cancellation);
+			return await _context.Reviews.
+				Include(x => x.Client).
+				Include(x => x.ServiceOffering).
+				ThenInclude(x => x.Expert).
+				ToListAsync(cancellation);
 		}
 
 		public async Task Update(Review review,CancellationToken cancellation)
@@ -64,5 +76,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				await _context.SaveChangesAsync();
 			}
 		}
+
+		
 	}
 }

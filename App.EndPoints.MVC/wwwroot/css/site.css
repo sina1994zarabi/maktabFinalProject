@@ -20,7 +20,6 @@ html {
 body {
   margin-bottom: 60px;
 }
-
 @font-face {
     font-family: 'MyForeignFont';
     src: url('/fonts/Vazir.woff2') format('woff2'), url('/fonts/Vazir.woff') format('woff'), url('/fonts/Vazir.ttf') format('truetype');

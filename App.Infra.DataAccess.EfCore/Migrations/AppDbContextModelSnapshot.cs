@@ -17,7 +17,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -110,6 +110,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
@@ -133,8 +136,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             ClientId = 1,
                             Comment = "خوب بود",
+                            IsApproved = false,
                             Rating = 4,
-                            ReviewDate = new DateTime(2025, 2, 15, 22, 9, 54, 694, DateTimeKind.Local).AddTicks(9458),
+                            ReviewDate = new DateTime(2025, 2, 24, 23, 56, 25, 915, DateTimeKind.Local).AddTicks(5497),
                             ServiceOfferingId = 1
                         });
                 });
@@ -217,7 +221,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 15, 22, 9, 54, 695, DateTimeKind.Local).AddTicks(2631),
+                            CreatedAt = new DateTime(2025, 2, 24, 23, 56, 25, 915, DateTimeKind.Local).AddTicks(7898),
                             Description = "می توانم این کار را برای شما انجام دهم",
                             ExpertId = 1,
                             ServiceRequestId = 1,
@@ -268,7 +272,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            BookingDate = new DateTime(2025, 2, 17, 22, 9, 54, 693, DateTimeKind.Local).AddTicks(3138),
+                            BookingDate = new DateTime(2025, 2, 26, 23, 56, 25, 914, DateTimeKind.Local).AddTicks(5401),
                             ClientId = 2,
                             Description = "نضافت حیاط و راه پله",
                             IsCompleted = false,
@@ -289,8 +293,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -299,8 +303,6 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Subcategories");
 
@@ -484,8 +486,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "bd7c1f7d-6281-4cd4-b7ae-b25222d8c794",
-                            DateRegistered = new DateTime(2025, 2, 15, 22, 9, 54, 6, DateTimeKind.Local).AddTicks(7612),
+                            ConcurrencyStamp = "5b5c040e-ea44-4b9e-95c0-bf9126f83ef7",
+                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 237, DateTimeKind.Local).AddTicks(1768),
                             Email = "Admin@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "AdminFullName",
@@ -493,9 +495,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMINUSERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFrmewRXcPMuz5bHzE8mfSCpneReTbegcSicsye0enuv/IBzU1vLr7v4B2Yq852d7A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMgLHh26wXkQqbD4XZAopTH1k0hM5pWUj+FS2Rr9yJxOoEQd+2rumXxjkgFub97rDQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef3404e5-a66b-4b21-8692-b69c2e1f82cc",
+                            SecurityStamp = "90a70a10-af25-4d13-a020-9a599c0c07e9",
                             TwoFactorEnabled = false,
                             UserName = "adminUserName"
                         },
@@ -504,8 +506,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "d2873664-64ce-45d9-bbd0-b6ccb4b22c58",
-                            DateRegistered = new DateTime(2025, 2, 15, 22, 9, 54, 110, DateTimeKind.Local).AddTicks(1157),
+                            ConcurrencyStamp = "23384486-c43d-4299-bd35-328ec1e995af",
+                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 354, DateTimeKind.Local).AddTicks(5233),
                             Email = "Client1@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام و نام خانوادگی کاربر یک",
@@ -513,9 +515,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "Client1@GMAIL.COM",
                             NormalizedUserName = "Client1USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEnA9kVMiYQ3T1yxQON6fL+43pclWb590VrxxxDVqLirrMjCUO10KtBowmReA0I+tQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEzutRcGU/jkHuReOnfoc8/Ebm6zQU2Zj4Nw1fEEiPUOspC2WLVzzsh+D0mqWRvfMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7053705a-d001-464c-b3f1-05260174fc49",
+                            SecurityStamp = "996c1648-841c-4e4c-8233-3c8ad8c1af8f",
                             TwoFactorEnabled = false,
                             UserName = "Client1UserName"
                         },
@@ -524,8 +526,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "e788d7fd-24f0-46a1-b805-2307a6fc349a",
-                            DateRegistered = new DateTime(2025, 2, 15, 22, 9, 54, 241, DateTimeKind.Local).AddTicks(7909),
+                            ConcurrencyStamp = "1b8e0a0d-2ce1-43d4-8aac-820d3f68c8bd",
+                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 485, DateTimeKind.Local).AddTicks(6706),
                             Email = "Client2@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام و نام خانوادگی کاربر دو",
@@ -533,9 +535,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2@GMAIL.COM",
                             NormalizedUserName = "CLIENT2USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAENnqxRBCoMIqAckHdD8xaEGKiBXOpZdjALXrKH/x+FvZPbx7n7EM4X/kK3hNZK4lew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFFCzeDxf05ye9YKINLw5jO6BK/Dpfi+obtxmtly5bIBYghpOp3xYMI6ASoR2ru9Iw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8f7a681c-f7d8-461a-85f3-b486caeb9498",
+                            SecurityStamp = "c0c20b4f-d2d8-4cbc-a79b-acaa6a70b0bc",
                             TwoFactorEnabled = false,
                             UserName = "Client2UserName"
                         },
@@ -544,8 +546,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 4,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "4c9bdcb1-e919-4931-83b5-5fef44bedcef",
-                            DateRegistered = new DateTime(2025, 2, 15, 22, 9, 54, 400, DateTimeKind.Local).AddTicks(8287),
+                            ConcurrencyStamp = "0be0c259-f2b4-437a-85cc-79c33d707246",
+                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 625, DateTimeKind.Local).AddTicks(327),
                             Email = "Expert1@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام  و نام خانوادگی کارشناس شماره یک",
@@ -553,9 +555,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT1@GMAIL.COM",
                             NormalizedUserName = "EXPERT1USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK6SxY//Tcv+G+1r1Rw03rmv0XR7J2Vk7/vPm2WqPkRMUtJ5wzU9bWOBZQ2Owo75qA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC4tYs01UKqrWKQbTik+PvzKJWWd1njVMQJwqUFpT6K1Kskw4DhUQIkszaphqSODXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "907ad989-a1d0-4962-b881-7c7b2eb769e8",
+                            SecurityStamp = "9b5fdc54-c0b1-41c1-87f4-c539373a3014",
                             TwoFactorEnabled = false,
                             UserName = "Expert1UserName"
                         },
@@ -564,8 +566,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 5,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "936b549c-bc7e-4768-af4f-ea0929f49bb1",
-                            DateRegistered = new DateTime(2025, 2, 15, 22, 9, 54, 553, DateTimeKind.Local).AddTicks(6230),
+                            ConcurrencyStamp = "5670cc73-fec9-4dce-a1a4-66443eb3b407",
+                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 772, DateTimeKind.Local).AddTicks(4650),
                             Email = "Expert2@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام  و نام خانوادگی کارشناس دو",
@@ -573,9 +575,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT2@GMAIL.COM",
                             NormalizedUserName = "EXPERT2USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJggrBz9eBCFPUO2MAKi/jtGRkkZ8rOoPhgRRawayOKSvPuBi4Qhpac8K46eThL/KQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL54HVrpSeLTBDb1/MmPHkm55TkqUZCM1HSS4IihuAmxCaRaAlccHq+DfQ2d68Nv6w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c58980f-57fa-4bac-964b-8d8502390f70",
+                            SecurityStamp = "949d9228-320b-4b34-bafb-71ba43e5f829",
                             TwoFactorEnabled = false,
                             UserName = "Expert2UserName"
                         });
@@ -960,13 +962,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Domain.Core.Entities.BaseEntity.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("App.Domain.Core.Entities.User.Admin", b =>

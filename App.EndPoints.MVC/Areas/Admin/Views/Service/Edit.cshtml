@@ -7,7 +7,7 @@
 
 <h2>ویرایش خدمات</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Title" class="control-label">عنوان</label>
         <input asp-for="Title" class="form-control" />
@@ -25,19 +25,42 @@
     </div>
     <div class="form-group">
         <label asp-for="SubCategoryId" class="control-label">دسته بندی فرعی</label>
-        <input asp-for="SubCategoryId" class="form-control" />
+        <select asp-for="SubCategoryId" class="form-control">
+            <option value="">انتخاب کنید</option>
+            @foreach (var item in ViewBag.SubCategories)
+            {
+                <option value="@item.Id">@item.Title</option>
+            }
+        </select>
         <span asp-validation-for="SubCategoryId" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Image" class="control-label"></label>
-        <input asp-for="Image" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
+   <div class="form-group relative">
+                            <input asp-for="Image" type="file" class="form-control">
+                            <label>آپلود عکس</label>
+                            <div class="input-group round">
+                                <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="icon-picture"></i>
+                                        آپلود عکس
+                                        <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
+                                    </button>
+                                </span>
+                            </div><!-- /.input-group -->
+                            <div class="help-block"></div>
     </div>
+
     <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <button type="submit" class="btn btn-primary">اعمال تغییرات</button>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">بازگشت</a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> بازگشت
+    </a>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

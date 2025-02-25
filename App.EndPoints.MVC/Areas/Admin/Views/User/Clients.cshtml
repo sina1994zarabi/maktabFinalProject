@@ -1,4 +1,5 @@
-﻿@model List<App.Domain.Core.Entities.User.Client>
+﻿@using App.Domain.Core.Enums;
+@model List<App.Domain.Core.Entities.User.Client>
 
 @{
     ViewData["Title"] = "Client Management";
@@ -10,49 +11,47 @@
 <table class="table table-bordered mt-4">
     <thead>
         <tr>
+            <th>پروفایل</th>
             <th>نام و نام خانوادگی</th>
             <th>شماره تماس</th>
             <th>جنسیت</th>
+            <th>عملیات</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var client in Model)
         {
             <tr>
+                @if (string.IsNullOrEmpty(client.AppUser.ProfilePicture))
+                {
+                    @if (client.Gender == Gender.male)
+                    {
+                        <td><img style="border-radius : 50%" src="~/Uploads/maleProfilePicture.jpg" width="80" height="80" /></td>
+                    }
+                    else
+                    {
+                        <td><img style="border-radius : 50%" src="~/Uploads/femaleProfilePicture.png" width="80" height="80" /></td>
+                    }
+                }
+                else
+                {
+                    <td><img style="border-radius : 50%" src="@client.AppUser.ProfilePicture" width="80" height="80" /></td>
+                }
                 <td>@client.FullName</td>
                 <td>@client.PhoneNumber</td>
-                <td>@client.Gender</td>
+                <td>@(client.Gender == Gender.male ? "مرد" : "زن")</td>
                 <td>
-                    <a href = "@Url.Action("ClientDetails", "User", new { area = "Admin", id = client.Id })" class="btn btn-info">مشاهده جزییات</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteClientModal-@client.Id">حذف</button>
-
-                    <!-- Delete Confirmation Modal -->
-                    <div class="modal fade" id="deleteClientModal-@client.Id" tabindex="-1" role="dialog" aria-labelledby="deleteClientModalLabel-@client.Id" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteClientModalLabel-@client.Id">پاک کردن رکورد</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    مطمین اید می خواهید ادامه دهید؟
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-                                    <a asp-action = "DeleteClient" asp-route-id = "@client.Id" class="btn btn-danger">پاک کردن</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a asp-action="EditClient" asp-route-id="@client.Id" class="btn btn-warning">ویرایش</a>
+                    <a asp-action="ClientDetails" asp-route-id = "@client.Id" class="btn btn-info">مشاهده جزییات</a>
+                    <a onclick="return confirm('آیا از حذف این کاربر اطمینان دارید؟')" asp-action="DeleteClient" asp-route-Id="@client.Id" class="btn btn-danger"> حذف </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-action="CreateClient" class="btn btn-primary">ایجاد مشتری جدید</a>
+<a asp-action = "CreateClient" class="btn btn-primary">ایجاد مشتری جدید</a>
+<a asp-action = "Index" class="btn btn-secondary">بازگشت</a>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

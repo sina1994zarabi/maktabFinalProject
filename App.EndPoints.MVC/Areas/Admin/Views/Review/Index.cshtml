@@ -1,0 +1,47 @@
+﻿@model List<App.Domain.Core.Entities.Services.Review>
+
+@{
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	ViewData["Title"] = "Reviews";
+}
+
+<div class="row">
+	@foreach (var review in Model)
+	{
+		<div class="col-md-4 col-lg-4 p-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">متن کامنت</h5>
+					<p class="card-text">@review.Comment</p>
+					<h6 class="card-title">امتیاز از 5 </h6>
+					<p class="card-text">@review.Rating</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">از @review.Client.FullName</li>
+					<li class="list-group-item">برای @review.ServiceOffering.Expert.FullName</li>
+				</ul>
+				<div class="card-body">
+					@if (review.IsApproved)
+					{
+						<a class="btn rounded-pill btn-label-success disabled">تایید شده</a>
+						<a asp-action = "ConfirmOrReject" asp-route-id="@review.Id" class="card-link rounded-pill btn btn-warning">رد</a>
+					}
+					else
+					{
+						<a class="btn rounded-pill btn-labal-danger disabled">رد شده</a>
+						<a asp-action = "ConfirmOrReject" asp-route-id="@review.Id" class="card-link rounded-pill btn btn-success">تایید</a>
+					}
+					<a asp-page-handler="Delete" asp-route-id="@review.Id" onclick="return confirm('مطمینید می خواهید ادامه دهید؟')" class="card-link rounded-pill btn btn-danger">حذف</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+<a asp-action = "Index" asp-controller = "Dashboard" class = "btn btn-secondary">
+	<i class="fas fa-arrow-left"></i> بازگشت
+</a>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

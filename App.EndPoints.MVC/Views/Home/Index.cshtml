@@ -1,8 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<div class="jumbotron text-center bg-primary text-white" style="padding: 4rem 2rem;">
+    <h1 class="display-4">راحت انجام می شه</h1>
+    <p class="lead">سرویس مورد نظرت رو پیدا کن</p>
+
+    <!-- Search Bar -->
+    <form class="form-inline justify-content-center mt-4" method="get" action="/Services/Search">
+        <input type="text" name="query" class="form-control form-control-lg mr-2" placeholder="جستجوی سرویس مورد نظر">
+        <button type="submit" class="btn btn-lg btn-light">جستجو</button>
+    </form>
+</div>
+
+<!-- Categories Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">دسته بندی های</h2>
+    <div class="row">
+        <!-- Sample Category Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/images/categories/plumbing.jpg" alt="Plumbing">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Plumbing</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat similar cards for other categories -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/images/categories/cleaning.jpg" alt="Cleaning">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Cleaning</h5>
+                </div>
+            </div>
+        </div>
+        <!-- Add more category cards as needed -->
+    </div>
+</div>
+
+<!-- Call-to-Action Section -->
+<div class="bg-light py-5">
+    <div class="container text-center">
+        <h2>آیا تا به حال عضو نشده اید؟?</h2>
+        <a href="/Account/Register" class="btn btn-primary btn-lg mt-3">همین حالا ثبت کنید</a>
+    </div>
 </div>

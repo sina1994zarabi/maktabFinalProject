@@ -33,7 +33,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			await _context.SaveChangesAsync(cancellation);
 		}
 
-		public async Task Delete(int id,CancellationToken cancellation)
+        public async Task ChangeStatus(int id, CancellationToken cancellation)
+        {
+            var expert = await _context.Experts.FindAsync(id,cancellation);
+            expert.IsApproved = !expert.IsApproved;
+            await _context.SaveChangesAsync(cancellation);
+        }
+
+        public async Task Delete(int id,CancellationToken cancellation)
 		{
 			var serviceProviderToDelete = await _context.Experts.FindAsync(id,cancellation);
 			if (serviceProviderToDelete != null)
@@ -51,7 +58,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<List<Expert>> GetAll(CancellationToken cancellation)
 		{
-			return await _context.Experts.ToListAsync(cancellation);
+			return await _context.Experts.
+					              Include(e => e.AppUser).
+								  ToListAsync(cancellation);
 		}
 
         public async Task<Expert> GetExpertInfo(int id, CancellationToken cancellation)

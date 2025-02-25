@@ -13,6 +13,7 @@ namespace App.Domain.Core.Contract.AppService
     {
         Task Create(CreateSubCategoryDto createSubCategoryDto, CancellationToken cancellationToken,IFormFile Image);
         Task<SubCategory> GetById(int id, CancellationToken cancellationToken);
+        Task<GetSubCategoryDto> GetSubCategoryDtoById(int id, CancellationToken cancellationToken);
         Task<List<SubCategory>> GetAll(CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(UpdateSubCategoryDto updateSubCategoryDto, CancellationToken cancellationToken,IFormFile image);

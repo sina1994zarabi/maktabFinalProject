@@ -15,5 +15,7 @@ namespace App.Domain.Core.Contract.Repository
 		Task<List<Review>> GetAll(CancellationToken cancellation);
 		Task Delete(int id, CancellationToken cancellation);
 		Task Update(Review review, CancellationToken cancellation);
+		Task ConfirmOrRejectRevie(int id,CancellationToken cancellation);
+		
 	}
 }

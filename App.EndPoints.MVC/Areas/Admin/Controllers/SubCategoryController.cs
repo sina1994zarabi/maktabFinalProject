@@ -48,7 +48,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var subcategory = await _subCategoryAppService.GetById(id, default);
+            var subcategory = await _subCategoryAppService.GetSubCategoryDtoById(id,default);
+            // quick fix
             if (subcategory == null) { return NotFound(); }
             ViewBag.Categories = await _categoryAppService.GetAll(default);
             return View(subcategory);

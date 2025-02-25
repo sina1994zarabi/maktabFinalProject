@@ -22,10 +22,11 @@
     <ProjectReference Include="..\App.Domain.Services.AppServices\App.Domain.Services.AppServices.csproj" />
     <ProjectReference Include="..\App.Domain.Services.Services\App.Domain.Services.Services.csproj" />
     <ProjectReference Include="..\App.Infra.DataAccess.EfCore\App.Infra.DataAccess.EfCore.csproj" />
+    <ProjectReference Include="..\FrameWork\FrameWork.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>

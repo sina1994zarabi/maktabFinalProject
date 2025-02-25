@@ -14,7 +14,7 @@ namespace App.Domain.Core.DTOs.ClientDto
         public Gender Gender { get; set; }
         public string PhoneNumber { get; set; }
         public int AppUserId { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
         public string? ImagePath { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			{
 				Title = subcategory.Title,
 				CategoryId = subcategory.CategoryId,
+				ImagePath = subcategory.ImagePath
 			};
 			await _context.Subcategories.AddAsync(newSubCategory,cancellationToken);
 			await _context.SaveChangesAsync(cancellationToken);
@@ -53,13 +54,15 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				ToListAsync(cancellationToken);
 		}
 
-		public async Task Update(UpdateSubCategoryDto subcategory,CancellationToken cancellationToken)
+
+        public async Task Update(UpdateSubCategoryDto subcategory,CancellationToken cancellationToken)
 		{
 			var subcategoryToUpdate = await _context.Subcategories.FindAsync(subcategory.Id,cancellationToken);
 			if (subcategoryToUpdate != null)
 			{
 				subcategoryToUpdate.Title = subcategory.Title;
 				subcategoryToUpdate.CategoryId = subcategory.CategoryId;
+				subcategoryToUpdate.ImagePath = subcategory.ImagePath;
 				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}

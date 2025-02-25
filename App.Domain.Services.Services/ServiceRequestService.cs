@@ -2,6 +2,7 @@
 using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.ServiceRequestDto;
 using App.Domain.Core.Entities.Services;
+using App.Domain.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,11 @@ namespace App.Domain.Services.Services
         public async Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken)
         {
             await _serviceRequestRepository.Update(serviceRequest, cancellationToken);
+        }
+
+        public async Task ChangeStatus(StatusEnum status,int id,CancellationToken cancellationToken)
+        {
+            await _serviceRequestRepository.ChangeStatus(status, id, cancellationToken);
         }
     }
 }

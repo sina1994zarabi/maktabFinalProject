@@ -44,6 +44,19 @@ namespace App.Domain.Services.AppServices
             return await _subCategoryService.Get(id,cancellationToken);
         }
 
+        public async Task<GetSubCategoryDto> GetSubCategoryDtoById(int id, CancellationToken cancellationToken)
+        {
+            var subCategory = await _subCategoryService.Get(id,cancellationToken);
+            var getSubCategoryDto = new GetSubCategoryDto
+            {
+                Id = subCategory.Id,
+                Title = subCategory.Title,
+                CategoryId = subCategory.CategoryId,
+                ImagePath = subCategory.ImagePath
+            };
+            return getSubCategoryDto;
+        }
+
         public async Task Update(UpdateSubCategoryDto updateSubCategoryDto, CancellationToken cancellationToken,IFormFile image)
         {
             var imagePath = await _utilityService.UploadImage(image);

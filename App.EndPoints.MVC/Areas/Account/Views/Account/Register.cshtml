@@ -1,5 +1,10 @@
-﻿@model App.EndPoints.MVC.Models.RegisterViewModel
+﻿@model App.Domain.Core.DTOs.AccountDto.AccountRegisterDto;
 @using App.Domain.Core.Enums;
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
 
 <section class="gray">
     <div class="container">

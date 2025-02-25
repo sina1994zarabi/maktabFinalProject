@@ -32,7 +32,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Rating = 4,
 					Comment = "خوب بود",
 					ReviewDate = DateTime.Now,
-
+					IsApproved = false
 				});
 		}
 	}

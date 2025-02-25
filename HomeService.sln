@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Services.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Services.AppServices", "App.Domain.Services.AppServices\App.Domain.Services.AppServices.csproj", "{AE21FF69-2214-42D8-BFB2-5A88AA842472}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-FrameWork", "0-FrameWork", "{4B8D781D-8594-4B19-B3BA-EA0E4E1B7513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameWork", "FrameWork\FrameWork.csproj", "{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{AE21FF69-2214-42D8-BFB2-5A88AA842472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE21FF69-2214-42D8-BFB2-5A88AA842472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE21FF69-2214-42D8-BFB2-5A88AA842472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,8 @@ Global
 		{222F3CF5-9827-4C3D-A732-2C37B82B883D} = {F2D4497A-78DA-4F34-82CC-7BC61AFDAFA6}
 		{DEE377B7-94AF-4652-945A-F5E7AB5B27F6} = {C83AADAC-AF95-40BA-956B-159E958ECBB2}
 		{AE21FF69-2214-42D8-BFB2-5A88AA842472} = {C83AADAC-AF95-40BA-956B-159E958ECBB2}
+		{4B8D781D-8594-4B19-B3BA-EA0E4E1B7513} = {19F00400-8915-4E7A-81B0-A3BBCFD05EAC}
+		{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7} = {4B8D781D-8594-4B19-B3BA-EA0E4E1B7513}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7525A6-B910-4A53-9EEE-803DAEC86593}
