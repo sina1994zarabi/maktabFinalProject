@@ -34,5 +34,17 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             await _serviceRequestAppService.ChangeStatus(model.Status,model.ServiceRequestId,default);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> MarkAsDone(int id,CancellationToken cancellationToken)
+        {
+            await _serviceRequestAppService.MarkAsDone(id, cancellationToken);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await _serviceRequestAppService.GetById(id, default);
+            return View(model);
+        }
     }
 }

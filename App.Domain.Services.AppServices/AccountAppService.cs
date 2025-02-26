@@ -43,7 +43,8 @@ namespace App.Domain.Services.AppServices
             return await _userManager.DeleteAsync(user);
         }
 
-        public async Task<string> GetRedirectUrlForUser(string username)
+
+		public async Task<string> GetRedirectUrlForUser(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null) return "/";

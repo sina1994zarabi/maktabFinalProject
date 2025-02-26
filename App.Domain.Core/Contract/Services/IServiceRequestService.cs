@@ -18,5 +18,6 @@ namespace App.Domain.Core.Contract.Services
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken);
         Task ChangeStatus(StatusEnum status, int id, CancellationToken cancellationToken);
+        Task MarkAsDone(int id, CancellationToken cancellationToken);
     }
 }

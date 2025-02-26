@@ -5,7 +5,7 @@
 
 @{
 	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-	ViewData["Title"] = " Service Requests";
+	ViewData["Title"] = "سفارشات";
 }
 
 <table class="table table-bordered">
@@ -14,9 +14,8 @@
 			<th>عنوان</th>
 			<th>توضیحات</th>
 			<th>نام سفارش دهنده</th>
-			<th>نام کارشناس</th>
-			<th>تعداد پیشنهادات</th>
 			<th>وضعیت سفارش</th>
+			<th>تعداد پیشنهادات</th>
 			<th>عملیات</th>
 		</tr>
 	</thead>
@@ -27,25 +26,15 @@
 				<td>@serviceRequest.Title</td>
 				<td>@serviceRequest.Description</td>
 				<td>@serviceRequest.Client.FullName</td>
-				<td>هنوز کارشناسی یافت نشد</td>
-				@if (serviceRequest.ServiceOfferings != null)
-				{
-					<td>@serviceRequest.ServiceOfferings.Count()</td>
-				}
-				else
-				{
-					<td>0</td>
-				}
 				<td>@serviceRequest.Status.ToFarsiStatus()</td>
+				<td>@(serviceRequest.ServiceOfferings?.Count() ?? 0)</td>
 				<td>
-					<a class = "btn btn-success" asp-action = "Changestatus" asp-route-id = "@serviceRequest.Id">
-						<i class="bx bx-edit-alt me-1"></i>
-						تغییر وضعیت
+					<a class = "btn btn-success" asp-action = "Changestatus" asp-route-id = "@serviceRequest.Id">تغییر وضعیت</a>
+					<a  asp-action="MarkAsDone" asp-route-id = "@serviceRequest.Id" class="btn @(serviceRequest.IsCompleted ? "btn-danger" : "btn-primary")">
+						@(serviceRequest.IsCompleted ? "انجام شده" : "انجام نشده")
 					</a>
 					<a asp-action="Details" asp-route-id="@serviceRequest.Id" class="btn btn-info">مشاهده جزییات</a>
-					<a asp-action="Delete" asp-route-id="@serviceRequest.Id" class="btn btn-warning" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')">
-						<i class="bx bx-trash me-1"></i> حذف
-					</a>
+					<a asp-action="Delete" asp-route-id="@serviceRequest.Id" class="btn btn-warning" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')"> حذف</a>
 				</td>
 			</tr>
 		}

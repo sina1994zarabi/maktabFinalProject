@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Services.AppServ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-FrameWork", "0-FrameWork", "{4B8D781D-8594-4B19-B3BA-EA0E4E1B7513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameWork", "FrameWork\FrameWork.csproj", "{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrameWork", "FrameWork\FrameWork.csproj", "{431F1F35-3DCC-4C57-B98A-2E41D26A5CB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

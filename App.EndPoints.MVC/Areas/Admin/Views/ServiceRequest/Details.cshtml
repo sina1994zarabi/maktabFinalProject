@@ -1,0 +1,71 @@
+﻿@using App.Domain.Core.Enums
+@using FrameWork
+@model App.Domain.Core.Entities.Services.ServiceRequest
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Service Request Details";
+}
+
+<h2>جزییات سفارش</h2>
+
+<div>
+    <h3>@Model.Title</h3>
+    <p>@Model.Description</p>
+    <p><strong>مشتری: </strong> @Model.Client.FullName</p>
+    <p><strong>زمان رزو شده: </strong> @Model.BookingDate.ToPersianString("yyyy/MM/dd")</p>
+    <p><strong>وضعیت: </strong> @Model.Status.ToFarsiStatus()</p>
+
+    <h4>عکس ها</h4>
+    @if (Model.Images != null && Model.Images.Any())
+    {
+        <div>
+            @foreach (var image in Model.Images)
+            {
+                <img src="@image.ImagePath" alt="Service Request Image" style="width: 200px; height: auto; margin: 10px;" />
+            }
+        </div>
+    }
+    else
+    {
+        <p>عکسی یافت نشد</p>
+    }
+
+    <h4>پیشنهادات ارسال شده</h4>
+    @if (Model.ServiceOfferings != null && Model.ServiceOfferings.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>توضیحات</th>
+                    <th>کارشناس</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ ایجاد</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var offering in Model.ServiceOfferings)
+                {
+                    <tr>
+                        <td>@offering.Description</td>
+                        <td>@(offering.Expert?.FullName ?? "کارشناسی یافت نشد")</td>
+                        <td>@offering.Status.ToFarsiStatus()</td>
+                        <td>@offering.CreatedAt.ToPersianString("yyyy/MM/dd")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>پیشنهادی یافت نشد</p>
+    }
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> بازگشت
+</a>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

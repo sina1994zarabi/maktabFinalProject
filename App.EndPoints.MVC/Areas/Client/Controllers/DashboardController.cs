@@ -11,6 +11,4 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
             return View();
         }
     }
-
-
 }

@@ -1,3 +1,53 @@
+:root {
+    --bs-primary: #008080; /* Teal */
+    --bs-primary-rgb: 0, 128, 128;
+}
+
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+.sidebar {
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #fff;
+}
+
+    .btn-primary:hover {
+        background-color: #006666;
+        border-color: #006666;
+        color: #fff;
+    }
+
+.btn-outline-primary {
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--bs-primary);
+        color: #fff;
+    }
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+.footer {
+    background-color: #f8f9fa;
+}
+
+
 html {
   font-size: 14px;
 }

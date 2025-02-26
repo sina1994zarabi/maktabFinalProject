@@ -1,13 +1,6 @@
 ﻿using App.Domain.Core.Contract.AppService;
 using App.Domain.Core.DTOs.AccountDto;
-using App.Domain.Core.DTOs.ClientDto;
-using App.Domain.Core.DTOs.ExpertDto;
-using App.Domain.Core.Entities.User;
-using App.EndPoints.MVC.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
-using Serilog;
 
 namespace App.EndPoints.MVC.Areas.Account.Controllers
 {
@@ -18,41 +11,46 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
         private readonly IAccountAppService _accountAppService;
         private readonly IClientAppService _clientAppService;
         private readonly IExpertAppService _expertAppService;
-
+        private readonly ILogger<AccountController> _logger;
 
         public AccountController(IAccountAppService accountAppService,
                                  IClientAppService clientAppService,
-                                 IExpertAppService expertAppService
+                                 IExpertAppService expertAppService,
+                                 ILogger<AccountController> logger
                                  )
         {
             _accountAppService = accountAppService;
             _clientAppService = clientAppService;
             _expertAppService = expertAppService;
+            _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+			return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(AccountLoginDto model)
         {
+            var timestamp = DateTime.Now.ToLongTimeString();
             if (!ModelState.IsValid)
             {
-                return View(model);
+				return View(model);
             }
-
-
             var result = await _accountAppService.Login(model);
-
-            if (result)
+			if (result)
             {
-                string redirectUrl = await _accountAppService.GetRedirectUrlForUser(model.Username);
+                _logger.LogInformation("[{Timestamp}] ورود موفق کاربر: {Username}."
+                    , timestamp,
+                    model.Username);
+                
+				string redirectUrl = await _accountAppService.GetRedirectUrlForUser(model.Username);
                 return Redirect(redirectUrl);
             }
-            ModelState.AddModelError("", "ورود ناموفق");
+			_logger.LogWarning("[{Timestamp}] ورود ناموفق کاربر: {Username}", timestamp, model.Username);
+			ModelState.AddModelError("", "ورود ناموفق");
             return View(model);
         }
 
@@ -67,7 +65,6 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-
             var result = await _accountAppService.Register(model);
             if (result.Count == 0)
                 return RedirectToAction("Login");
@@ -81,9 +78,10 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
 
         public async Task<IActionResult> LogOut()
         {
-            await _accountAppService.Logout();
+            var timestamp = DateTime.Now;
+			_logger.LogInformation("[{Timestamp}] خروج موفق کاربر: {Username}", timestamp, User.Identity.Name);
+			await _accountAppService.Logout();
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model List<App.Domain.Core.Entities.Services.SubCategory>
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "دسته بندی های فرعی";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -22,28 +22,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@subCat.Id" class="btn btn-warning">ویرایش</a> |
                 <a asp-action="Details" asp-route-id="@subCat.Id" class="btn btn-info">مشاهده جزییات</a> |
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteSubcategoryModal-@subCat.Id">پاک کردن</button>
-
-
-                <div class="modal fade" id="deleteSubcategoryModal-@subCat.Id" tabindex="-1" role="dialog" aria-labelledby="deleteSubcategoryModalLabel-@subCat.Id" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteSubcategoryModalLabel-@subCat.Id">پاک کردن رکورد</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                مطمین اید می خواهید ادامه دهید؟
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">لغو</button>
-                                <a asp-action="Delete" class="btn btn-danger">پاک کردن</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a asp-action="Delete" asp-route-id="@subCat.Id" class="btn btn-warning" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')"> حذف</a>
             </td>
         </tr>
     }

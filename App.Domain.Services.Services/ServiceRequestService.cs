@@ -49,5 +49,10 @@ namespace App.Domain.Services.Services
         {
             await _serviceRequestRepository.ChangeStatus(status, id, cancellationToken);
         }
-    }
+
+		public async Task MarkAsDone(int id, CancellationToken cancellationToken)
+		{
+			await _serviceRequestRepository.MarkAsDone(id,cancellationToken);
+		}
+	}
 }

@@ -45,7 +45,12 @@ namespace App.Domain.Services.AppServices
             return await _serviceRequestService.Get(id,CancellationToken);
         }
 
-        public Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken)
+		public async Task MarkAsDone(int id, CancellationToken cancellationToken)
+		{
+			await _serviceRequestService.MarkAsDone(id,cancellationToken);
+		}
+
+		public Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

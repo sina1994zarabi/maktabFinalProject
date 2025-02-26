@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog.Events;
 using System.Drawing;
+using Serilog.Sinks.MSSqlServer;
+using App.EndPoints.MVC.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,15 +27,41 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Host.UseSerilog();
 
 
-builder.Host.ConfigureLogging(loggingBuilder =>
+//builder.Host.ConfigureLogging(loggingBuilder =>
+//{
+//    loggingBuilder.ClearProviders();
+//})
+//.UseSerilog((context, config) =>
+//{
+//    config.WriteTo.Console();
+//    config.WriteTo.Seq("http://localhost:5341", LogEventLevel.Information);
+//});
+
+builder.Host.UseSerilog((context, config) =>
 {
-    loggingBuilder.ClearProviders();
-})
-.UseSerilog((context, config) =>
-{
-    config.WriteTo.Console();
-    config.WriteTo.Seq("http://localhost:5341", LogEventLevel.Information);
+	var connectionString = context.Configuration.GetConnectionString("LogsConnection");
+	
+	config.ReadFrom.Configuration(context.Configuration).
+			WriteTo.MSSqlServer(
+				connectionString,
+				new MSSqlServerSinkOptions
+						{
+							TableName = "MyLogs",
+							AutoCreateSqlTable = true
+						}
+				).
+		   WriteTo.File("logs/app.log",rollingInterval: RollingInterval.Day).
+           WriteTo.Console();
 });
+
+
+//builder.Host.UseSerilog((context, config) =>
+//{
+//	config.WriteTo.Console()
+//		  .WriteTo.EventLog("MyHomeServiceApp", manageEventSource: true)  // Send logs to Windows Event Viewer
+//		  .MinimumLevel.Information();
+//});
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); // Ensures Razor views are compiled at runtime
@@ -94,11 +122,15 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
-    options.SignIn.RequireConfirmedEmail = false; // <-- Important
+    options.SignIn.RequireConfirmedEmail = false; 
 });
 
 
 var app = builder.Build();
+
+
+
+app.UseMiddleware<LoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

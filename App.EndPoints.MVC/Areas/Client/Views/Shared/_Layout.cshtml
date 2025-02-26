@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Home Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Offcanvas for mobile sidebar -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                @await Html.PartialAsync("_Sidebar")
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center p-3 bg-white border-bottom">
+            <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            @await Html.PartialAsync("_Header")
+        </header>
+
+        <!-- Main content -->
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-none d-md-block bg-light sidebar">
+                @await Html.PartialAsync("_Sidebar")
+            </nav>
+            <main role="main" class="col-md-9 col-lg-10 px-md-4">
+                @RenderBody()
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3 bg-light">
+            @await Html.PartialAsync("_Footer")
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
