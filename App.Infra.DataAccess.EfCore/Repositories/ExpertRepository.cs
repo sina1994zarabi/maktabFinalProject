@@ -48,7 +48,6 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				_context.Experts.Remove(serviceProviderToDelete);
 				await _context.SaveChangesAsync(cancellation);
 			}
-
 		}
 
 		public async Task<Expert> Get(int id,CancellationToken cancellation)

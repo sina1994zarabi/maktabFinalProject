@@ -45,8 +45,8 @@
                 <td>
                     @if (!expert.IsApproved)
                     {
-                        <a asp-action="ApproveOrRejectExpert" asp-route-id="@expert.Id" class="btn btn-success">تایید</a>
-                        <a asp-action="ApproveOrRejectExpert" asp-route-id="@expert.Id" class="btn btn-danger">رد</a>
+                        <a asp-action="Approve" asp-route-id="@expert.Id" class="btn btn-success">تایید</a>
+                        @*<a asp-action="ApproveOrRejectExpert" asp-route-id="@expert.Id" class="btn btn-danger">رد</a>*@
                     }
                     <a asp-action = "EditExpert" asp-route-id = "@expert.Id" class="btn btn-warning"> ویرایش </a>
                     <a asp-action = "ExpertDetails" asp-route-id = "@expert.Id" class="btn btn-info">مشاهده جزییات</a>

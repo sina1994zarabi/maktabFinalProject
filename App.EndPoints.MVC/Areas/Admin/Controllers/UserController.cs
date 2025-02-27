@@ -83,8 +83,9 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 Id = id,
                 AppUserId = client.AppUserId,
                 FullName = client.FullName,
-                Email = "Example@Gmail.Com",
+                Email = client.AppUser.Email,
                 PhoneNumber = client.PhoneNumber,
+                Username = client.AppUser.UserName
             };
             return View(model);
         }
@@ -99,7 +100,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 FullName = model.FullName,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-                Username = model.Username
+                Username = model.Username,
+                
             };
             await _accountAppService.UpdateUserAsync(updateAccountDto);
             var timeStamp = DateTime.Now;
@@ -163,8 +165,9 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 Id = id,
                 AppUserId = expert.AppUserId,
                 FullName = expert.FullName,
-                Email = "Example@Gmail.Com",
-                PhoneNumber = expert.PhoneNumber
+                Email = expert.AppUser.Email,
+                PhoneNumber = expert.PhoneNumber,
+                Username = expert.AppUser.UserName
             };
             return View(model);
         }
@@ -187,7 +190,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         }
 
         
-        public async Task<IActionResult> ApproveOrRejectExpert(int id)
+        public async Task<IActionResult> Approve(int id)
         {
             await _expertAppService.ChangeStatus(id, default);
             var timeStamp = DateTime.Now;
