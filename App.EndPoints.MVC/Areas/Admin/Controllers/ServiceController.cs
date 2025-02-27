@@ -9,12 +9,16 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
     {
         private readonly IServiceAppService _serviceAppService;
         private readonly ISubCategoryAppService _subCategoryAppService;
+        private readonly ILogger<ServiceController> _logger;
 
         public ServiceController(IServiceAppService serviceAppService,
-            ISubCategoryAppService subCategoryAppService)
+            ISubCategoryAppService subCategoryAppService,
+            ILogger<ServiceController> logger
+            )
         {
             _serviceAppService = serviceAppService;
             _subCategoryAppService = subCategoryAppService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -34,13 +38,12 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                //TempData["ValidationErrors"] = errors;
-
-                //ViewBag.SubCategories = await _subCategoryAppService.GetAll(default);
+                ViewBag.SubCategories = await _subCategoryAppService.GetAll(default);
                 return View(model);
             }
             await _serviceAppService.Create(model, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] اضافه شدن سرویس جدید: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 
@@ -59,6 +62,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             await _serviceAppService.Update(model, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] ویرایش سرویس: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 

@@ -1,4 +1,4 @@
-﻿@model App.Domain.Core.DTOs.SubCategoryDto.GetSubCategoryDto
+﻿@model App.Domain.Core.DTOs.SubCategoryDto.UpdateSubCategoryDto
 
 @{
     ViewData["Title"] = "SubCategory Edit";
@@ -7,12 +7,12 @@
 
 <h2>ویرایش جزییات </h2>
 
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Id" />
+<form asp-action = "Edit" method="post" enctype="multipart/form-data">
+    <input type = "hidden" asp-for="Id" />
 
     <div class="form-group">
         <label>عنوان</label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for = "Title" class="form-control" />
     </div>
 
     <div class="form-group relative">
@@ -32,11 +32,15 @@
     </div>
 
     <div class="form-group">
-        <label>دسته بندی مادر </label>
-        <select asp-for="CategoryId" class="form-control">
-            @foreach (var category in ViewBag.Categories)
+        <label>دسته بندی اصلی </label>
+        <select asp-for = "CategoryId" class = "form-control">
+            <option value="">انتخاب دسته‌بندی</option>
+            @if (ViewBag.Categories != null)
             {
-                <option value="@category.Id">@category.Title</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Title</option>
+                }
             }
         </select>
     </div>

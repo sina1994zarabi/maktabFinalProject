@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>ایجاد دسته بندی فرعی جدید</h2>
+<h2> ایجاد دسته بندی فرعی جدید </h2>
 
 <form asp-action = "Create" method = "post" enctype="multipart/form-data">
     <div class = "form-group">
@@ -14,10 +14,10 @@
     </div>
 
     <div class="form-group relative">
-        <input asp-for="Image" type="file" class="form-control">
+        <input asp-for = "Image" type = "file" class="form-control">
         <label>آپلود عکس</label>
         <div class="input-group round">
-            <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+            <input type="text" class="form-control file-input" placeholder = "برای آپلود کلیک کنید">
             <span class="input-group-btn">
                 <button type="button" class="btn btn-success">
                     <i class="icon-picture"></i>
@@ -25,22 +25,25 @@
                     <div class="paper-ripple"><div class="paper-ripple__background"></div><div class="paper-ripple__waves"></div></div>
                 </button>
             </span>
-        </div><!-- /.input-group -->
+        </div>
         <div class="help-block"></div>
     </div>
 
     <div class="form-group">
-        <label>دسته بندی مادر </label>
+        <label>دسته بندی اصلی </label>
         <select asp-for = "CategoryId" class="form-control">
-            @foreach (var category in ViewBag.Categories)
+            @if (ViewBag.Categories != null)
             {
-                <option value="@category.Id">@category.Title</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Title</option>
+                }
             }
         </select>
     </div>
 
-    <button type="submit" class="btn btn-success">ایجاد</button>
-    <a asp-action="Index" class="btn btn-secondary">
+    <button type = "submit" class = "btn btn-success">ایجاد</button>
+    <a asp-action = "Index" class = "btn btn-secondary">
         <i class="fas fa-arrow-left"></i> بازگشت
     </a>
 </form>

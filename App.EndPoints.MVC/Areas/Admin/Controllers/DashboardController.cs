@@ -12,7 +12,5 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             ViewData["Username"] = username;
             return View();
         }
-
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Contract.AppService;
 using App.Domain.Core.DTOs.SubCategoryDto;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Signing;
 
 namespace App.EndPoints.MVC.Areas.Admin.Controllers
 {
@@ -10,12 +11,15 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
 
         private readonly ISubCategoryAppService _subCategoryAppService;
         private readonly ICategoryAppService _categoryAppService;
+        private readonly ILogger<SubCategoryController> _logger;
 
         public SubCategoryController(ISubCategoryAppService subCategoryAppService,
-            ICategoryAppService categoryAppService)
+            ICategoryAppService categoryAppService,
+            ILogger<SubCategoryController> logger)
         {
             _subCategoryAppService = subCategoryAppService;
             _categoryAppService = categoryAppService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -34,7 +38,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.Categories = await _categoryAppService.GetAll(default);
-            return View ();
+            return View();
         }
 
         [HttpPost]
@@ -43,16 +47,15 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (ModelState.IsValid)
                 return View(model);
             await _subCategoryAppService.Create(model, default,model.Image);
+            var timeStamp = DateTime.Now;
+            _logger.LogInformation("[{Timestamp}] اضافه شدن دسته بندی فرعی جدید: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var subcategory = await _subCategoryAppService.GetSubCategoryDtoById(id,default);
-            // quick fix
-            if (subcategory == null) { return NotFound(); }
             ViewBag.Categories = await _categoryAppService.GetAll(default);
-            return View(subcategory);
+            return View();
         }
 
         [HttpPost]
@@ -61,12 +64,16 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             await _subCategoryAppService.Update(model, default,model.Image);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] ویرایش دسته بندی فرعی : {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
             await _subCategoryAppService.Delete(id, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] حذف دسته بندی فرعی : {Id}", timeStamp, id);
             return RedirectToAction("Index");
         }
     }

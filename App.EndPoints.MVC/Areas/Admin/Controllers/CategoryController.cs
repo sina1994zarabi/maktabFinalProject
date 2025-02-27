@@ -3,6 +3,7 @@ using App.Domain.Core.DTOs.CategoryDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using NuGet.Packaging.Signing;
 
 namespace App.EndPoints.MVC.Areas.Admin.Controllers
 {
@@ -10,11 +11,13 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryAppService _categoryAppService;
+        private readonly ILogger<CategoryController> _logger;
 
 
-        public CategoryController(ICategoryAppService categoryAppService)
+        public CategoryController(ICategoryAppService categoryAppService, ILogger<CategoryController> logger)
         {
             _categoryAppService = categoryAppService;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -41,6 +44,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             await _categoryAppService.Create(model,default, model.Image);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] اضافه شدن دسته بندی اصلی جدید: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 
@@ -57,13 +62,17 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             await _categoryAppService.Update(model,default,model.Image);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] ویرایش دسته بندی: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        
         public async Task<IActionResult> Delete(int id)
         {
             await _categoryAppService.Delete(id,default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] پاک شدن دسته بندی: {Id}", timeStamp, id);
             return RedirectToAction("Index");
         }
     }

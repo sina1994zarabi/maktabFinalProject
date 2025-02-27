@@ -20,17 +20,19 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         private readonly IClientAppService _clientAppService;
         private readonly IExpertAppService _expertAppService;
         private readonly IAccountAppService _accountAppService;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly ILogger<UserController> _logger;
+        
 
         public UserController(IClientAppService clientAppService,
                               IExpertAppService expertAppService,
                               IAccountAppService accountAppService,
-                              UserManager<AppUser> userManager)
+                              ILogger<UserController> logger
+                              )
         {
             _clientAppService = clientAppService;
             _expertAppService = expertAppService;
-            _userManager = userManager;
             _accountAppService = accountAppService;
+            _logger = logger;
         }
         #endregion 
 
@@ -57,6 +59,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var result = await _accountAppService.Register(model);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] مشتری جدید اضافه شد با نام کاربری: {Username}", timeStamp, model.Username);
             if (result.Count == 0)
                 return RedirectToAction("Clients");
             foreach (var error in result)
@@ -98,6 +102,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 Username = model.Username
             };
             await _accountAppService.UpdateUserAsync(updateAccountDto);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] مشخصات مشتری با نام کاربری ویرایش شد: {Username}", timeStamp, model.Username);
             return RedirectToAction("Clients");
         }
         
@@ -106,6 +112,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             var clientToDelete = await _clientAppService.GetById(id, default);
             await _accountAppService.DeleteUserAsync(clientToDelete.AppUserId);
             await _clientAppService.Delete(id, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] مشتری حذف شد: {Id}", timeStamp, id);
             return RedirectToAction("Clients");
         }
 
@@ -132,6 +140,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var result = await _accountAppService.Register(model);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] کارشناس جدید اضافه شد با نام کاربری: {Username}", timeStamp, model.Username);
             if (result.Count == 0)
                 return RedirectToAction("Experts");
             foreach (var error in result)
@@ -170,6 +180,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 PhoneNumber = model.PhoneNumber,
                 Username = model.Username
             };
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] مشخصات کارشناس با نام کاربری ویرایش شد: {Username}", timeStamp, model.Username);
             await _accountAppService.UpdateUserAsync(updateAccountDto);
             return RedirectToAction("Experts");
         }
@@ -178,6 +190,8 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> ApproveOrRejectExpert(int id)
         {
             await _expertAppService.ChangeStatus(id, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] کارشناس با نام کاربری تایید شد: {Username}", timeStamp, id);
             return RedirectToAction("Experts");
         }
 
@@ -186,10 +200,10 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
             var expertToDelete = await _expertAppService.GetById(id, default);
             await _accountAppService.DeleteUserAsync(expertToDelete.AppUserId);
             await _expertAppService.Delete(id, default);
+            var timeStamp = DateTime.Now;
+            _logger.LogWarning("[{Timestamp}] کارشناس حذف شد: {Id}", timeStamp, id);
             return RedirectToAction("Experts");
         }
-
-
 
         #endregion 
     }

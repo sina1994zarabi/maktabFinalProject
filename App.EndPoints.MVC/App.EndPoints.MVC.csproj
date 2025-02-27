@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Expert\Views\Shared\" />
+    <Folder Include="wwwroot\ClientPanel\js\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 

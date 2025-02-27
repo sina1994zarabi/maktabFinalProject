@@ -17,42 +17,36 @@ using App.EndPoints.MVC.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog
-//Log.Logger = new LoggerConfiguration()
-//				.MinimumLevel.Information()
-//				.WriteTo.Console()
-//				.WriteTo.Seq("http://localhost:5341")
-//				.CreateLogger();
-
-//builder.Host.UseSerilog();
 
 
-//builder.Host.ConfigureLogging(loggingBuilder =>
-//{
-//    loggingBuilder.ClearProviders();
-//})
-//.UseSerilog((context, config) =>
-//{
-//    config.WriteTo.Console();
-//    config.WriteTo.Seq("http://localhost:5341", LogEventLevel.Information);
-//});
-
-builder.Host.UseSerilog((context, config) =>
+builder.Host.ConfigureLogging(loggingBuilder =>
 {
-	var connectionString = context.Configuration.GetConnectionString("LogsConnection");
-	
-	config.ReadFrom.Configuration(context.Configuration).
-			WriteTo.MSSqlServer(
-				connectionString,
-				new MSSqlServerSinkOptions
-						{
-							TableName = "MyLogs",
-							AutoCreateSqlTable = true
-						}
-				).
-		   WriteTo.File("logs/app.log",rollingInterval: RollingInterval.Day).
-           WriteTo.Console();
+    loggingBuilder.ClearProviders();
+
+}).UseSerilog((context, config) =>
+{
+    config.WriteTo.Console();
+    config.WriteTo.Seq("http://localhost:5341",apiKey: "0j2hkEmc8v0O6Gih7Ueg");
 });
+
+
+#region alternative Log Destinations 
+//builder.Host.UseSerilog((context, config) =>
+//{
+//	var connectionString = context.Configuration.GetConnectionString("LogsConnection");
+
+//	config.ReadFrom.Configuration(context.Configuration).
+//			WriteTo.MSSqlServer(
+//				connectionString,
+//				new MSSqlServerSinkOptions
+//						{
+//							TableName = "MyLogs",
+//							AutoCreateSqlTable = true
+//						}
+//				).
+//		   WriteTo.File("logs/app.log",rollingInterval: RollingInterval.Day).
+//           WriteTo.Console();
+//});
 
 
 //builder.Host.UseSerilog((context, config) =>
@@ -61,7 +55,7 @@ builder.Host.UseSerilog((context, config) =>
 //		  .WriteTo.EventLog("MyHomeServiceApp", manageEventSource: true)  // Send logs to Windows Event Viewer
 //		  .MinimumLevel.Information();
 //});
-
+#endregion
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); // Ensures Razor views are compiled at runtime
