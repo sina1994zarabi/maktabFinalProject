@@ -1,4 +1,4 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -48,3 +48,59 @@
         <a href="/Account/Register" class="btn btn-primary btn-lg mt-3">همین حالا ثبت کنید</a>
     </div>
 </div>
+*@
+
+
+@model List<App.Domain.Core.Entities.Services.Category>
+@{
+    ViewData["Title"] = "HomePage";
+    Layout = "_Layout";
+}
+<!-- ======================= Home Banner ======================== -->
+<div class = "home-banner margin-bottom-0"
+     style="background-image: url('@Url.Content("~/HomePage/assets/img/Background.png")')";
+     data-overlay="5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="text-center mb-5">
+                    <h1 class="">
+                        خدمات منزل
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======================= Home Banner ======================== -->
+<!-- ======================= Listing Categories ======================== -->
+<section class="space min gray">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="sec_title position-relative text-center mb-5">
+                    <h6 class="theme-cl">دسته بندی‌ها</h6>
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+
+        <div class="row align-items-center">
+            @foreach (var category in Model)
+            {
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
+                    <div class="cats-wrap text-center">
+                        <a asp-area = "Admin" asp-controller = "Category" asp-action = "" asp-route-id = "@category.Id" class = "Goodup-catg-wrap">
+                            <div class="Goodup-catg-icon"><img style="width:50%" src="@category.Image" /></div>
+                            <div class="Goodup-catg-caption">
+                                <h4 class="fs-md mb-0 ft-medium m-catrio">@category.Title</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- ======================= Listing Categories End ======================== -->

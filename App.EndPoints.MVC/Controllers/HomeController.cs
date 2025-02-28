@@ -1,4 +1,5 @@
-﻿using App.EndPoints.MVC.Models;
+﻿using App.Domain.Core.Contract.AppService;
+using App.EndPoints.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,16 +8,19 @@ namespace App.EndPoints.MVC.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private readonly ICategoryAppService _categoryAppService;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger,
+			ICategoryAppService categoryAppService)
 		{
 			_logger = logger;
+			_categoryAppService = categoryAppService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			
-			return View();
+			var categories = await _categoryAppService.GetAll(default);
+			return View(categories);
 		}
 
 		public IActionResult Privacy()

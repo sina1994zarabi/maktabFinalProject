@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog.Events;
 using System.Drawing;
 using Serilog.Sinks.MSSqlServer;
+using App.EndPoints.MVC.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -126,7 +127,7 @@ var app = builder.Build();
 
 
 
-//app.UseMiddleware<LoggingMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
