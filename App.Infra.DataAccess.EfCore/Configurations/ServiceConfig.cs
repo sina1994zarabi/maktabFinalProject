@@ -28,11 +28,19 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			new Service
 			{
 				Id = 1,
-				Title = "عنوان خدمت شماره یک",
-				Description = "توضیحات خدمت شماره یک ",
+				Title = "سرویس عادی نظافت",
+				Description = "توضیحات سرویس عادی نظافت ",
 				SubCategoryId = 1,
 				Price = 1000
-			});
+			},
+            new Service
+            {
+                Id = 2,
+                Title = "کارواش سیار",
+                Description = "توضیحات کارواش سیار ",
+                SubCategoryId = 2,
+                Price = 500
+            });
 		}
 	}
 }

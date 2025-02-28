@@ -91,7 +91,7 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            Title = "نضافت منزل"
+                            Title = "تمیز کاری"
                         });
                 });
 
@@ -138,8 +138,18 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Comment = "خوب بود",
                             IsApproved = false,
                             Rating = 4,
-                            ReviewDate = new DateTime(2025, 2, 24, 23, 56, 25, 915, DateTimeKind.Local).AddTicks(5497),
+                            ReviewDate = new DateTime(2025, 2, 28, 10, 21, 23, 609, DateTimeKind.Local).AddTicks(9222),
                             ServiceOfferingId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClientId = 2,
+                            Comment = "عالی بود",
+                            IsApproved = false,
+                            Rating = 5,
+                            ReviewDate = new DateTime(2025, 2, 28, 10, 21, 23, 609, DateTimeKind.Local).AddTicks(9237),
+                            ServiceOfferingId = 2
                         });
                 });
 
@@ -178,10 +188,18 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "توضیحات خدمت شماره یک ",
+                            Description = "توضیحات سرویس عادی نظافت ",
                             Price = 1000m,
                             SubCategoryId = 1,
-                            Title = "عنوان خدمت شماره یک"
+                            Title = "سرویس عادی نظافت"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "توضیحات کارواش سیار ",
+                            Price = 500m,
+                            SubCategoryId = 2,
+                            Title = "کارواش سیار"
                         });
                 });
 
@@ -221,10 +239,19 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 2, 24, 23, 56, 25, 915, DateTimeKind.Local).AddTicks(7898),
+                            CreatedAt = new DateTime(2025, 2, 28, 10, 21, 23, 610, DateTimeKind.Local).AddTicks(1365),
                             Description = "می توانم این کار را برای شما انجام دهم",
                             ExpertId = 1,
                             ServiceRequestId = 1,
+                            Status = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 2, 28, 10, 21, 23, 610, DateTimeKind.Local).AddTicks(1371),
+                            Description = "می توانم این کار را برای شما انجام دهم",
+                            ExpertId = 2,
+                            ServiceRequestId = 2,
                             Status = 2
                         });
                 });
@@ -272,13 +299,24 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         new
                         {
                             Id = 1,
-                            BookingDate = new DateTime(2025, 2, 26, 23, 56, 25, 914, DateTimeKind.Local).AddTicks(5401),
-                            ClientId = 2,
+                            BookingDate = new DateTime(2025, 3, 2, 10, 21, 23, 608, DateTimeKind.Local).AddTicks(5211),
+                            ClientId = 1,
                             Description = "نضافت حیاط و راه پله",
                             IsCompleted = false,
                             ServiceId = 1,
                             Status = 1,
                             Title = "نظافت و شتشوی آپارتمان"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BookingDate = new DateTime(2025, 3, 2, 10, 21, 23, 608, DateTimeKind.Local).AddTicks(5240),
+                            ClientId = 2,
+                            Description = "روشویی و توشویی با دسترسی به آب و برق",
+                            IsCompleted = false,
+                            ServiceId = 2,
+                            Status = 1,
+                            Title = "سرویس کارواش با آب"
                         });
                 });
 
@@ -311,13 +349,13 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Title = "نظافت منزل"
+                            Title = "نظافت و پذیرایی"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            Title = "نظافت راه پله"
+                            Title = "کارواش"
                         });
                 });
 
@@ -486,8 +524,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "5b5c040e-ea44-4b9e-95c0-bf9126f83ef7",
-                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 237, DateTimeKind.Local).AddTicks(1768),
+                            ConcurrencyStamp = "47a7d022-b65b-4970-8680-09f5f5ebcd07",
+                            DateRegistered = new DateTime(2025, 2, 28, 10, 21, 22, 634, DateTimeKind.Local).AddTicks(7946),
                             Email = "Admin@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "AdminFullName",
@@ -495,9 +533,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMINUSERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMgLHh26wXkQqbD4XZAopTH1k0hM5pWUj+FS2Rr9yJxOoEQd+2rumXxjkgFub97rDQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDAeWHnqoUi+3FLYTz9AAmIFRhurch6znDTCfklaujFheFgzGP/CrUgyXrzCDtW6wg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "90a70a10-af25-4d13-a020-9a599c0c07e9",
+                            SecurityStamp = "09fbf9dc-3a54-4516-a5c2-34908b6211c3",
                             TwoFactorEnabled = false,
                             UserName = "adminUserName"
                         },
@@ -506,8 +544,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "23384486-c43d-4299-bd35-328ec1e995af",
-                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 354, DateTimeKind.Local).AddTicks(5233),
+                            ConcurrencyStamp = "1cfaf7ba-2a78-4e55-a2f8-ad0189608145",
+                            DateRegistered = new DateTime(2025, 2, 28, 10, 21, 22, 804, DateTimeKind.Local).AddTicks(4113),
                             Email = "Client1@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام و نام خانوادگی کاربر یک",
@@ -515,9 +553,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "Client1@GMAIL.COM",
                             NormalizedUserName = "Client1USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEzutRcGU/jkHuReOnfoc8/Ebm6zQU2Zj4Nw1fEEiPUOspC2WLVzzsh+D0mqWRvfMA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK4pU5GaaPTB5OU6k1/biBbf+pMlBjnQHJs7SwFl7icB3y8T5Ga2HeH/A46XY/wP7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "996c1648-841c-4e4c-8233-3c8ad8c1af8f",
+                            SecurityStamp = "fa8f4057-1b1c-4ba4-8443-f39e69e378a9",
                             TwoFactorEnabled = false,
                             UserName = "Client1UserName"
                         },
@@ -526,8 +564,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "1b8e0a0d-2ce1-43d4-8aac-820d3f68c8bd",
-                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 485, DateTimeKind.Local).AddTicks(6706),
+                            ConcurrencyStamp = "7d92bd6b-119e-4be7-8651-84ba31b47900",
+                            DateRegistered = new DateTime(2025, 2, 28, 10, 21, 23, 5, DateTimeKind.Local).AddTicks(7624),
                             Email = "Client2@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام و نام خانوادگی کاربر دو",
@@ -535,9 +573,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT2@GMAIL.COM",
                             NormalizedUserName = "CLIENT2USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFFCzeDxf05ye9YKINLw5jO6BK/Dpfi+obtxmtly5bIBYghpOp3xYMI6ASoR2ru9Iw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFJwnzdrT467QFdDS8urPkj/UobHzxF4jF17s3HX4bGuQWGzs9a2Bn7awRRQ7l6u0g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c0c20b4f-d2d8-4cbc-a79b-acaa6a70b0bc",
+                            SecurityStamp = "d64738f8-68c8-4cb8-aa7f-703d3f45071e",
                             TwoFactorEnabled = false,
                             UserName = "Client2UserName"
                         },
@@ -546,8 +584,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 4,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "0be0c259-f2b4-437a-85cc-79c33d707246",
-                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 625, DateTimeKind.Local).AddTicks(327),
+                            ConcurrencyStamp = "8b658149-ad76-4169-aa78-a7335ba1d4c2",
+                            DateRegistered = new DateTime(2025, 2, 28, 10, 21, 23, 201, DateTimeKind.Local).AddTicks(8215),
                             Email = "Expert1@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام  و نام خانوادگی کارشناس شماره یک",
@@ -555,9 +593,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT1@GMAIL.COM",
                             NormalizedUserName = "EXPERT1USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEC4tYs01UKqrWKQbTik+PvzKJWWd1njVMQJwqUFpT6K1Kskw4DhUQIkszaphqSODXg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOJp2+phjfkAuSfibMN2MTejyv8kzUVeWXyS4WlFFzR2ugO6UzVF+PFcFrEh67pSVA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b5fdc54-c0b1-41c1-87f4-c539373a3014",
+                            SecurityStamp = "9f0d7735-7ca5-41a3-9cec-6af1e80ca8ea",
                             TwoFactorEnabled = false,
                             UserName = "Expert1UserName"
                         },
@@ -566,8 +604,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             Id = 5,
                             AccessFailedCount = 0,
                             AccountBalance = 0m,
-                            ConcurrencyStamp = "5670cc73-fec9-4dce-a1a4-66443eb3b407",
-                            DateRegistered = new DateTime(2025, 2, 24, 23, 56, 25, 772, DateTimeKind.Local).AddTicks(4650),
+                            ConcurrencyStamp = "46c4107f-193d-4d89-a7d9-0ea76b7d3c3d",
+                            DateRegistered = new DateTime(2025, 2, 28, 10, 21, 23, 423, DateTimeKind.Local).AddTicks(2213),
                             Email = "Expert2@Gmail.com",
                             EmailConfirmed = true,
                             FullName = "نام  و نام خانوادگی کارشناس دو",
@@ -575,9 +613,9 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EXPERT2@GMAIL.COM",
                             NormalizedUserName = "EXPERT2USERNAME",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL54HVrpSeLTBDb1/MmPHkm55TkqUZCM1HSS4IihuAmxCaRaAlccHq+DfQ2d68Nv6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC4DiUM46WuKpmU0Hht2uAgrpzA2POS5lspxGt5RMvldcIrFXDbJZek7+AHroY/nsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "949d9228-320b-4b34-bafb-71ba43e5f829",
+                            SecurityStamp = "a9e1aaed-72ec-4a9f-a57a-8c1d11a3f719",
                             TwoFactorEnabled = false,
                             UserName = "Expert2UserName"
                         });

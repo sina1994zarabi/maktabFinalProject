@@ -7,7 +7,7 @@
     ViewData["Title"] = "Service Request Details";
 }
 
-<h2>جزییات سفارش</h2>
+<h2> جزییات سفارش </h2>
 
 <div>
     <h3>@Model.Title</h3>
@@ -22,7 +22,7 @@
         <div>
             @foreach (var image in Model.Images)
             {
-                <img src="@image.ImagePath" alt="Service Request Image" style="width: 200px; height: auto; margin: 10px;" />
+                <img src = "@image.ImagePath" alt = "Service Request Image" style = "width: 200px; height: auto; margin: 10px;" />
             }
         </div>
     }

@@ -31,7 +31,7 @@
 						<a class="btn rounded-pill btn-labal-danger disabled">رد شده</a>
 						<a asp-action = "ConfirmOrReject" asp-route-id="@review.Id" class="card-link rounded-pill btn btn-success">تایید</a>
 					}
-					<a asp-page-handler="Delete" asp-route-id="@review.Id" onclick="return confirm('مطمینید می خواهید ادامه دهید؟')" class="card-link rounded-pill btn btn-danger">حذف</a>
+					<a asp-action = "Delete" asp-route-id = "@review.Id" onclick="return confirm('مطمینید می خواهید ادامه دهید؟')" class="card-link rounded-pill btn btn-danger">حذف</a>
 				</div>
 			</div>
 		</div>

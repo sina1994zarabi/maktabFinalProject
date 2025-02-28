@@ -20,7 +20,8 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasData(
 				new Category {
 					Id = 1,
-					Title = "نضافت منزل"}
+					Title = "تمیز کاری"
+				}
 				);
 		}
 	}

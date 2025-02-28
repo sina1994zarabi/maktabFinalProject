@@ -32,8 +32,17 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					ExpertId = 1,
 					ServiceRequestId = 1,
 					CreatedAt = DateTime.Now
-				}
-				);
+				},
+                new ServiceOffering
+                {
+                    Id = 2,
+                    Description = "می توانم این کار را برای شما انجام دهم",
+                    Status = StatusEnum.PendingClientConfirmation,
+                    ExpertId = 2,
+                    ServiceRequestId = 2,
+                    CreatedAt = DateTime.Now
+                }
+                );
 		}
 	}
 }

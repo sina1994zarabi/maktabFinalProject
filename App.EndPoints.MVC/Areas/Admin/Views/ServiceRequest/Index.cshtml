@@ -33,8 +33,8 @@
 					<a  asp-action="MarkAsDone" asp-route-id = "@serviceRequest.Id" class="btn @(serviceRequest.IsCompleted ? "btn-danger" : "btn-primary")">
 						@(serviceRequest.IsCompleted ? "انجام شده" : "انجام نشده")
 					</a>
-					<a asp-action="Details" asp-route-id="@serviceRequest.Id" class="btn btn-info">مشاهده جزییات</a>
-					<a asp-action="Delete" asp-route-id="@serviceRequest.Id" class="btn btn-warning" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')"> حذف</a>
+					<a asp-action = "Details" asp-route-id="@serviceRequest.Id" class="btn btn-info">مشاهده جزییات</a>
+					<a asp-action = "Delete" asp-route-id="@serviceRequest.Id" class="btn btn-danger" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')"> حذف</a>
 				</td>
 			</tr>
 		}

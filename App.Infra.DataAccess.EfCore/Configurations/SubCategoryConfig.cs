@@ -25,13 +25,14 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasData(new SubCategory
 			{
 				Id = 1,
-				Title = "نظافت منزل",
-				CategoryId =1
+				Title = "نظافت و پذیرایی",
+				CategoryId = 1
 			}
-			, new SubCategory
+			,
+			new SubCategory
 			{   Id = 2,
-				Title = "نظافت راه پله",
-				CategoryId =1
+				Title = "کارواش",
+				CategoryId = 1
 			}
 			);
 		}

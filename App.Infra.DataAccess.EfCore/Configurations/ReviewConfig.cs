@@ -33,7 +33,17 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Comment = "خوب بود",
 					ReviewDate = DateTime.Now,
 					IsApproved = false
-				});
+				} ,
+                new Review
+                {
+                    Id = 2,
+                    ClientId = 2,
+                    ServiceOfferingId = 2,
+                    Rating = 5,
+                    Comment = "عالی بود",
+                    ReviewDate = DateTime.Now,
+                    IsApproved = false
+                });
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace FrameWork
         {
             { StatusEnum.AwaitingOfferReveives, "در انتظار دریافت پیشنهاد" },
             { StatusEnum.PendingClientConfirmation, "منتظر تایید مشتری" },
-            { StatusEnum.PendingProviderConfirmation, "منتظر تایید ارائه دهنده" },
+            { StatusEnum.PendingProviderConfirmation, "منتظر تایید کارشناس" },
             { StatusEnum.Completed, "تایید شده" },
             { StatusEnum.Cancelled, "لغو شده" }
     };
