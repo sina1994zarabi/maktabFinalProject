@@ -56,51 +56,144 @@
     ViewData["Title"] = "HomePage";
     Layout = "_Layout";
 }
-<!-- ======================= Home Banner ======================== -->
-<div class = "home-banner margin-bottom-0"
-     style="background-image: url('@Url.Content("~/HomePage/assets/img/Background.png")')";
-     data-overlay="5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-11 col-lg-12 col-md-12 col-sm-12 col-12">
+<!-- Service Categories -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Our Services</h2>
+    <div class="row">
+        @for (int i = 1; i <= 8; i++)
+        {
+            <div class="col-6 col-md-3 mb-4">
+                <div class="card service-card text-center h-100">
+                    <div class="card-body">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-tools fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Service @i</h5>
+                        <p class="card-text small">Professional service at your doorstep</p>
+                        <a href="#" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-                <div class="text-center mb-5">
-                    <h1 class="">
-                        خدمات منزل
-                    </h1>
+<!-- How It Works -->
+<div class="bg-light py-5 mb-5">
+    <div class="container">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="howto-card">
+                    <div class="howto-icon mb-3">
+                        <i class="fas fa-search-location fa-4x text-primary"></i>
+                    </div>
+                    <h4>Find a Service</h4>
+                    <p>Browse through our services and select what you need</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="howto-card">
+                    <div class="howto-icon mb-3">
+                        <i class="fas fa-calendar-check fa-4x text-primary"></i>
+                    </div>
+                    <h4>Book an Appointment</h4>
+                    <p>Choose a convenient time and date for the service</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="howto-card">
+                    <div class="howto-icon mb-3">
+                        <i class="fas fa-thumbs-up fa-4x text-primary"></i>
+                    </div>
+                    <h4>Get the Service</h4>
+                    <p>Our professional will arrive and complete the job</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- ======================= Home Banner ======================== -->
-<!-- ======================= Listing Categories ======================== -->
-<section class="space min gray">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                <div class="sec_title position-relative text-center mb-5">
-                    <h6 class="theme-cl">دسته بندی‌ها</h6>
+
+<!-- Featured Services -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Featured Services</h2>
+        <a href="#" class="btn btn-outline-primary">View All</a>
+    </div>
+    <div class="row">
+        @for (int i = 1; i <= 4; i++)
+        {
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="~/images/service-@(i).jpg" class="card-img-top" alt="Service Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Service Title @i</h5>
+                        <p class="card-text text-muted">Starting from $29</p>
+                        <p class="card-text">Short description of the service goes here.</p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="#" class="btn btn-primary w-100">Book Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- row -->
+        }
+    </div>
+</div>
 
-        <div class="row align-items-center">
-            @foreach (var category in Model)
+<!-- Testimonials -->
+<div class="bg-light py-5 mb-5">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Customers Say</h2>
+        <div class="row">
+            @for (int i = 1; i <= 3; i++)
             {
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6">
-                    <div class="cats-wrap text-center">
-                        <a asp-area = "Admin" asp-controller = "Category" asp-action = "" asp-route-id = "@category.Id" class = "Goodup-catg-wrap">
-                            <div class="Goodup-catg-icon"><img style="width:50%" src="@category.Image" /></div>
-                            <div class="Goodup-catg-caption">
-                                <h4 class="fs-md mb-0 ft-medium m-catrio">@category.Title</h4>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div class="d-flex">
+                                    <div class="customer-img me-3">
+                                        <img src="~/images/avatar-@(i).jpg" alt="Customer" class="rounded-circle" width="50" height="50">
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0">Customer Name</h5>
+                                        <p class="text-muted small mb-0">Service Used</p>
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </div>
                             </div>
-                        </a>
+                            <p class="card-text">"The service was incredible. The technician arrived on time and fixed my problem quickly. I'll definitely use this service again!"</p>
+                        </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-</section>
-<!-- ======================= Listing Categories End ======================== -->
+</div>
+
+<!-- App Download Section -->
+<div class="container mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2>Download Our Mobile App</h2>
+            <p class="lead">Get services on the go with our easy to use mobile application.</p>
+            <div class="d-flex mt-4">
+                <a href="#" class="me-3">
+                    <img src="~/images/app-store.png" alt="App Store" height="50">
+                </a>
+                <a href="#">
+                    <img src="~/images/google-play.png" alt="Google Play" height="50">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="~/images/app-mockup.png" alt="Mobile App" class="img-fluid">
+        </div>
+    </div>
+</div>

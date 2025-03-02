@@ -1,82 +1,175 @@
+/* site.css */
+
 :root {
-    --bs-primary: #008080; /* Teal */
-    --bs-primary-rgb: 0, 128, 128;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
-    background-color: #fff;
-    color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
 
-.sidebar {
-    background-color: #f8f9fa;
+/* Service Cards */
+.service-card {
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
 }
 
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.service-icon {
+    height: 80px;
+    width: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* How It Works */
+.howto-card {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    height: 100%;
+}
+
+.howto-icon {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+}
+
+/* Testimonials */
+.testimonial-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+/* Buttons */
 .btn-primary {
-    background-color: var(--bs-primary);
-    border-color: var(--bs-primary);
-    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
     .btn-primary:hover {
-        background-color: #006666;
-        border-color: #006666;
-        color: #fff;
+        background-color: #2980b9;
+        border-color: #2980b9;
     }
 
 .btn-outline-primary {
-    color: var(--bs-primary);
-    border-color: var(--bs-primary);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
     .btn-outline-primary:hover {
-        background-color: var(--bs-primary);
-        color: #fff;
+        background-color: var(--primary-color);
+        color: white;
     }
 
-.card {
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px;
+    }
+
+    .howto-card {
+        margin-bottom: 20px;
+    }
 }
 
-.text-primary {
-    color: var(--bs-primary) !important;
+/* Custom animation for service cards */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.footer {
-    background-color: #f8f9fa;
+.service-card {
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
-
-html {
-  font-size: 14px;
+/* Service detail page styles */
+.service-detail-header {
+    background-color: var(--light-gray);
+    padding: 30px 0;
+    margin-bottom: 30px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.pricing-box {
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.service-provider-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.provider-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
-body {
-  margin-bottom: 60px;
-}
-@font-face {
-    font-family: 'MyForeignFont';
-    src: url('/fonts/Vazir.woff2') format('woff2'), url('/fonts/Vazir.woff') format('woff'), url('/fonts/Vazir.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+/* Booking form styles */
+.booking-form {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
 }
 
-body {
-    font-family: 'MyForeignFont', sans-serif;
+.form-label {
+    font-weight: 600;
+}
+
+/* Mobile app section */
+.app-section {
+    background-color: var(--light-gray);
+    padding: 60px 0;
+}
+
+/* Footer adjustments */
+footer a:hover {
+    color: white !important;
+    text-decoration: none;
 }
