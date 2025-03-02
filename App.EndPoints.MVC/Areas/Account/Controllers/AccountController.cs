@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace App.EndPoints.MVC.Areas.Account.Controllers
 {
     [Area("Account")]
+    
     public class AccountController : Controller
     {
 
@@ -81,7 +82,7 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
             var timestamp = DateTime.Now;
 			_logger.LogInformation("[{Timestamp}] خروج موفق کاربر: {Username}", timestamp, User.Identity.Name);
 			await _accountAppService.Logout();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home",new { area = ""});
         }
     }
 }
