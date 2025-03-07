@@ -50,9 +50,9 @@ namespace App.Domain.Services.AppServices
 			await _serviceRequestService.MarkAsDone(id,cancellationToken);
 		}
 
-		public Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken)
+		public async Task Update(ServiceRequest serviceRequest, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _serviceRequestService.Update(serviceRequest,cancellationToken);
         }
     }
 }

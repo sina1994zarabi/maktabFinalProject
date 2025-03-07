@@ -1,6 +1,8 @@
 ﻿using App.Domain.Core.Contract.Repository;
+using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.ClientDto;
 using App.Domain.Core.Entities.User;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,12 @@ namespace App.Infra.DataAccess.EfCore.Repositories
     public class ClientRepository : IClientRepository
 	{
 		private readonly AppDbContext _context;
+		private readonly IUtilityService _utilityService;
 
-        public ClientRepository(AppDbContext context)
+        public ClientRepository(AppDbContext context,IUtilityService utilityService)
         {
 			_context = context;
+			_utilityService = utilityService;
         }
 
         public async Task Add(CreateClientDto client,CancellationToken cancellation)
@@ -35,7 +39,14 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			await _context.SaveChangesAsync(cancellation);
 		}
 
-		public async Task Delete(int id,CancellationToken cancellation)
+        public async Task ChangeAccountBalance(int clientId,decimal amount, CancellationToken cancellation)
+        {
+            var Client = await _context.Clients.FindAsync(clientId,cancellation);
+			Client.AppUser.AccountBalance += amount;
+			await _context.SaveChangesAsync(cancellation);
+        }
+
+        public async Task Delete(int id,CancellationToken cancellation)
 		{
 			var client = await _context.Clients.FindAsync(id, cancellation);
 			if (client != null)
@@ -65,17 +76,28 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				.FirstAsync(x => x.Id == id);
         }
 
-        public async Task Update(UpdateClientDto client,CancellationToken cancellation)
+        public async Task Update(UpdateClientprofileDto client,CancellationToken cancellation,IFormFile Image)
 		{
-		    var clientToUpdate = await _context.Clients.FindAsync(client.Id, cancellation);
+		    var clientToUpdate = await _context.Clients
+				.Include(c => c.AppUser)
+				.FirstOrDefaultAsync(c => c.Id == client.Id, cancellation);
+			var ImagePath = await _utilityService.UploadImage(Image);
 			if (clientToUpdate != null)
 			{
-				//clientToUpdate.Email = client.Email;
+				clientToUpdate.AppUser.Email = client.Email;
 				clientToUpdate.PhoneNumber  = client.PhoneNumber;
 				clientToUpdate.FullName = client.FullName;
-				//clientToUpdate.UserName = client.Username;
-				await _context.SaveChangesAsync();
+				clientToUpdate.AppUser.UserName = client.Username;
+				clientToUpdate.AppUser.ProfilePicture = ImagePath;
+				await _context.SaveChangesAsync(cancellation);
 			}
 		}
-	}
+
+        public async Task UpdateBalance(int id, decimal amount, CancellationToken cancellation)
+        {
+            var client = await _context.Clients.Include(x => x.AppUser).FirstOrDefaultAsync(x => x.Id == id);
+			client.AppUser.AccountBalance += amount;
+			await _context.SaveChangesAsync(cancellation);
+        }
+    }
 }

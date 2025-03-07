@@ -50,7 +50,10 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<List<ServiceOffering>> GetAll(CancellationToken cancellationToken)
 		{
-			return await _context.ServiceOfferings.ToListAsync(cancellationToken);
+			return await _context.ServiceOfferings
+							     .Include(so => so.Expert)
+									.ThenInclude(e => e.AppUser)
+								 .ToListAsync(cancellationToken);
 		}
 
 		public async Task Update(ServiceOffering serviceOffering,CancellationToken cancellationToken)

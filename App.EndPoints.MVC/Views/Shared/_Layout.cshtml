@@ -88,7 +88,7 @@
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="#">
-                            <img src="~/HomePage/assets/img/logo.jpg" class="logo" alt="" style="width: 50px; height: auto;" />
+                            <img src="~/HomePage/assets/img/images.png" class="logo" alt="" style="width: 50px; height: auto;" />
                         </a>
 
                     </div>
@@ -99,7 +99,7 @@
                                 <a href="javascript:void(0);"> صفحه اصلی </a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a >صفحه اصلی</a></li>
-                                    <li><a > زیر دسته بندی</a></li>
+                                    <li><a >  دسته بندی</a></li>
                                     <li><a > خدمات</a></li>
                                 </ul>
                             </li>
@@ -252,18 +252,19 @@
 
 @*Third LayOut*@
 
-@{
-    ViewData["Title"] = "Home";
-}
+
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - YourServiceMarketplace</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
@@ -272,7 +273,7 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-0">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/images/logo.png" alt="Logo" height="40" />
+                    <img src="~/HomePage/assets/img/images.png" alt="Logo" height="100" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -280,40 +281,28 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller = "Home" asp-action="Index">خانه</a>
+                        </li>
+                        <!-- Use View Component for Categories -->
+                        @await Component.InvokeAsync("CategoryMenu")
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller = "Services" asp-action="Index">خدمات</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller = "About" asp-action="Index">درباره ما</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller = "Contact" asp-action="Index">ارتباط</a>
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <a class="btn btn-outline-primary me-2" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        <a class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        <a class="btn btn-outline-primary me-2" asp-area = "Account" asp-controller = "Account" asp-action="Login">ورود </a>
+                        <a class="btn btn-primary" asp-area="Account" asp-controller="Account" asp-action="Register">ثبت نام</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-
-    <!-- Hero Section with Search -->
-    <div class="hero-section py-5 mb-4" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-bg.jpg'); background-size: cover; background-position: center;">
-        <div class="container text-center text-white py-5">
-            <h1 class="display-4 mb-4">Find The Perfect Home Service</h1>
-            <p class="lead mb-4">Choose from our wide range of professional home services</p>
-            <div class="search-container mx-auto" style="max-width: 600px;">
-                <div class="input-group">
-                    <input type="text" class="form-control form-control-lg" placeholder="What service do you need?">
-                    <button class="btn btn-primary btn-lg" type="button">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <main role="main">
         @RenderBody()

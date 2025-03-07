@@ -1,0 +1,145 @@
+﻿:root {
+    --primary-green: #28a745; /* Green from homepage */
+    --gray-light: #f8f9fa;
+    --gray-dark: #808080;
+}
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Vazir', sans-serif; /* Persian font for RTL */
+    background-color: var(--gray-light);
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Header */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-nav .nav-link {
+    color: var(--gray-dark);
+}
+
+    .navbar-nav .nav-link.active {
+        color: var(--primary-green);
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--primary-green);
+    }
+
+/* Sidebar */
+.sidebar {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item a {
+    color: var(--gray-dark);
+    text-decoration: none;
+}
+
+    .list-group-item a:hover {
+        color: var(--primary-green);
+    }
+
+/* Dashboard Content */
+.dashboard-content .card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header.bg-light {
+    background-color: var(--gray-light);
+}
+
+.card-title {
+    color: var(--gray-dark);
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+    .btn-primary:hover {
+        background-color: #218838;
+        border-color: #218838;
+    }
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #218838;
+    }
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #e0a800;
+    }
+
+/* Service Cards */
+.service-card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+    .service-card:hover {
+        transform: translateY(-5px);
+    }
+
+.service-icon i {
+    color: var(--primary-green);
+}
+
+/* Proposal Cards */
+.proposal-card {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none; /* Hide sidebar on mobile, consider a toggle */
+    }
+
+    .col-md-9 {
+        width: 100%;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+}

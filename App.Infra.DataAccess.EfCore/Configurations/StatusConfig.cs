@@ -19,10 +19,12 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 			builder.HasData(
 				new Status { Id = StatusEnum.PendingProviderConfirmation, Name = "در انتظار تایید کارشناس"},
 				new Status { Id = StatusEnum.PendingClientConfirmation, Name = "در انتظار تایید مشتری"},
-				new Status { Id = StatusEnum.AwaitingOfferReveives, Name = "در انتظار دریافت پیشنهادات"},
-				new Status { Id = StatusEnum.Completed, Name = "تایید شده"},
+				new Status { Id = StatusEnum.AwaitingOffers, Name = "در انتظار دریافت پیشنهادات"},
+				new Status { Id = StatusEnum.Completed, Name = "انجام شده"},
+				new Status { Id = StatusEnum.AwaitingPayment, Name = "پرداخت نشده"},
+				new Status { Id = StatusEnum.Paid, Name = "پرداخت شده"},
+				new Status { Id = StatusEnum.InProgress, Name = "در حال انجام"},
 				new Status { Id = StatusEnum.Cancelled, Name = "لغو شده"}
-
 				);
 		}
 	}

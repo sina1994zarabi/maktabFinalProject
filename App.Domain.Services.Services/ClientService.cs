@@ -2,6 +2,7 @@
 using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.ClientDto;
 using App.Domain.Core.Entities.User;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace App.Domain.Services.Services
             await _clientRepository.Add(client, cancellation);
         }
 
+        public async Task ChangeAccountBalance(int id, decimal balance, CancellationToken cancellation)
+        {
+            await _clientRepository.ChangeAccountBalance(id,balance,cancellation);
+        }
+
         public async Task Delete(int id, CancellationToken cancellation)
         {
             await _clientRepository.Delete(id, cancellation);
@@ -44,9 +50,14 @@ namespace App.Domain.Services.Services
             return await _clientRepository.GetClientInfo(id,cancellation);
         }
 
-        public async Task Update(UpdateClientDto client, CancellationToken cancellation)
+        public async Task Update(UpdateClientprofileDto client, CancellationToken cancellation,IFormFile Image)
         {
-            await _clientRepository.Update(client, cancellation);
+            await _clientRepository.Update(client, cancellation,Image);
+        }
+
+        public async Task UpdateBalance(int id, decimal amount,CancellationToken cancellation)
+        {
+            await _clientRepository.UpdateBalance(id,amount,cancellation);
         }
     }
 }

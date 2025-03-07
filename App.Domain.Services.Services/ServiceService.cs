@@ -2,6 +2,8 @@
 using App.Domain.Core.Contract.Services;
 using App.Domain.Core.DTOs.ServiceDto;
 using App.Domain.Core.Entities.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,10 @@ namespace App.Domain.Services.Services
     public class ServiceService : IServiceService
     {
         private readonly IServiceRepository _serviceRepository;
+        
 
-        public ServiceService(IServiceRepository serviceRepository)
+        public ServiceService(IServiceRepository serviceRepository
+                              )
         {
             _serviceRepository = serviceRepository;
         }
@@ -37,6 +41,7 @@ namespace App.Domain.Services.Services
 
         public async Task<List<Service>> GetAll(CancellationToken cancellationToken)
         {
+
             return await _serviceRepository.GetAll(cancellationToken);
         }
 

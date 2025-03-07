@@ -18,5 +18,4 @@ namespace App.Domain.Core.Entities.Services
         public List<SubCategory> Subcategories { get; set; } = new List<SubCategory>();
         #endregion
     }
-
 }

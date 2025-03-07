@@ -24,7 +24,7 @@
                         <a href="#" class="profile-link"><i class="fas fa-user"></i> پروفایل</a>
                     </div>
                     <div class="phone">
-                        <i class="fas fa-phone"></i> 
+                        <i class="fas fa-phone"></i>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 </html>*@
 
 
-<!DOCTYPE html>
+@*<!DOCTYPE html>
 <html lang="fa">
 
 <head>
@@ -72,9 +72,9 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="" alt = "Logo">
-    <link href="~/assets/css/styles.css" rel="stylesheet">
-
-
+    <link href="~/ClientPanel/assets/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link type="text/css" rel="stylesheet" href="~/ClientPanel/calendar-dist/jalalidatepicker.min.css" />
     <script type="text/javascript" src="~/ClientPanel/calendar-dist/jalalidatepicker.min.js"></script>
 </head>
@@ -103,7 +103,7 @@
                         </a>
                     </div>
                     <div class="nav-menus-wrapper" style="transition-property: none;">
-                        
+
                     </div>
                 </nav>
             </div>
@@ -126,7 +126,7 @@
                         </ul>
                         <ul data-submenu-title="حساب کاربری">
                             <li class="@ViewData["ProfileSetting"]"><a ><i class="lni lni-user ms-2"></i>تنظیمات </a></li>
-                            @* <li class="@ViewData["ChangePass"]"><a asp-page=""><i class="lni lni-lock-alt ms-2"></i>تغییر رمز عبور</a></li> *@
+                            <li class="@ViewData["ChangePass"]"><a asp-page=""><i class="lni lni-lock-alt ms-2"></i>تغییر رمز عبور</a></li>
                             <li>
                                 <form class="form-inline" asp-area="Account" asp-controller = "Account" asp-action="Account">
                                     <button type="submit" class="nav-link btn btn-link text-dark">خروج<i class="bx bx-power-off me-2"></i></button>
@@ -193,3 +193,229 @@
 
 @await RenderSectionAsync("Scripts", required: false)
 </html>
+*@
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>پنل مشتری - HomeService</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="stylesheet" href="~/ClientPanel/css/site.css" asp-append-version="true">
+
+	@*Jalali DatePicker*@
+	<link rel="stylesheet" href="~/ClientPanel/calender-dist/jalalidatepicker.css" />
+	<link type="text/css" rel="stylesheet" href="~/ClientPanel/calendar-dist/jalalidatepicker.min.css" />
+	<script type="text/javascript" src="~/ClientPanel/calendar-dist/jalalidatepicker.min.js"></script>
+	<script src="~/ClientPanel/assets/js/jquery.min.js"></script>
+	<script src="~/ClientPanel/assets/js/moment-jalaali.js"></script>
+	<script src="~/ClientPanel/calendar-dist/jalalidatepicker.js"></script>
+	
+	@*styling the comment section*@
+	
+
+</head>
+<body>
+	<div class="page-wrapper">
+		<!-- Header -->
+		<header class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container">
+				<a class="navbar-brand ms-auto" href="/">
+					<img src="~/ClientPanel/images.png" alt="HomeService" height="200">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">خدمات</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Dashboard">پنل مشتری</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="Account" asp-controller="Account" asp-action="LogOut"><i class="fas fa-power-off"></i> خروج</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+
+		<!-- Main Content -->
+		<main class="container my-4">
+			<div class="row">
+				<!-- Sidebar -->
+				<aside class="col-md-3">
+					<div class="sidebar card p-3 mb-4 shadow-sm">
+						<h5 class="card-title mb-3">منوی سریع</h5>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><a asp-area="Client" asp-controller= "Dashboard" asp-action = "ViewProfile" class="text-dark">مشخصات من</a></li>
+							<li class="list-group-item"><a asp-area="Client" asp-controller= "Dashboard" asp-action = "ViewServices" class="text-dark">لیست خدمات</a></li>
+							<li class="list-group-item"><a asp-area="Client" asp-controller= "Dashboard" asp-action = "AddServiceRequest" class="text-dark">درخواست خدمات</a></li>
+							<li class="list-group-item"><a asp-area="Client" asp-controller= "Dashboard" asp-action = "ViewServiceOfferings" class="text-dark">پیشنهادات</a></li>
+							<li class="list-group-item"><a asp-area="Client" asp-controller="Dashboard" asp-action  = "ViewServiceRequests" class="text-dark">سفارش‌ها</a></li>
+							<li class="list-group-item"><a asp-area="Client" asp-controller= "Dashboard" asp-action = "UpdateBalance" class="text-dark">افزایش موجودی</a></li>
+							<li class="list-group-item"><a href="#reviews" class="text-dark">نظرات و امتیازها</a></li>
+						</ul>
+					</div>
+				</aside>
+
+				<!-- Dashboard Content -->
+				@*<section class="col-md-9">
+					<div class="dashboard-content">
+						<!-- Dashboard Summary -->
+						<div class="card shadow-sm mb-4">
+							<div class="card-body">
+								<h4 class="card-title">خوش آمدید، [نام مشتری]!</h4>
+								<p class="card-text">مدیریت خدمات و سفارش‌های خود را از اینجا آغاز کنید.</p>
+								<ul class="list-unstyled">
+									<li><strong>درخواست‌های فعال:</strong> 3</li>
+									<li><strong>سفارش‌های تکمیل‌شده:</strong> 5</li>
+									<li><strong>امتیاز کلی:</strong> 4.8/5</li>
+								</ul>
+							</div>
+						</div>*@
+
+
+
+						<!-- Services List -->
+						@*<div id="services" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>لیست خدمات</h5>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-4 mb-3">
+										<div class="card service-card small-card text-center h-100">
+											<div class="card-body p-2">
+												<div class="service-icon mb-2">
+													<i class="fas fa-broom fa-2x text-success"></i>
+												</div>
+												<h5 class="card-title small">نظافت منزل</h5>
+												<p class="card-text small">خدمات حرفه‌ای در محل شما</p>
+												<p class="card-text small">قیمت: 1,200,000 IRR</p>
+											</div>
+										</div>
+									</div>
+									<!-- Add more service cards as needed -->
+								</div>
+							</div>
+						</div>*@
+
+						<!-- Service Requests -->
+						@*<div id="requests" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>ارسال درخواست برای خدمات</h5>
+							</div>
+							<div class="card-body">
+								<form asp-action="SubmitRequest" method="post">
+									<div class="form-group mb-3">
+										<label class="form-label">خدمت مورد نظر</label>
+										<select class="form-control" name="ServiceId">
+											<option value="">انتخاب خدمت</option>
+											<option value="1">نظافت منزل</option>
+											<option value="2">تعمیر لوله‌کشی</option>
+											<!-- Dynamic options from database -->
+										</select>
+									</div>
+									<button type="submit" class="btn btn-success">ارسال درخواست</button>
+								</form>
+							</div>
+						</div>*@
+
+						<!-- Proposals -->
+						@*<div id="proposals" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>پیشنهادات کارشناسان</h5>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<div class="card proposal-card">
+											<div class="card-body">
+												<h6>کارشناس: [نام کارشناس]</h6>
+												<p>قیمت پیشنهادی: 1,500,000 IRR</p>
+												<p>توضیحات: خدمات سریع و حرفه‌ای</p>
+												<button class="btn btn-primary" onclick="selectProposal(1)">انتخاب</button>
+											</div>
+										</div>
+									</div>
+									<!-- Add more proposals as needed -->
+								</div>
+							</div>
+						</div>*@
+
+						<!-- Orders -->
+						@*<div id="orders" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>سفارش‌های من</h5>
+							</div>
+							<div class="card-body">
+								<p>سفارش نظافت منزل تأیید شده. وضعیت: در حال انجام</p>
+								<button class="btn btn-success" onclick="confirmOrder(1)">تأیید نهایی</button>
+							</div>
+						</div>*@
+
+						<!-- Payments -->
+					@*	<div id="payments" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>پرداخت هزینه</h5>
+							</div>
+							<div class="card-body">
+								<p>مبلغ قابل پرداخت: 1,500,000 IRR برای سفارش نظافت منزل</p>
+								<button class="btn btn-primary" onclick="processPayment()">پرداخت آنلاین</button>
+								<button class="btn btn-secondary" onclick="payOffline()">پرداخت حضوری</button>
+							</div>
+						</div>*@
+
+						<!-- Reviews -->
+						@*<div id="reviews" class="card shadow-sm mb-4">
+							<div class="card-header bg-light">
+								<h5>نظرات و امتیازها</h5>
+							</div>
+							<div class="card-body">
+								<form asp-action="SubmitReview" method="post">
+									<div class="form-group mb-3">
+										<label class="form-label">امتیاز برای کارشناس</label>
+										<select class="form-control" name="Rating">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+									<div class="form-group mb-3">
+										<label class="form-label">نظر شما</label>
+										<textarea class="form-control" name="Comment" rows="3" placeholder="نظر خود را اینجا وارد کنید"></textarea>
+									</div>
+									<button type="submit" class="btn btn-warning">ثبت نظر</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>*@
+			<main role="main">
+				@RenderBody()
+			</main>
+	</div>
+	</main>
+</body>
+<!-- Footer -->
+<footer class="border-top pt-5 bg-dark text-white text-center">
+	<div class="container">
+		<p>© 2025 HomeService. تمامی حقوق محفوظ است.</p>
+	</div>
+</footer>
+</html>
+
+
+

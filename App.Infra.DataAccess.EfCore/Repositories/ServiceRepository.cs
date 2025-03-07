@@ -2,6 +2,7 @@
 using App.Domain.Core.DTOs.ServiceDto;
 using App.Domain.Core.Entities.Services;
 using App.Domain.Core.Enums;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 	public class ServiceRepository : IServiceRepository
 	{
 		private readonly AppDbContext _context;
+
 
         public ServiceRepository(AppDbContext context)
         {
@@ -68,6 +70,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				serviceToEdit.Description = service.Description;
 				serviceToEdit.Price = service.Price;
 				serviceToEdit.SubCategoryId = service.SubCategoryId;
+				serviceToEdit.Image = service.ImagePath;
 				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}

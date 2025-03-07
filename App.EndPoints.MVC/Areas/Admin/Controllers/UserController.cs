@@ -78,7 +78,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> EditClient(int id)
         {
             var client = await _clientAppService.GetClientInfo(id, default);
-            var model = new UpdateClientDto
+            var model = new UpdateClientprofileDto
             {
                 Id = id,
                 AppUserId = client.AppUserId,
@@ -91,9 +91,9 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditClient(UpdateClientDto model)
+        public async Task<IActionResult> EditClient(UpdateClientprofileDto model)
         {
-            await _clientAppService.Update(model, default);
+            await _clientAppService.Update(model, default, model.Image);
             var updateAccountDto = new UpdateAccountDto
             {
                 Id = model.AppUserId,
@@ -101,7 +101,6 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 Username = model.Username,
-                
             };
             await _accountAppService.UpdateUserAsync(updateAccountDto);
             var timeStamp = DateTime.Now;

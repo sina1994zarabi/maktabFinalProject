@@ -61,7 +61,9 @@ builder.Host.ConfigureLogging(loggingBuilder =>
 #endregion
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); // Ensures Razor views are compiled at runtime
+builder.Services.AddControllersWithViews(); 
+
+builder.Services.AddMemoryCache();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -83,6 +85,7 @@ builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
 builder.Services.AddScoped<IServiceRequestAppService, ServiceRequestAppService>();
 
 builder.Services.AddScoped<IServiceOfferingRepository, ServiceOfferingRepository>();
+builder.Services.AddScoped<IServiceOfferingService, ServiceOfferingService>();
 
 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();

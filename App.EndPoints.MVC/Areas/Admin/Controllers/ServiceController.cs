@@ -41,7 +41,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
                 ViewBag.SubCategories = await _subCategoryAppService.GetAll(default);
                 return View(model);
             }
-            await _serviceAppService.Create(model, default);
+            await _serviceAppService.Create(model, default,model.Image);
             var timeStamp = DateTime.Now;
             _logger.LogWarning("[{Timestamp}] اضافه شدن سرویس جدید: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");
@@ -61,7 +61,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            await _serviceAppService.Update(model, default);
+            await _serviceAppService.Update(model, default,model.Image);
             var timeStamp = DateTime.Now;
             _logger.LogWarning("[{Timestamp}] ویرایش سرویس: {Title}", timeStamp, model.Title);
             return RedirectToAction("Index");

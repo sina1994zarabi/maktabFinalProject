@@ -15,15 +15,18 @@ namespace App.Domain.Services.AppServices
     {
 
         private readonly IServiceService _serviceService;
-        
+        private readonly IUtilityService _utilityService;
 
-        public ServiceAppService(IServiceService serviceService)
+        public ServiceAppService(IServiceService serviceService, IUtilityService utilityService)
         {
             _serviceService = serviceService;
+            _utilityService = utilityService;
         }
 
-        public async Task Create(CreateServiceDto createServiceDto, CancellationToken cancellationToken)
+        public async Task Create(CreateServiceDto createServiceDto, CancellationToken cancellationToken,IFormFile Image)
         {
+            var ImagePath = await _utilityService.UploadImage(Image);
+            createServiceDto.ImagePath = ImagePath;
             await _serviceService.Add(createServiceDto,cancellationToken);
         }
 
@@ -42,8 +45,10 @@ namespace App.Domain.Services.AppServices
             return await _serviceService.Get(id,cancellationToken);
         }
 
-        public async Task Update(UpdateServiceDto updateServiceDto, CancellationToken cancellationToken)
+        public async Task Update(UpdateServiceDto updateServiceDto, CancellationToken cancellationToken,IFormFile Image)
         {
+            var ImagePath = await _utilityService.UploadImage(Image);
+            updateServiceDto.ImagePath = ImagePath;
             await _serviceService.Update(updateServiceDto,cancellationToken);
         }
     }

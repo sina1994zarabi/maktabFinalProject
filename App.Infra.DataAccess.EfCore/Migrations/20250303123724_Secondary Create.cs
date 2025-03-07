@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace App.Infra.DataAccess.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class SecondaryCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -459,11 +459,11 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "AccountBalance", "ConcurrencyStamp", "DateRegistered", "Email", "EmailConfirmed", "FullName", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, 0m, "47a7d022-b65b-4970-8680-09f5f5ebcd07", new DateTime(2025, 2, 28, 10, 21, 22, 634, DateTimeKind.Local).AddTicks(7946), "Admin@Gmail.com", true, "AdminFullName", 0, false, null, "ADMIN@GMAIL.COM", "ADMINUSERNAME", "AQAAAAIAAYagAAAAEDAeWHnqoUi+3FLYTz9AAmIFRhurch6znDTCfklaujFheFgzGP/CrUgyXrzCDtW6wg==", null, false, null, "09fbf9dc-3a54-4516-a5c2-34908b6211c3", false, "adminUserName" },
-                    { 2, 0, 0m, "1cfaf7ba-2a78-4e55-a2f8-ad0189608145", new DateTime(2025, 2, 28, 10, 21, 22, 804, DateTimeKind.Local).AddTicks(4113), "Client1@Gmail.com", true, "نام و نام خانوادگی کاربر یک", 0, false, null, "Client1@GMAIL.COM", "Client1USERNAME", "AQAAAAIAAYagAAAAEK4pU5GaaPTB5OU6k1/biBbf+pMlBjnQHJs7SwFl7icB3y8T5Ga2HeH/A46XY/wP7Q==", null, false, null, "fa8f4057-1b1c-4ba4-8443-f39e69e378a9", false, "Client1UserName" },
-                    { 3, 0, 0m, "7d92bd6b-119e-4be7-8651-84ba31b47900", new DateTime(2025, 2, 28, 10, 21, 23, 5, DateTimeKind.Local).AddTicks(7624), "Client2@Gmail.com", true, "نام و نام خانوادگی کاربر دو", 0, false, null, "CLIENT2@GMAIL.COM", "CLIENT2USERNAME", "AQAAAAIAAYagAAAAEFJwnzdrT467QFdDS8urPkj/UobHzxF4jF17s3HX4bGuQWGzs9a2Bn7awRRQ7l6u0g==", null, false, null, "d64738f8-68c8-4cb8-aa7f-703d3f45071e", false, "Client2UserName" },
-                    { 4, 0, 0m, "8b658149-ad76-4169-aa78-a7335ba1d4c2", new DateTime(2025, 2, 28, 10, 21, 23, 201, DateTimeKind.Local).AddTicks(8215), "Expert1@Gmail.com", true, "نام  و نام خانوادگی کارشناس شماره یک", 0, false, null, "EXPERT1@GMAIL.COM", "EXPERT1USERNAME", "AQAAAAIAAYagAAAAEOJp2+phjfkAuSfibMN2MTejyv8kzUVeWXyS4WlFFzR2ugO6UzVF+PFcFrEh67pSVA==", null, false, null, "9f0d7735-7ca5-41a3-9cec-6af1e80ca8ea", false, "Expert1UserName" },
-                    { 5, 0, 0m, "46c4107f-193d-4d89-a7d9-0ea76b7d3c3d", new DateTime(2025, 2, 28, 10, 21, 23, 423, DateTimeKind.Local).AddTicks(2213), "Expert2@Gmail.com", true, "نام  و نام خانوادگی کارشناس دو", 0, false, null, "EXPERT2@GMAIL.COM", "EXPERT2USERNAME", "AQAAAAIAAYagAAAAEC4DiUM46WuKpmU0Hht2uAgrpzA2POS5lspxGt5RMvldcIrFXDbJZek7+AHroY/nsg==", null, false, null, "a9e1aaed-72ec-4a9f-a57a-8c1d11a3f719", false, "Expert2UserName" }
+                    { 1, 0, 0m, "e9e9d084-bac2-4156-9bf5-7e8687ff1cb3", new DateTime(2025, 3, 3, 16, 7, 23, 396, DateTimeKind.Local).AddTicks(1886), "Admin@Gmail.com", true, "AdminFullName", 0, false, null, "ADMIN@GMAIL.COM", "ADMINUSERNAME", "AQAAAAIAAYagAAAAEA+jnAt7bL89UUrBsGYYWYrnMuSwNJ+JyPtpgIg9PEycXYUR+yi7KxW5BboTk3k7Cg==", null, false, null, "f5abff37-ae6d-42c9-a167-061f7a915ddd", false, "adminUserName" },
+                    { 2, 0, 0m, "966e81ab-4714-4cf0-a7e8-1a4faa65387d", new DateTime(2025, 3, 3, 16, 7, 23, 558, DateTimeKind.Local).AddTicks(2878), "Client1@Gmail.com", true, "نام و نام خانوادگی کاربر یک", 0, false, null, "Client1@GMAIL.COM", "Client1USERNAME", "AQAAAAIAAYagAAAAECG9PDW8iDvCjBwhCC07sOmAgnVIfvQQzAgo0G7RfHjatX9hQBNZVEl3Mva0nlVkMw==", null, false, null, "479c39bc-e780-4f31-ade2-693c34ad8075", false, "Client1UserName" },
+                    { 3, 0, 0m, "c78e2d6d-aa1a-4f0d-b040-462790d96f9f", new DateTime(2025, 3, 3, 16, 7, 23, 687, DateTimeKind.Local).AddTicks(8433), "Client2@Gmail.com", true, "نام و نام خانوادگی کاربر دو", 0, false, null, "CLIENT2@GMAIL.COM", "CLIENT2USERNAME", "AQAAAAIAAYagAAAAEJQvhRlBNLmaxoSpRw8KUz75Y/br0SJR3a8CI6Lk6UyhUitmgiBATmwJHPOTQd5cJw==", null, false, null, "5af2cf93-6dda-424b-ba00-094d4677eb7d", false, "Client2UserName" },
+                    { 4, 0, 0m, "602eb7de-d8f9-46ea-81e1-5b212a89714a", new DateTime(2025, 3, 3, 16, 7, 23, 814, DateTimeKind.Local).AddTicks(7825), "Expert1@Gmail.com", true, "نام  و نام خانوادگی کارشناس شماره یک", 0, false, null, "EXPERT1@GMAIL.COM", "EXPERT1USERNAME", "AQAAAAIAAYagAAAAENOf6hc1tcaKl6lKKClwNz+3IwIt+N5ScshzxmHPb4KbCjD00xlgK34L+jYOJdfuvQ==", null, false, null, "5fb6e86a-0a76-4d20-9a9c-e3886239424a", false, "Expert1UserName" },
+                    { 5, 0, 0m, "090c2737-4e5b-43a3-aa98-366ecea24089", new DateTime(2025, 3, 3, 16, 7, 23, 959, DateTimeKind.Local).AddTicks(8833), "Expert2@Gmail.com", true, "نام  و نام خانوادگی کارشناس دو", 0, false, null, "EXPERT2@GMAIL.COM", "EXPERT2USERNAME", "AQAAAAIAAYagAAAAEGxnp1Lphv1VM2xgyt3Mch1u4ZpSTSFkv1cKw0oOZxVg692+baYgOZ1VRyN/XQ824w==", null, false, null, "7104b599-ca34-4496-982a-8e866ee3b48e", false, "Expert2UserName" }
                 });
 
             migrationBuilder.InsertData(
@@ -484,8 +484,11 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                     { 1, "در انتظار دریافت پیشنهادات" },
                     { 2, "در انتظار تایید مشتری" },
                     { 3, "در انتظار تایید کارشناس" },
-                    { 4, "تایید شده" },
-                    { 5, "لغو شده" }
+                    { 4, "در حال انجام" },
+                    { 5, "انجام شده" },
+                    { 6, "پرداخت نشده" },
+                    { 7, "پرداخت شده" },
+                    { 8, "لغو شده" }
                 });
 
             migrationBuilder.InsertData(
@@ -546,8 +549,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "BookingDate", "ClientId", "Description", "IsCompleted", "ServiceId", "Status", "Title" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 3, 2, 10, 21, 23, 608, DateTimeKind.Local).AddTicks(5211), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" },
-                    { 2, new DateTime(2025, 3, 2, 10, 21, 23, 608, DateTimeKind.Local).AddTicks(5240), 2, "روشویی و توشویی با دسترسی به آب و برق", false, 2, 1, "سرویس کارواش با آب" }
+                    { 1, new DateTime(2025, 3, 5, 16, 7, 24, 109, DateTimeKind.Local).AddTicks(873), 1, "نضافت حیاط و راه پله", false, 1, 1, "نظافت و شتشوی آپارتمان" },
+                    { 2, new DateTime(2025, 3, 5, 16, 7, 24, 109, DateTimeKind.Local).AddTicks(900), 2, "روشویی و توشویی با دسترسی به آب و برق", false, 2, 1, "سرویس کارواش با آب" }
                 });
 
             migrationBuilder.InsertData(
@@ -555,8 +558,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "ExpertId", "ServiceRequestId", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 2, 28, 10, 21, 23, 610, DateTimeKind.Local).AddTicks(1365), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 },
-                    { 2, new DateTime(2025, 2, 28, 10, 21, 23, 610, DateTimeKind.Local).AddTicks(1371), "می توانم این کار را برای شما انجام دهم", 2, 2, 2 }
+                    { 1, new DateTime(2025, 3, 3, 16, 7, 24, 110, DateTimeKind.Local).AddTicks(2366), "می توانم این کار را برای شما انجام دهم", 1, 1, 2 },
+                    { 2, new DateTime(2025, 3, 3, 16, 7, 24, 110, DateTimeKind.Local).AddTicks(2374), "می توانم این کار را برای شما انجام دهم", 2, 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -564,8 +567,8 @@ namespace App.Infra.DataAccess.EfCore.Migrations
                 columns: new[] { "Id", "ClientId", "Comment", "IsApproved", "Rating", "ReviewDate", "ServiceOfferingId" },
                 values: new object[,]
                 {
-                    { 1, 1, "خوب بود", false, 4, new DateTime(2025, 2, 28, 10, 21, 23, 609, DateTimeKind.Local).AddTicks(9222), 1 },
-                    { 2, 2, "عالی بود", false, 5, new DateTime(2025, 2, 28, 10, 21, 23, 609, DateTimeKind.Local).AddTicks(9237), 2 }
+                    { 1, 1, "خوب بود", false, 4, new DateTime(2025, 3, 3, 16, 7, 24, 110, DateTimeKind.Local).AddTicks(202), 1 },
+                    { 2, 2, "عالی بود", false, 5, new DateTime(2025, 3, 3, 16, 7, 24, 110, DateTimeKind.Local).AddTicks(222), 2 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,0 +1,189 @@
+﻿@using App.Domain.Core.Enums;
+@using FrameWork;
+@model List<App.Domain.Core.Entities.Services.ServiceRequest>
+
+@{
+	ViewData["Title"] = "Service Requests";
+	Layout = "_Layout";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["ErrorMessage"]
+	</div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+	<div class="alert alert-success">
+		@TempData["SuccessMessage"]
+	</div>
+}
+
+<h2 class="mb-4">مشاهده سفارشات</h2>
+
+@foreach (var request in Model)
+{
+	<div class="container dsd-single-listing-wraps my-3">
+		<div class="row dsd-single-lst-caption">
+			<div class="dsd-single-lst-thumb col-md-4">
+				@if (request.Images == null || request.Images.Count == 0)
+				{
+					<img src="~/ClientPanel/assets/img/logo/banner (2).jpg" class="img-fluid" alt="" />
+				}
+				else
+				{
+					<img src="@request.Images.FirstOrDefault()" class="img-fluid" alt="" />
+				}
+			</div>
+			<div class="col-md-8">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h4 class="card-title">@request.Title</h4>
+						<h5 class="card-subtitle mb-2 text-muted">@request.Service.Title</h5>
+						<p class="card-text"><strong>تاریخ رزرو: </strong> @request.BookingDate.ToPersianString()</p>
+						<p class="card-text"><strong>مشتری: </strong> @request.Client.FullName</p>
+						<p class="card-text"><strong>وضعیت: </strong> @request.Status.ToFarsiStatus()</p>
+						<p class="card-text"><strong>توضیحات: </strong> @request.Description</p>
+						@if (request.Status != StatusEnum.Completed)
+						{
+							<a class="btn btn-danger" asp-action="DeleteServiceRequest" asp-route-id="@request.Id" class="btn btn-danger" onclick="return confirm('مطمینید میخواهید ادامه دهید؟')"> حذف</a>
+							<button class="btn btn-primary me-1" type="button" data-bs-toggle="collapse" data-bs-target="#@(
+					"collapse-" + request.Id
+					)" aria-expanded="false" aria-controls="@("collapse-" + request.Id)">
+								لیست پیشنهادات
+							</button>
+						}
+						@if (request.Status == StatusEnum.Completed)
+						{
+							<a asp-action = "Pay" asp-route-id = "@request.Id" class="btn btn-success btn-sm">
+								پرداخت
+							</a>
+							<a asp-action = "LeaveReview" asp-route-id = "@request.Id" class="btn btn-info btn-sm">
+								ارسال نظر
+							</a>
+						}
+						else if (request.Status == StatusEnum.AwaitingPayment)
+						{
+							<span class = "text-warning">در انتظار پرداخت</span>
+							<form method = "post" asp-action = "ProccessPayment" asp-controller="ServiceRequest" class="d-inline">
+								<input type = "hidden" name = "requestId" value="@request.Id" />
+								<button type = "submit" class = "btn btn-success btn-sm">پرداخت</button>
+							</form>
+						}
+						else if (request.Status == StatusEnum.Paid)
+						{
+							<span class="text-success">پرداخت شده</span>
+						}
+						<div class="collapse mt-3" id="@("collapse-" + request.Id)">
+							<div class="table-responsive">
+								@if (request.ServiceOfferings == null || !request.ServiceOfferings.Any())
+								{
+									<span class="text-muted">بدون پیشنهاد</span>
+								}
+								else
+								{
+									<table class="table table-bordered">
+										<thead class="table-dark">
+											<tr>
+												<th>نام متخصص</th>
+												<th>تاریخ پیشنهادی</th>
+												<th>وضعیت</th>
+												<th>عملیات</th>
+											</tr>
+										</thead>
+										<tbody>
+											@foreach (var offer in request.ServiceOfferings)
+											{
+												<tr>
+													<td>@offer.Expert.FullName</td>
+													<td>@offer.CreatedAt.ToPersianString("dddd, dd MMMM,yyyy")</td>
+													<td>@offer.Status.ToFarsiStatus()</td>
+													<td>
+														@if (offer.Status == StatusEnum.PendingClientConfirmation)
+														{
+															<form method="post" asp-action="SelectServiceOffer">
+																<input type="hidden" name="Id" value="@offer.Id" />
+																<button type="submit" class="btn btn-success btn-sm">انتخاب</button>
+															</form>
+														}
+														else
+														{
+															@if (offer.Status == StatusEnum.InProgress)
+															{
+																<form method="post" asp-action="DoneRequest" asp-route-id="@offer.Id">
+																	<button type="submit" class="btn btn-primary">اتمام کار</button>
+																</form>
+															}
+															@if (offer.Status == StatusEnum.PendingProviderConfirmation)
+															{
+																<form method="post" asp-action="CancelServiceOffering" asp-route-id="@offer.Id">
+																	<button type="submit" class="btn btn-danger">لغو درخواست</button>
+																</form>
+															}
+															<a class="btn btn-warning" asp-action="ViewExpertDetails" asp-route-Id="@offer.ExpertId">مشاهده کارشناس</a>
+														}
+													</td>
+												</tr>
+											}
+										</tbody>
+									</table>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+<!-- Bootstrap Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Styles -->
+<style>
+	.card {
+		margin-bottom: 1.5rem;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.card-body {
+		padding: 1.5rem;
+	}
+
+	.table {
+		margin-bottom: 1.5rem;
+		border-collapse: separate;
+		border-spacing: 0 1rem;
+	}
+
+		.table th, .table td {
+			border-top: none;
+			vertical-align: middle;
+		}
+
+	.table-hover tbody tr:hover {
+		background-color: #f8f9fa;
+	}
+
+	.table .thead-dark th {
+		background-color: #343a40;
+		color: white;
+	}
+
+	.btn-sm {
+		padding: 0.25rem 0.5rem;
+	}
+
+	.btn-success {
+		background-color: #28a745;
+		border-color: #28a745;
+	}
+
+		.btn-success:hover {
+			background-color: #218838;
+			border-color: #1e7e34;
+		}
+</style>

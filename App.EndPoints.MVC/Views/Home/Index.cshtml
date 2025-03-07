@@ -1,43 +1,69 @@
-﻿@*@{
+﻿@model List<App.Domain.Core.Entities.Services.Category>
+
+
+@{
     ViewData["Title"] = "Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
 }
 
 <!-- Hero Section -->
-<div class="jumbotron text-center bg-primary text-white" style="padding: 4rem 2rem;">
-    <h1 class="display-4">راحت انجام می شه</h1>
-    <p class="lead">سرویس مورد نظرت رو پیدا کن</p>
-
-    <!-- Search Bar -->
-    <form class="form-inline justify-content-center mt-4" method="get" action="/Services/Search">
-        <input type="text" name="query" class="form-control form-control-lg mr-2" placeholder="جستجوی سرویس مورد نظر">
-        <button type="submit" class="btn btn-lg btn-light">جستجو</button>
-    </form>
+<div class="hero-section py-5 mb-4" style="background: linear-gradient(rgba(40,167,69,0.8), rgba(33,136,56,0.6));
+                                               background-size: cover;
+                                               background-position: center;
+                                               clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);">
+    <div class="container text-center text-white py-5">
+        <h1 class="display-4 mb-4">راحت انجام می شه</h1>
+        <p class="lead mb-4">جستجوی خدمات مورد نظر</p>
+        <div class="search-container mx-auto" style="max-width: 600px;">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="دنبال چه می گردید؟">
+                <button class="btn btn-lg btn-light" type="button">جستجو</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Categories Section -->
-<div class="container my-5">
-    <h2 class="text-center mb-4">دسته بندی های</h2>
+<div class="container mb-5">
+    <h2 class="text-center mb-3">دسته بندی ها</h2>
     <div class="row">
-        <!-- Sample Category Card -->
-        <div class="col-md-3 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="~/images/categories/plumbing.jpg" alt="Plumbing">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Plumbing</h5>
+        @foreach (var cat in Model)
+        {
+            <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
+                <div class="card category-card small-card text-center">
+                    <div class="card-body p-1">
+                        <img src="@cat.Image" class="img-fluid mb-1 category-logo" alt="@cat.Title" />
+                        <h6 class="card-title m-0">@cat.Title</h6>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Repeat similar cards for other categories -->
-        <div class="col-md-3 mb-4">
-            <div class="card h-100">
-                <img class="card-img-top" src="~/images/categories/cleaning.jpg" alt="Cleaning">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Cleaning</h5>
+        }
+    </div>
+</div>
+
+
+
+<div class="container mb-5">
+    <h2 class="text-center mb-4">خدمات</h2>
+    <div class="card-body">
+        <div class="row">
+            @foreach (var service in ViewBag.Services)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card service-card small-card text-center h-100">
+                        <div class="card-body p-2">
+                            <div class="service-icon mb-2">
+                                <i class="fas fa-broom fa-2x text-success"></i>
+                            </div>
+                            <h5 class="card-title small">@service.Title</h5>
+                            <p class="card-text small">@service.Description</p>
+                            <p class="card-text small">قیمت: @service.Price.ToString("N0") IRR</p>
+                        </div>
+                        <a asp-area= "Client" asp-controller="Dashboard" asp-action="SubmitRequest" asp-route-id="@service.Id" class="btn btn-primary">ایجاد درخواست</a>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-        <!-- Add more category cards as needed -->
     </div>
 </div>
 
@@ -48,29 +74,72 @@
         <a href="/Account/Register" class="btn btn-primary btn-lg mt-3">همین حالا ثبت کنید</a>
     </div>
 </div>
-*@
+
+<style>
+    .small-card {
+        max-width: 120px; /* Adjust width as needed */
+        margin: 0 auto;
+    }
+
+    .category-logo {
+        max-height: 60px;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .category-card .card-body {
+        padding: 4px; /* Reduced padding for a tighter look */
+    }
+
+    .category-card .card-title {
+        font-size: 0.9rem;
+        margin: 0;
+    }
 
 
-@model List<App.Domain.Core.Entities.Services.Category>
+</style>
+
+
+@*
 @{
     ViewData["Title"] = "HomePage";
     Layout = "_Layout";
 }
-<!-- Service Categories -->
+
+<!-- Hero Section with Search -->
+<div class="hero-section py-5 mb-4" style="background: linear-gradient(rgba(40,167,69,0.8), rgba(33,136,56,0.6));
+                                               background-size: cover;
+                                               background-position: center;
+                                               clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);">
+    <div class="container text-center text-white py-5">
+        <h1 class="display-4 mb-4">Find The Perfect Home Service</h1>
+        <p class="lead mb-4">Choose from our wide range of professional home services</p>
+        <div class="search-container mx-auto" style="max-width: 600px;">
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg" placeholder="What service do you need?">
+                <button class="btn btn-primary btn-lg" type="button">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services -->
 <div class="container mb-5">
     <h2 class="text-center mb-4">Our Services</h2>
     <div class="row">
-        @for (int i = 1; i <= 8; i++)
+        @foreach (var service in ViewBag.Services)
         {
-            <div class="col-6 col-md-3 mb-4">
-                <div class="card service-card text-center h-100">
-                    <div class="card-body">
-                        <div class="service-icon mb-3">
-                            <i class="fas fa-tools fa-3x text-primary"></i>
+            <div class="col-6 col-md-3 mb-4 d-flex justify-content-center">
+                <div class="card service-card small-card text-center h-100">
+                    <div class="card-body p-2">
+                        <div class="service-icon mb-2">
+                            <i class="fas fa-tools fa-2x text-primary"></i>
                         </div>
-                        <h5 class="card-title">Service @i</h5>
+                        <h5 class="card-title small">@service.Title</h5>
                         <p class="card-text small">Professional service at your doorstep</p>
-                        <a href="#" class="stretched-link"></a>
+                        <img src="@service.Image" class="img-fluid" alt="@service.Title" />
+                        <p class="card-text small">Price: @service.Price.ToString("N0") IRR</p>
                     </div>
                 </div>
             </div>
@@ -78,12 +147,14 @@
     </div>
 </div>
 
+
+
 <!-- How It Works -->
-<div class="bg-light py-5 mb-5">
-    <div class="container">
-        <h2 class="text-center mb-5">How It Works</h2>
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
+<div class = "bg-light py-5 mb-5">
+    <div class = "container">
+        <h2 class = "text-center mb-5">How It Works</h2>
+        <div class = "row text-center">
+            <div class = "col-md-4 mb-4">
                 <div class="howto-card">
                     <div class="howto-icon mb-3">
                         <i class="fas fa-search-location fa-4x text-primary"></i>
@@ -176,24 +247,4 @@
         </div>
     </div>
 </div>
-
-<!-- App Download Section -->
-<div class="container mb-5">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>Download Our Mobile App</h2>
-            <p class="lead">Get services on the go with our easy to use mobile application.</p>
-            <div class="d-flex mt-4">
-                <a href="#" class="me-3">
-                    <img src="~/images/app-store.png" alt="App Store" height="50">
-                </a>
-                <a href="#">
-                    <img src="~/images/google-play.png" alt="Google Play" height="50">
-                </a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <img src="~/images/app-mockup.png" alt="Mobile App" class="img-fluid">
-        </div>
-    </div>
-</div>
+*@

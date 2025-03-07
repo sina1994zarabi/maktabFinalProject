@@ -1,0 +1,87 @@
+﻿@model List<App.Domain.Core.Entities.Services.ServiceOffering>
+@using App.Domain.Core.Enums;
+
+<div class="container">
+    <h2>مشاهده خدمات انجام شده</h2>
+
+    @foreach (var offering in Model.Where(o => o.Status == StatusEnum.Completed))
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    @offering.ServiceRequest.Title - اتمام کار در
+                    @offering.ServiceRequest.BookingDate.ToString("d")
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>جزییات</h5>
+                        <p>@offering.ServiceRequest.Description</p>
+                        <p>کارشناس: @offering.Expert?.FullName</p>
+                        <p>جزییات پیشنهاد: @offering.Description</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="review-form">
+                            <h5>ارسال نظر</h5>
+
+                            <form asp-action="SubmitReview" method="post">
+                                <input type="hidden" name="ServiceOfferingId" value="@offering.Id" />
+
+                                <div class="form-group">
+                                    <label>امتیاز</label>
+                                    <select name="Rating" class="form-control" required>
+                                        <option value="">انتخاب</option>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <option value="@i">@i Star@(i > 1 ? "s" : "")</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>کامنت</label>
+                                    <textarea name="Comment" class="form-control" rows="3"
+                                              maxlength="500" required></textarea>
+                                    <small class="text-muted">Max 500 characters</small>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    ارسال نظر
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (!Model.Any(o => o.Status == StatusEnum.Completed))
+    {
+        <div class="alert alert-info">
+            سرویس انجام شده ای برای شما وجود ندارد
+        </div>
+    }
+</div>
+
+<style>
+    .rating {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .review-form {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 0.25rem;
+        border: 1px solid #dee2e6;
+    }
+
+    .existing-review {
+        border-top: 1px solid #dee2e6;
+        padding-top: 1.5rem;
+    }
+</style>

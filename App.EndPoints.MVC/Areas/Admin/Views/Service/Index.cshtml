@@ -18,6 +18,7 @@
             <th>توضیحات</th>
             <th>قیمت</th>
             <th>دسته بندی</th>
+            <th>عکس</th>
             <th>عملیات</th>
         </tr>
     </thead>
@@ -29,6 +30,7 @@
                 <td>@service.Description</td>
                 <td>@service.Price</td>
                 <td>@service.Subcategory.Title</td>
+                <td><img src="@service.Image" alt="Category Image" class="img-fluid" style="max-width:100px; height:100px;"></td>
                 <td>
                     <a asp-action = "Edit" asp-route-id = "@service.Id"  class="btn btn-warning"> ویرایش </a>
                     <a asp-action = "Details" asp-route-id = "@service.Id" class="btn btn-info"> مشاهده جزییات </a>

@@ -30,7 +30,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
 					Description = "نضافت حیاط و راه پله",
 					ServiceId = 1,
 					ClientId = 1,
-					Status = StatusEnum.AwaitingOfferReveives,
+					Status = StatusEnum.AwaitingOffers,
 					BookingDate = DateTime.Now.AddDays(2),
 				},
                 new ServiceRequest
@@ -40,7 +40,7 @@ namespace App.Infra.DataAccess.EfCore.Configurations
                     Description = "روشویی و توشویی با دسترسی به آب و برق",
                     ServiceId = 2,
                     ClientId = 2,
-                    Status = StatusEnum.AwaitingOfferReveives,
+                    Status = StatusEnum.AwaitingOffers,
                     BookingDate = DateTime.Now.AddDays(2),
                 }
                 );

@@ -26,7 +26,8 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 				Title = serviceRequest.Title,
 				Description = serviceRequest.Description,
 				ServiceId = serviceRequest.ServiceId,
-				ClientId  = serviceRequest.ClientId
+				ClientId  = serviceRequest.ClientId,
+				BookingDate = serviceRequest.BookingDate
 			};
 			await _context.ServiceRequests.AddAsync(newServiceRequest,cancellationToken);
 			await _context.SaveChangesAsync(cancellationToken);
@@ -35,7 +36,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 		public async Task ChangeStatus(StatusEnum status, int id, CancellationToken cancellationToken)
 		{
 			var serviceRequest = await _context.ServiceRequests.FindAsync(id,cancellationToken);
+			var serviceOffering = await _context.ServiceOfferings.FirstOrDefaultAsync(x => x.ServiceRequestId == id,cancellationToken);
 			serviceRequest.Status = status;
+			serviceOffering.Status = status;
 			await _context.SaveChangesAsync(cancellationToken);
 		}
 
@@ -53,9 +56,11 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 		{
 			return await _context.ServiceRequests
 								 .Include(sr => sr.Client)
+										.ThenInclude(c => c.AppUser)
+								 .Include(sr => sr.Service)
 								 .Include(sr => sr.Images)
 								 .Include(sr => sr.ServiceOfferings)
-								 .ThenInclude(so => so.Expert)
+									    .ThenInclude(so => so.Expert)
 								 .FirstOrDefaultAsync(x => x.Id == id,cancellationToken);
 		}
 
@@ -63,7 +68,9 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 		{
 			return await _context.ServiceRequests
 								  .Include(x => x.Client)
+								  .Include(x => x.Service)
 								  .Include(x => x.ServiceOfferings)
+											.ThenInclude(x => x.Expert)
 								  .Include(x => x.Images)
 								  .ToListAsync(cancellationToken);
 		}

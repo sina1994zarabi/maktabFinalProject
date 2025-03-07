@@ -6,12 +6,15 @@ namespace FrameWork
     {
         private static readonly Dictionary<StatusEnum, string> FarsiEqui = new Dictionary<StatusEnum, string>
         {
-            { StatusEnum.AwaitingOfferReveives, "در انتظار دریافت پیشنهاد" },
+            { StatusEnum.AwaitingOffers, "در انتظار دریافت پیشنهاد" },
             { StatusEnum.PendingClientConfirmation, "منتظر تایید مشتری" },
             { StatusEnum.PendingProviderConfirmation, "منتظر تایید کارشناس" },
-            { StatusEnum.Completed, "تایید شده" },
-            { StatusEnum.Cancelled, "لغو شده" }
-    };
+            { StatusEnum.Completed, "انجام شده" },
+            { StatusEnum.Cancelled, "لغو شده" },
+            { StatusEnum.AwaitingPayment, "پرداخت نشده" },
+            { StatusEnum.Paid, "پرداخت شده" },
+            { StatusEnum.InProgress, "در حال انجام" }
+        };
 
         public static string ToFarsiStatus(this StatusEnum status)
         {

@@ -1,0 +1,35 @@
+﻿@model List<App.Domain.Core.Entities.Services.Service>
+
+@{
+    ViewData["Title"] = "View Services";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="services" class="card shadow-sm mb-4">
+    <div class="card-header bg-light">
+        <h5>لیست خدمات</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach (var service in Model)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card service-card small-card text-center h-100">
+                        <div class="card-body p-2">
+                            <img src="@service.Image" height="100" width="100">
+                            <div class="service-icon mb-2">
+                                <i class="fas fa-broom fa-2x text-success"></i>
+                            </div>
+                            <h5 class="card-title small">@service.Title</h5>
+                            <p class="card-text small">@service.Description</p>
+                            <p class="card-text small">قیمت: @service.Price.ToString("N0") IRR</p>
+                        </div>
+                        <a asp-action="SubmitRequest" asp-route-id="@service.Id" class="btn btn-primary">ایجاد درخواست</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<a asp-action="Index" class="btn btn-secondary">بازگشت</a>
