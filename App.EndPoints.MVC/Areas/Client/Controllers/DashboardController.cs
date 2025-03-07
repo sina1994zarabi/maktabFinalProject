@@ -208,7 +208,7 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
             ViewBag.ServiceRequestId = request.Id;
             ViewBag.ServiceOfferingId = createReviewDto.ServiceOfferingId;
             ViewBag.ClientId = createReviewDto.ClientId;
-            ViewBag.ExpertName = request.ServiceOfferings.FirstOrDefault().Expert.FullName;
+            
 
             return View(createReviewDto);
         }

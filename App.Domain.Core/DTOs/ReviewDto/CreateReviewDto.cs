@@ -8,7 +8,6 @@ namespace App.Domain.Core.DTOs.ReviewDto
 {
     public class CreateReviewDto
     {
-        public int Id { get; set; }
         public string Comment { get; set; }
         public int ClientId { get; set; }
         public int ServiceOfferingId { get; set; }
