@@ -102,8 +102,8 @@ namespace App.Domain.Services.AppServices
             {
                 throw new InvalidOperationException("موجودی کافی نیست.");
             }
-            await _clientService.ChangeAccountBalance(client.Id, (-1) * servicePrice, cancellationToken);      
-            await UpdateServiceOfferingStatus(serviceRequestId,StatusEnum.AwaitingPayment,cancellationToken);
+            await _clientService.ChangeAccountBalance(client.Id, (-1) * servicePrice, cancellationToken);
+            //await UpdateServiceOfferingStatus(serviceRequestId,StatusEnum.Paid,cancellationToken);
         }
 
         public async Task SelectServiceOffering(int serviceOfferingId, CancellationToken cancellationToken)

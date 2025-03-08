@@ -19,7 +19,7 @@
                 {
                     <img src="@ViewBag.CurrentUser.ProfilePicture" alt="Avatar" class="rounded-circle" style="width: 100px;" />
                 }
-                else if (@ViewBag.CurrentUser.ProfilePicture.Gender == Gender.male)
+                else if (@ViewBag.CurrentUser.Gender == Gender.male)
                 {
                     <img src="~/Uploads/maleProfilePicture.jpg" alt="Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" />
                 }

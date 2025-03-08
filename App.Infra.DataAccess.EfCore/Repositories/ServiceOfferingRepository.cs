@@ -45,7 +45,8 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 
 		public async Task<ServiceOffering> Get(int id,CancellationToken cancellationToken)
 		{
-			return await _context.ServiceOfferings.FindAsync(id,cancellationToken);
+			return await _context.ServiceOfferings.
+						FirstOrDefaultAsync(x => x.Id == id,cancellationToken);
 		}
 
 		public async Task<List<ServiceOffering>> GetAll(CancellationToken cancellationToken)
