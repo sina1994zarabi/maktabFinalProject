@@ -141,31 +141,6 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
             return View();
         }
         
-        public async Task<IActionResult> AddServiceRequest()
-        {
-            string cachKey = "Services";
-            if (!_memoryCache.TryGetValue(cachKey, out List<Service> services))
-            {
-                services = await _serviceAppService.GetAll(default);
-                _memoryCache.Set(cachKey, services, TimeSpan.FromMinutes(30));
-            }
-            ViewBag.Services = services;
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddServiceRequest(CreateServiceRequestDto model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            var user = await _userManager.GetUserAsync(User);
-            var client = await _clientAppService.GetClientByUserId(user.Id, default);
-            model.ClientId = client.Id;
-            await _clientAppService.SubmitServiceRequest(model, default);
-            TempData["Message"] = "سفارش با موفقیت ثبت شد";
-            return RedirectToAction("AddServiceRequest");
-        }
-
         
         public async Task<IActionResult> DeleteServiceRequest(int Id)
         {
