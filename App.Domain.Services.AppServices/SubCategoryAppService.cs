@@ -39,6 +39,12 @@ namespace App.Domain.Services.AppServices
             return await _subCategoryService.GetAll(cancellationToken);
         }
 
+        public async Task<List<SubCategory>> GetAllSubCategoriesByCategoryId(int categoryId, CancellationToken cancellationToken)
+        {
+            var allSubs = await _subCategoryService.GetAll(cancellationToken);
+            return allSubs.Where(x => x.CategoryId == categoryId).ToList();
+        }
+
         public async Task<SubCategory> GetById(int id, CancellationToken cancellationToken)
         {
             return await _subCategoryService.Get(id,cancellationToken);

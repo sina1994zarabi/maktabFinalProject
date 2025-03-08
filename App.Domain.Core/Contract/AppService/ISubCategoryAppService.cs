@@ -15,6 +15,7 @@ namespace App.Domain.Core.Contract.AppService
         Task<SubCategory> GetById(int id, CancellationToken cancellationToken);
         Task<GetSubCategoryDto> GetSubCategoryDtoById(int id, CancellationToken cancellationToken);
         Task<List<SubCategory>> GetAll(CancellationToken cancellationToken);
+        Task<List<SubCategory>> GetAllSubCategoriesByCategoryId(int categoryId,CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(UpdateSubCategoryDto updateSubCategoryDto, CancellationToken cancellationToken,IFormFile image);
     }
