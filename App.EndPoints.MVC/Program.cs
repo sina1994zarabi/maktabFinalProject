@@ -14,6 +14,8 @@ using Serilog.Events;
 using System.Drawing;
 using Serilog.Sinks.MSSqlServer;
 using App.EndPoints.MVC.MiddleWare;
+using Microsoft.Extensions.DependencyInjection;
+using App.Domain.Infra.Repos.Dapper.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,7 +63,16 @@ builder.Host.ConfigureLogging(loggingBuilder =>
 #endregion
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); 
+builder.Services.AddControllersWithViews();
+
+#region DapperDependencies
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddScoped<ICityRepository>(provider => new CityDapperRepository(connectionString));
+builder.Services.AddScoped<ICategoryRepository>(provider => new CategoryDapperRepository(connectionString));
+builder.Services.AddScoped<ISubCategoryRepository>(provider => new SubCategoryDapperRepository(connectionString));
+builder.Services.AddScoped<IServiceRepository>(provider => new ServiceDapperRepository(connectionString));
+#endregion
+
 
 builder.Services.AddMemoryCache();
 
@@ -88,7 +99,7 @@ builder.Services.AddScoped<IServiceOfferingRepository, ServiceOfferingRepository
 builder.Services.AddScoped<IServiceOfferingService, ServiceOfferingService>();
 
 
-builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+//builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceAppService, ServiceAppService>();
 
