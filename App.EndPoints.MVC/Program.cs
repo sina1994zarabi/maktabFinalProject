@@ -107,7 +107,7 @@ builder.Services.AddScoped<IServiceAppService, ServiceAppService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 
-builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
+//builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<ISubCategoryAppService, SubCategoryAppService>();
 
