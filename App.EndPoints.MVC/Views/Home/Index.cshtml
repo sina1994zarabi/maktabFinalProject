@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-
+ 
 <!-- Categories Section -->
 <div class="container mb-5">
     <h2 class="text-center mb-3">دسته بندی ها</h2>
@@ -32,8 +32,8 @@
             <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
                 <div class="card category-card small-card text-center">
                     <div class="card-body p-1">
-                        <img src="@cat.Image" class="img-fluid mb-1 category-logo" alt="@cat.Title" />
-                        <h6 class="card-title m-0">@cat.Title</h6>
+                        <img src = "@cat.Image" class = "img-fluid mb-1 category-logo" alt = "@cat.Title" />
+                        <h6 class = "card-title m-0">@cat.Title</h6>
                     </div>
                 </div>
             </div>
@@ -41,31 +41,6 @@
     </div>
 </div>
 
-
-
-<div class="container mb-5">
-    <h2 class="text-center mb-4">خدمات</h2>
-    <div class="card-body">
-        <div class="row">
-            @foreach (var service in ViewBag.Services)
-            {
-                <div class="col-md-4 mb-3">
-                    <div class="card service-card small-card text-center h-100">
-                        <div class="card-body p-2">
-                            <div class="service-icon mb-2">
-                                <i class="fas fa-broom fa-2x text-success"></i>
-                            </div>
-                            <h5 class="card-title small">@service.Title</h5>
-                            <p class="card-text small">@service.Description</p>
-                            <p class="card-text small">قیمت: @service.Price.ToString("N0") IRR</p>
-                        </div>
-                        <a asp-area= "Client" asp-controller="Dashboard" asp-action="SubmitRequest" asp-route-id="@service.Id" class="btn btn-primary">ایجاد درخواست</a>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
 
 <!-- Call-to-Action Section -->
 <div class="bg-light py-5">

@@ -12,24 +12,27 @@ namespace App.EndPoints.MVC.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly ICategoryAppService _categoryAppService;
+		private readonly ISubCategoryAppService _subCategoryAppService;
 		private readonly IServiceAppService _serviceAppService;
 		private readonly IMemoryCache _memoryCache;
 
 		public HomeController(ILogger<HomeController> logger,
             ICategoryAppService categoryAppService,
+            ISubCategoryAppService subCategoryAppService,
             IServiceAppService serviceAppService,
 			IMemoryCache memoryCache)
         {
             _logger = logger;
             _categoryAppService = categoryAppService;
             _serviceAppService = serviceAppService;
+            _subCategoryAppService = subCategoryAppService;
 			_memoryCache = memoryCache;
         }
 
         public async Task<IActionResult> Index()
 		{
-            string servicesCacheKey = "ServicesCacheKey";
             string categoriesCacheKey = "CategoriesCacheKey";
+            string servicesCacheKey = "ServicesCacheKey";
 
             if (!_memoryCache.TryGetValue(servicesCacheKey, out List<Service> services))
             {
@@ -49,6 +52,41 @@ namespace App.EndPoints.MVC.Controllers
 
             return View(model);
         }
+
+
+        public async Task<IActionResult> Categories()
+        {
+            string categoriesCacheKey = "CategoriesCacheKey";
+            if (!_memoryCache.TryGetValue(categoriesCacheKey, out List<Category> categories))
+            {
+                categories = await _categoryAppService.GetAll(default);
+                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(10));
+                _memoryCache.Set(categoriesCacheKey, categories, cacheEntryOptions);
+            }
+            var model = categories;
+            return View(model);
+        }
+
+        public async Task<IActionResult> SubCategories(int Id)
+        {
+            var allSubs = await _subCategoryAppService.GetAll(default);
+            var model = allSubs.Where(x => x.CategoryId == Id).ToList();
+            return View(model);
+        }
+
+        public async Task<IActionResult> Services(int Id)
+        {
+            var allServices = await _serviceAppService.GetAll(default);
+            var model = allServices.Where(x => x.SubCategoryId == Id).ToList();
+            return View(model);
+        }
+
+        public async Task<IActionResult> ServiceDetails(int Id)
+        {
+            var model = await _serviceAppService.GetById(Id, default);
+            return View(model);
+        }
+
 
 		public IActionResult Privacy()
 		{

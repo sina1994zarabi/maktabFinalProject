@@ -1,0 +1,40 @@
+﻿@model List<App.Domain.Core.Entities.Services.Category>
+
+
+@{
+    ViewData["Title"] = "Services";
+    Layout = "_Layout";
+}
+
+
+<section class="gray py-5">
+    <div class="container">
+        <!-- Item Wrap Start -->
+        <div class="row">
+            @foreach (var cat in Model)
+            {
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                    <a asp-action= "SubCategories" asp-route-id = "@cat.Id" class="d-block text-center m-auto">
+                        <div class="Goodup-grid-wrap">
+                            <div class="Goodup-grid-upper">
+                                <div class="Goodup-pos ab-right"></div>
+                                <div class="Goodup-grid-thumb">
+                                    <img src="@cat.Image" class="img-fluid">
+                                </div>
+                                <div class="Goodup-rating overlay"></div>
+                            </div>
+                            <div class="Goodup-grid-fl-wrap">
+                                <div class="Goodup-caption px-3 p-4">
+                                    <h4 class="mb-0 ft-medium medium mb-0">
+                                        @cat.Title
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <!-- Item Wrap End -->
+    </div>
+</section>

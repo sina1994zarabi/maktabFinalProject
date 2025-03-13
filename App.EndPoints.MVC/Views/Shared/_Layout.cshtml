@@ -1,71 +1,22 @@
-﻿@*<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HomeService</title>
-    <link rel = "stylesheet" href = "~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel = "stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel = "stylesheet" href="~/css/rtl.css" asp-append-version="true" />
-    <link rel = "stylesheet" href="~/App.EndPoints.MVC.styles.css" asp-append-version="true" />
-    @RenderSection("Styles",required:false)
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">خدمات منازل</a>
-                <button class="navbar-toggler" type = "button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Account" asp-controller="Account" asp-action="Login">ورود | ثبت نام </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+﻿<!DOCTYPE html>
+<html lang="fa">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            <p>© تمامی حقوق محفوظ است</p>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
-*@
-
-
-
-﻿@*<!DOCTYPE html>
-<html lang="fa" dir="rtl">
 <head>
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Goodup - قالب ثبت آگهی و دایرکتوری HTML</title>
+    <title>@ViewData["Title"]</title>
 
     <!-- Favicon -->
-    <link rel = "shortcut icon" type = "image/x-icon" href = "~/HomePage/assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/ClientPanel/images.png">
 
     <!-- Custom CSS -->
-    <link href = "~/HomePage/assets/css/styles.css" rel = "stylesheet">
-</head>
+    <link href="~/ClientPanel/assets/css/styles.css" rel="stylesheet">
 
+    <link type="text/css" rel="stylesheet" href="~/ClientPanel/calendar-dist/jalalidatepicker.min.css" />
+    <script type="text/javascript" src="~/ClientPanel/calendar-dist/jalalidatepicker.min.js"></script>
+</head>
 
 <body dir="rtl">
 
@@ -88,7 +39,7 @@
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="#">
-                            <img src="~/HomePage/assets/img/images.png" class="logo" alt="" style="width: 50px; height: auto;" />
+                            <img src = "~/ClientPanel//images.png" class="logo" alt="" style="width: 50px; height: auto;" />
                         </a>
 
                     </div>
@@ -96,28 +47,14 @@
                         <ul class="nav-menu">
 
                             <li class="active">
-                                <a href="javascript:void(0);"> صفحه اصلی </a>
+                                <a href="javascript:void(0);">صفحه اصلی</a>
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a >صفحه اصلی</a></li>
-                                    <li><a >  دسته بندی</a></li>
-                                    <li><a > خدمات</a></li>
+                                    <li><a asp-action = "Index">صفحه اصلی</a></li>
+                                    <li><a asp-action = "Categories"> دسته بندی ها</a></li>
+                                    <li><a asp-action = "Service"> خدمات</a></li>
                                 </ul>
                             </li>
-
-
-
-                            <ul class="navbar-nav me-auto" style="display: flex; flex-direction: row;">
-                                <li class="nav-item" style="margin-right: 1rem;">
-                                    <a asp-area="Account" asp-controller="Account" asp-action="Login" class="nav-link text-dark"  style="color: #000;">
-                                        <i class="fas fa-sign-in-alt me-2"></i> ورود
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="Account" asp-controller="Account" asp-action="Register" class="nav-link text-dark" style="color: #000;">
-                                        <i class="fas fa-user-plus me-2"></i> ثبت نام
-                                    </a>
-                                </li>
-                            </ul>
+                            <partial name="_LoginPartial" />
                         </ul>
 
                     </div>
@@ -125,244 +62,58 @@
             </div>
         </div>
     </div>
-
-    <div class="container mt-4">
-        <main role="main" class="pb-4">
-            @RenderBody()
-        </main>
-    </div>
-
+    <!-- End Navigation -->
+    <div class="clearfix"></div>
+    <!-- ============================================================== -->
+    <!-- Top header  -->
+    <!-- ============================================================== -->
+    @RenderBody();
+    <!-- ======================= All Types Listing ======================== -->
     <!-- ============================ Footer Start ================================== -->
     <footer class="light-footer skin-light-footer style-2">
-        <div class="footer-middle">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="footer_widget">
-                            <img src="assets/img/logo.jpg" class="img-footer small mb-2" alt="" />
-
-                            <div class="address mt-2">
-                                
-                            </div>
-                            <div class="address mt-3">
-                                09913466961<br>support@Goodup.com
-                            </div>
-                            <div class="address mt-2">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><a href="#" class="theme-cl"><i class="lni lni-facebook-filled"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="theme-cl"><i class="lni lni-twitter-filled"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="theme-cl"><i class="lni lni-youtube"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="theme-cl"><i class="lni lni-instagram-filled"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="theme-cl"><i class="lni lni-linkedin-original"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                        <div class="footer_widget">
-                            <h4 class="widget_title"> راهنمای سایت</h4>
-                            <ul class="footer-menu">
-                                <li><a href="#"> لیست آگهی</a></li>
-                                <li><a href="#">لیست آگهی دهنده</a></li>
-                                <li><a href="#">افزودن آگهی</a></li>
-                                <li><a href="#">تماس با ما</a></li>
-                                <li><a href="#">پیشخوان</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                        <div class="footer_widget">
-                            <h4 class="widget_title">حساب کاربری</h4>
-                            <ul class="footer-menu">
-                                <li><a href="#">سایر دسته بندی</a></li>
-                                <li><a href="#">لینک پرداخت</a></li>
-                                <li><a href="#">لیست علاقه مندی</a></li>
-                                <li><a href="#">تنظیمات</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                        <div class="footer_widget">
-                            <h4 class="widget_title">درباره شرکت</h4>
-                            <ul class="footer-menu">
-                                <li><a href="#">درباره ما</a></li>
-                                <li><a href="#">وظایف ما</a></li>
-                                <li><a href="#">کارشناسان</a></li>
-                                <li><a href="#">پکیج ها</a></li>
-                                <li><a href="#">پروفایل من</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                        <div class="footer_widget">
-                            <h4 class="widget_title">لینک های مفید</h4>
-                            <ul class="footer-menu">
-                                <li><a href="#">نقشه سایت</a></li>
-                                <li><a href="#">حریم شخصی</a></li>
-                                <li><a href="#">تماس با ما</a></li>
-                                <li><a href="#">سوالات متداول</a></li>
-                                <li><a href="#">قوانین سایت</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <div class="footer-bottom br-top">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 col-md-12 text-center">
-                        <p class="mb-0">© 2022 Goodup ارائه شده در سایت <a href="https://rtl-theme.com/">راست چین</a></p>
+                        <p class="mb-0">© خدمات منزل</p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+    <!-- ============================ Footer End ================================== -->
 
+
+    <a id="tops-button" class="top-scroll" title="Back to top" href="#">
+        <i class="ti-arrow-up"></i>
+    </a>
+
+   
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="~/HomePage/assets/js/jquery.min.js"></script>
-    <script src="~/HomePage/assets/js/popper.min.js"></script>
-    <script src="~/HomePage/assets/js/bootstrap.min.js"></script>
-    <script src="~/HomePage/assets/js/slick.js"></script>
-    <script src="~/HomePage/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/HomePage/assets/js/dropzone.js"></script>
-    <script src="~/HomePage/assets/js/counterup.js"></script>
-    <script src="~/HomePage/assets/js/lightbox.js"></script>
-    <script src="~/HomePage/assets/js/moment.min.js"></script>
-    <script src="~/HomePage/assets/js/daterangepicker.js"></script>
-    <script src="~/HomePage/assets/js/lightbox.js"></script>
-    <script src="~/HomePage/assets/js/jQuery.style.switcher.js"></script>
-    <script src="~/HomePage/assets/js/custom.js"></script>
+    <script src="~/ClientPanel/assets/js/jquery.min.js"></script>
+    <script src="~/ClientPanel/assets/js/popper.min.js"></script>
+    <script src="~/ClientPanel/assets/js/bootstrap.min.js"></script>
+    <script src="~/ClientPanel/assets/js/slick.js"></script>
+    <script src="~/ClientPanel/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/ClientPanel/assets/js/dropzone.js"></script>
+    <script src="~/ClientPanel/assets/js/counterup.js"></script>
+    <script src="~/ClientPanel/assets/js/lightbox.js"></script>
+    <script src="~/ClientPanel/assets/js/moment.min.js"></script>
+    <script src="~/ClientPanel/assets/js/daterangepicker.js"></script>
+    <script src="~/ClientPanel/assets/js/lightbox.js"></script>
+    <script src="~/ClientPanel/assets/js/jQuery.style.switcher.js"></script>
+    <script src="~/ClientPanel/assets/js/custom.js"></script>
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
-    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 
-</html>*@
 
-
-@*Third LayOut*@
-
-
-
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - YourServiceMarketplace</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-</head>
-<body>
-    <!-- Top Navigation Bar -->
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-0">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/HomePage/assets/img/images.png" alt="Logo" height="100" />
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller = "Home" asp-action="Index">خانه</a>
-                        </li>
-                        <!-- Use View Component for Categories -->
-                        @await Component.InvokeAsync("CategoryMenu")
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller = "Services" asp-action="Index">خدمات</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller = "About" asp-action="Index">درباره ما</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller = "Contact" asp-action="Index">ارتباط</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex">
-                        <a class="btn btn-outline-primary me-2" asp-area = "Account" asp-controller = "Account" asp-action="Login">ورود </a>
-                        <a class="btn btn-primary" asp-area="Account" asp-controller="Account" asp-action="Register">ثبت نام</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main role="main">
-        @RenderBody()
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-top pt-5 bg-dark text-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <h5>Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50">About Us</a></li>
-                        <li><a href="#" class="text-white-50">Our Team</a></li>
-                        <li><a href="#" class="text-white-50">Careers</a></li>
-                        <li><a href="#" class="text-white-50">Press</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h5>Services</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50">Cleaning</a></li>
-                        <li><a href="#" class="text-white-50">Plumbing</a></li>
-                        <li><a href="#" class="text-white-50">Electrical</a></li>
-                        <li><a href="#" class="text-white-50">Home Repairs</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h5>Support</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50">Help Center</a></li>
-                        <li><a href="#" class="text-white-50">Contact Us</a></li>
-                        <li><a href="#" class="text-white-50">FAQs</a></li>
-                        <li><a href="#" class="text-white-50">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h5>Connect With Us</h5>
-                    <div class="d-flex mb-3">
-                        <a href="#" class="me-2 text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#" class="me-2 text-white"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="me-2 text-white"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    </div>
-                    <h5>Newsletter</h5>
-                    <div class="input-group">
-                        <input type="email" class="form-control" placeholder="Your email">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center py-3 mt-4 border-top border-secondary">
-                <p class="mb-0">&copy; @DateTime.Now.Year YourServiceMarketplace. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+@await RenderSectionAsync("Scripts", required: false)
 </html>

@@ -100,79 +100,7 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ViewServices()
-        {
-            string cachKey = "Services";
-            if(!_memoryCache.TryGetValue(cachKey,out List<Service> model))
-            {
-                model = await _serviceAppService.GetAll(default);
-                _memoryCache.Set(cachKey,model,TimeSpan.FromMinutes(30));
-            }
-            return View(model);
-        }
 
-        public async Task<IActionResult> ViewServiceRequests()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            var client = await _clientAppService.GetClientByUserId(user.Id, default);
-            //string cachKey = "ServiceRequests";
-            //if (!_memoryCache.TryGetValue(cachKey, out List<ServiceRequest> model))
-            //{
-                  var model = await _clientAppService.GetServiceRequests(client.Id,default);
-                //_memoryCache.Set(cachKey, model, TimeSpan.FromMinutes(30));
-            //}
-            return View(model);
-        }
-
-        public async Task<IActionResult> SubmitRequest(int id)
-        {
-           var service = await _serviceAppService.GetById(id,default);
-           ViewBag.Service = service;
-           return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> SubmitRequest(CreateServiceRequestDto model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            await _clientAppService.SubmitServiceRequest(model,default);
-            TempData["Message"] = "سفارش با موفقیت ثبت شد";
-            return View();
-        }
-        
-        public async Task<IActionResult> AddServiceRequest()
-        {
-            string cachKey = "Services";
-            if (!_memoryCache.TryGetValue(cachKey, out List<Service> services))
-            {
-                services = await _serviceAppService.GetAll(default);
-                _memoryCache.Set(cachKey, services, TimeSpan.FromMinutes(30));
-            }
-            ViewBag.Services = services;
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddServiceRequest(CreateServiceRequestDto model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            var user = await _userManager.GetUserAsync(User);
-            var client = await _clientAppService.GetClientByUserId(user.Id, default);
-            model.ClientId = client.Id;
-            await _clientAppService.SubmitServiceRequest(model, default);
-            TempData["Message"] = "سفارش با موفقیت ثبت شد";
-            return RedirectToAction("AddServiceRequest");
-        }
-
-        
-        public async Task<IActionResult> DeleteServiceRequest(int Id)
-        {
-            await _requestAppService.Delete(Id, default);
-            TempData["SuccessMessage"] = "سفارش با موفقیت حذف شد";
-            return RedirectToAction("ViewServiceRequests");
-        }
 
         public async Task<IActionResult> ViewServiceOfferings(int Id)
         {

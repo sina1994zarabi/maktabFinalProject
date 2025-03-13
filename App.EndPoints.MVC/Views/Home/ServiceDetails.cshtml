@@ -1,0 +1,48 @@
+﻿@model App.Domain.Core.Entities.Services.Service
+
+@{
+    ViewData["Title"] = "Service Details";
+    Layout = "_Layout";
+}
+
+
+
+<section class="gray py-5 position-relative">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="bg-white rounded shadow-sm p-4">
+                    <h4 class="text-primary fw-bold mb-3">جزئیات خدمات</h4>
+                    <div class="text-center mb-4">
+                        @if (!string.IsNullOrWhiteSpace(Model.Image))
+                        {
+                            <img src="@Model.Image" class="img-fluid rounded" alt="@Model.Title" width="400" height="400" />
+                        }
+                        else
+                        {
+                            <p class="text-muted">تصویری موجود نیست</p>
+                        }
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>عنوان:</strong> @Model.Title</li>
+                        <li class="list-group-item"><strong>دسته‌بندی:</strong> @Model.Subcategory.Title</li>
+                        <li class="list-group-item"><strong>توضیحات:</strong> @Model.Description</li>
+                        <li class="list-group-item"><strong>قیمت پایه:</strong> <span class="text-success">@Model.Price.ToString("N0") تومان</span></li>
+                    </ul>
+                    @if (User.IsInRole("Client"))
+                    {
+                        <div class="p-3">
+                            <a asp-area="Client" asp-controller= "ServiceRequest" asp-action = "SubmitRequest" asp-route-id="@Model.Id" class="btn btn-md  theme-bg text-light rounded ft-medium">ثبت درخواست</a>
+                        </div>
+                    }
+                    else if (User.IsInRole("Expert"))
+                    {
+                        <div class="text-center mt-4">
+                            <a asp-area = "Expert" asp-controller = "ExpertSkill" asp-action = "AddSkill" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">افزودن به مهارت ها</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
