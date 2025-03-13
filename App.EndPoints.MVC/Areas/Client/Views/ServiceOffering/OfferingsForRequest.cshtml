@@ -1,0 +1,43 @@
+﻿@model List<App.Domain.Core.Entities.Services.ServiceOffering>
+
+@{
+    ViewData["Title"] = "Offerings For Request";
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <h2>پیشنهادات برای سفارش #@Model.First().ServiceRequestId</h2>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>توضیحات</th>
+                <th>کارشناس</th>
+                <th>عکس</th>
+                <th>مشاهده پروفایل کارشناس</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var offering in Model)
+            {
+                <tr>
+                    <td>@offering.Description</td>
+                    <td>@offering.Expert.FullName</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(offering.Expert.AppUser.ProfilePicture))
+                        {
+                            <img src = "@offering.Expert.AppUser.ProfilePicture" alt = "@offering.Expert.FullName's Profile Picture" class = "img-thumbnail" style = "width: 50px; height: 50px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <img src="/images/default-profile.png" alt="No Profile Picture" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover;" />
+                        }
+                    </td>
+                    <td>
+                        <a asp-area = "Expert" asp-controller = "Dashboard" asp-action = "ExpertProfileSummary" class = "btn btn-info">مشاهده کارشناس</a>
+                        <a asp-controller = "ServiceOffering" asp-action = "SelectOffer"  asp-route-id = "@offering.Id" class = "btn btn-Success">انتخاب</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

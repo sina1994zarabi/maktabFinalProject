@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 
 <head>
     <!-- Meta Data -->
@@ -9,45 +9,35 @@
     <title>@ViewData["Title"]</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/logo/1716061360566.png">
-    <link href="~/assets/css/styles.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="~/calendar-dist/jalalidatepicker.min.css" />
-    <script type="text/javascript" src="~/calendar-dist/jalalidatepicker.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/ClientPanel//images.png">
+
+    <!-- Custom CSS -->
+    <link href="~/ClientPanel/assets/css/styles.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="~/ClientPanel/calendar-dist/jalalidatepicker.min.css" />
+    <script type="text/javascript" src="~/ClientPanel/calendar-dist/jalalidatepicker.min.js"></script>
 </head>
 
 <body dir="rtl">
 
     <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader"></div>
 
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
 
-        <!-- ============================================================== -->
         <!-- Top header  -->
-        <!-- ============================================================== -->
-        <!-- Start Navigation -->
         <div class="header header-light dark-text">
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand" asp-page="Index" asp-area="">
-                            <img src="~/assets/img/logo/1716061360566.png" style="height:43px" />
+                        <a class="nav-brand" asp-action="Index" asp-area="">
+                            <img src="~/ClientPanel/images.png" style="height:43px" />
                         </a>
-                    </div>
-                    <div class="nav-menus-wrapper" style="transition-property: none;">
-                        <partial name="_LoginPartial" />
                     </div>
                 </nav>
             </div>
         </div>
-        <!-- End Navigation -->
-        <div class="clearfix"></div>
 
-        <!-- ======================= dashboard Detail ======================== -->
         <div class="goodup-dashboard-wrap gray px-4 py-5">
             <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
                 <i class="fas fa-bars ms-2"></i>منو
@@ -56,54 +46,53 @@
                 <div class="goodup-dashboard-nav sticky-top">
                     <div class="goodup-dashboard-inner">
                         <ul data-submenu-title="منو">
-                            <li ><a asp-action = "Index"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
-                            <li ><a asp-action = "ServiceOfferings" ><i class="lni lni-files ms-2"></i>پیشنهادهای من</a></l>
-                            <li ><a asp-action = "ServiceRequests" ><i class="lni lni-add-files ms-2"></i>درخواست های باز</a></li>
+                            <li><a asp-action="Index"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
+                            <li><a asp-controller = "ServiceRequest" asp-action = "ViewServiceRequests"><i class="lni lni-files ms-2"></i>پیشنهادات من</a></li>
+                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers"><i class="lni lni-add-files ms-2"></i> درخواست های مرتبط</a></li>
+                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers"><i class="lni lni-add-files ms-2"></i> مهارت ها</a></li>
+                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers"><i class="lni lni-add-files ms-2"></i> پروفایل</a></li>
                         </ul>
                         <ul data-submenu-title="حساب کاربری">
-                            <li class="@ViewData["ProfileSetting"]">
-                                <a asp-page="ProfileSetting">
-                                    <i class="lni lni-user ms-2"></i>
-                                    تنظیمات
-                                </a>
-                            </li>
+                            <li><a asp-controller = "Dashboard" asp-action = "Profile"><i class="lni lni-user ms-2"></i>مشاهده مشخصات </a></li>
+                            <li><a asp-controller = "Dashboard" asp-action = "EditProfile"><i class="lni lni-user ms-2"></i>ویرایش مشخصات </a></li>
                             <li>
-                                <form class="form-inline" asp-area="Account" asp-page="Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                                    <button type="submit" class="nav-link btn btn-link text-dark"><i class="bx bx-power-off me-2"></i>خروج</button>
-                                </form>
+                                <a class="form-inline" asp-area = "Account" asp-controller = "Account" asp-action = "LogOut">
+                                    <i class="bx bx-power-off me-2">خروج</i>
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            @RenderBody()
+
+            <div class="goodup-dashboard-content">
+                <div class="dashboard-widg-bar d-block">
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- =====================  == dashboard Detail End ======================== -->
-        <!-- ======================= All Types Listing ======================== -->
 
-
-
-        <a id="tops-button" class="top-scroll" title="Back to top" href="#">
-            <i class="ti-arrow-up"></i>
-        </a>
         <footer class="light-footer skin-light-footer style-2">
             <div class="footer-bottom br-top">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-12 col-md-12 text-center">
-                            <p class="mb-0">© خدمات محفوظ است</p>
+                            <p class="mb-0">© خدمات منزل</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>s
         </footer>
+
+        <a id="tops-button" class="top-scroll" title="Back to top" href="#">
+            <i class="ti-arrow-up"></i>
+        </a>
+
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+
+
     <script src="~/ClientPanel/assets/js/jquery.min.js"></script>
     <script src="~/ClientPanel/assets/js/popper.min.js"></script>
     <script src="~/ClientPanel/assets/js/bootstrap.min.js"></script>
@@ -117,9 +106,15 @@
     <script src="~/ClientPanel/assets/js/lightbox.js"></script>
     <script src="~/ClientPanel/assets/js/jQuery.style.switcher.js"></script>
     <script src="~/ClientPanel/assets/js/custom.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
+
+
+    <script src="~/ClientPanel/assets/js/plugins/raphael/raphael.min.js"></script>
+    <script src="~/ClientPanel/assets/js/plugins/morris.js/morris.min.js"></script>
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
-@await RenderSectionAsync("Scripts", required: false)
+
 </html>

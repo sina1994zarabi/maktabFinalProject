@@ -9,11 +9,11 @@
         <li>
             @if (User.IsInRole("Expert"))
             {
-                <a class="nav-link text-dark" asp-area="Expert" asp-action = "Index" title="پروفایل">@User.Identity?.Name</a>
+                <a class="nav-link text-dark" asp-area = "Expert" asp-controller = "Dashboard" asp-action = "Index" title="پروفایل">@User.Identity?.Name</a>
             }
             else if (User.IsInRole("Client"))
             {
-                <a class="nav-link text-dark" asp-area="Client" asp-action = "Index" title="پروفایل">@User.Identity?.Name</a>
+                <a class="nav-link text-dark" asp-area="Client" asp-controller = "Dashboard" asp-action = "Index" title="پروفایل">@User.Identity?.Name</a>
             }
         </li>
         <li>

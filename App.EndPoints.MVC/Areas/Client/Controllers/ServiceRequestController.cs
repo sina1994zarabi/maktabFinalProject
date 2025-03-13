@@ -71,13 +71,5 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
 			TempData["Message"] = "سفارش با موفقیت ثبت شد";
 			return View();
 		}
-
-
-		public async Task<IActionResult> DeleteServiceRequest(int Id)
-		{
-			await _requestAppService.Delete(Id, default);
-			TempData["SuccessMessage"] = "سفارش با موفقیت حذف شد";
-			return RedirectToAction("ViewServiceRequests");
-		}
 	}
 }

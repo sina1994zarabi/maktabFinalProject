@@ -173,7 +173,7 @@ namespace App.EndPoints.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditExpert(UpdateExpertDto model)
         {
-            await _expertAppService.Update(model, default);
+            await _expertAppService.Update(model, default,model.Image);
             var updateAccountDto = new UpdateAccountDto
             {
                 Id = model.AppUserId,

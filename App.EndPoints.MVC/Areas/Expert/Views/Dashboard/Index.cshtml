@@ -1,7 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Expert Dashboard";
-    Layout = "~/Areas/Expert/Views/Shared/_ExpertLayout.cshtml";
+﻿@using App.Domain.Core.Enums;
+
+
+
+@{
+    ViewData["Title"] = "Expert Profile";
+    Layout = "_Layout";
 }
 
-<h2>Welcome @ViewData["Username"]</h2>
-<p>Here you can manage your requests, view your profile, and more.</p>
+<div class="row">
+    <div class="col-md-8">
+        <h2>خوش آمدید @ViewBag.CurrentUser.UserName</h2>
+    </div>
+</div>
