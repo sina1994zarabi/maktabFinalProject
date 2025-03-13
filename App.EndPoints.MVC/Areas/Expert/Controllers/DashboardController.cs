@@ -4,6 +4,7 @@ using App.Domain.Core.DTOs.ExpertDto;
 using App.Domain.Core.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Composition;
 
 namespace App.EndPoints.MVC.Areas.Expert.Controllers
 {
@@ -28,11 +29,31 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> ExpertInfoSummary()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var expert = await _expertAppService.GetExpertByUserId(user.Id, default);
+            ViewBag.Expert = expert;
+            var model = await _expertAppService.GetExpertReview(expert.Id, default);
+            return View(model);
+        }
+
+        public async Task<IActionResult> ExpertInfoSummary(int Id)
+        {
+            var expert = await _expertAppService.GetById(Id, default);
+            ViewBag.Expert = expert;
+            var model = await _expertAppService.GetExpertReview(expert.Id, default);
+            return View(model);
+        }
+
+
         public async Task<IActionResult> Profile()
         {
-           var model = await _userManager.GetUserAsync(User);
-           return View(model);
+            var model = await _userManager.GetUserAsync(User);
+            return View(model);
         }
+
 
         public async Task<IActionResult> EditProfile()
         {
@@ -58,11 +79,6 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             await _expertAppService.Update(model, default, model.Image);
             return RedirectToAction("Profile");
         }
-
-
-
-
-
 
     }
 }

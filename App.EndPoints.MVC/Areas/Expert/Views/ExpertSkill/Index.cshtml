@@ -1,0 +1,41 @@
+﻿@model List<App.Domain.Core.DTOs.ServiceDto.GetServiceDto>
+
+@{
+    ViewData["Title"] = "مهارت‌های من";
+    Layout = "~_Layout";
+}
+
+
+@{
+    
+    string message = ViewBag.Message as string;
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <h1 class="btn btn-info">@message</h1>
+}
+
+
+<h2>مهارت‌های من</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>عنوان مهارت</th>
+            <th>توضیحات</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var skill in Model)
+        {
+            <tr>
+                <td>@skill.Name</td>
+                <td>
+                    <a class="btn btn-danger btn-sm" asp-action = "Delete" asp-route-id="@skill.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

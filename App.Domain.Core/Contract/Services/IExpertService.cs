@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.DTOs.ExpertDto;
+using App.Domain.Core.Entities.Services;
 using App.Domain.Core.Entities.User;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace App.Domain.Core.Contract.Services
         Task<Expert> GetExpertInfo(int id,CancellationToken cancellation);
         Task Delete(int id, CancellationToken cancellation);
         Task Update(UpdateExpertDto expert, CancellationToken cancellation);
+        Task UpdateSkills(int Id, Service service, CancellationToken cancellationToken);
+        Task RemoveSkill(int Id, Service service, CancellationToken cancellationToken);
         Task ChangeStatus(int id, CancellationToken cancellation);
     }
 }
