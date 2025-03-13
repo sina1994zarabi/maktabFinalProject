@@ -39,7 +39,7 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ExpertInfoSummary(int Id)
+        public async Task<IActionResult> ExpertInfoSummaryForClient(int Id)
         {
             var expert = await _expertAppService.GetById(Id, default);
             ViewBag.Expert = expert;

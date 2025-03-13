@@ -1,4 +1,5 @@
-﻿@model List<App.Domain.Core.Entities.Services.Review>;
+﻿@using FrameWork;
+@model List<App.Domain.Core.Entities.Services.Review>;
 
 @{
     ViewData["Title"] = "Expert Profile Summary";
@@ -57,7 +58,7 @@
                                         <h5>تخصص‌ها</h5>
                                         @foreach (var skill in @ViewBag.Expert.Services)
                                         {
-                                            <p>@skill.Name</p>
+                                            <p>@skill.Title</p>
                                         }
                                     </div>
                                 </div>
@@ -85,7 +86,7 @@
                                         <!-- reviews-comments-item -->
                                         <div class="reviews-comments-item">
                                             <div class="reviews-comments-item-text">
-                                                <h4>@review.Client.FullName <span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i>@comment.CreatedAt.ToPersianString("dddd, dd MMMM,yyyy")</span></h4>
+                                                <h4>@review.Client.FullName <span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i></span></h4>
                                                 <div class="listing-rating high">
                                                     @if (review.Rating == 1)
                                                     {

@@ -60,6 +60,7 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 		{
 			return await _context.Experts.
 					              Include(e => e.AppUser).
+								  Include(x => x.Services).
 								  ToListAsync(cancellation);
 		}
 

@@ -30,7 +30,7 @@
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand" asp-action="Index" asp-area="">
+                        <a class="nav-brand" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/ClientPanel/images.png" style="height:43px" />
                         </a>
                     </div>
@@ -49,7 +49,7 @@
                             <li><a asp-action="Index"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                             <li><a asp-controller = "ServiceRequest" asp-action = "ViewServiceRequests"><i class="lni lni-files ms-2"></i>پیشنهادات من</a></li>
                             <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers"><i class="lni lni-add-files ms-2"></i> درخواست های مرتبط</a></li>
-                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers"><i class="lni lni-add-files ms-2"></i> مهارت ها</a></li>
+                            <li><a asp-controller = "ExpertSkill" asp-action = "Index"><i class="lni lni-add-files ms-2"></i> مهارت ها</a></li>
                             <li><a asp-controller = "Dashboard" asp-action = "ExpertInfoSummary"  ><i class="lni lni-add-files ms-2"></i> پروفایل</a></li>
                         </ul>
                         <ul data-submenu-title="حساب کاربری">

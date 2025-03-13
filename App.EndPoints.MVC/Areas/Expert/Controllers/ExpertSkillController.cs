@@ -52,8 +52,5 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             TempData["Message"] = "سرویس از لیست مهارت ها پاک شد";
             return RedirectToAction("Index");
         }
-
-
-
     }
 }

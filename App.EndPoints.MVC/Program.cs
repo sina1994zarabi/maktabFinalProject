@@ -70,7 +70,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddScoped<ICityRepository>(provider => new CityDapperRepository(connectionString));
 builder.Services.AddScoped<ICategoryRepository>(provider => new CategoryDapperRepository(connectionString));
 builder.Services.AddScoped<ISubCategoryRepository>(provider => new SubCategoryDapperRepository(connectionString));
-builder.Services.AddScoped<IServiceRepository>(provider => new ServiceDapperRepository(connectionString));
+//builder.Services.AddScoped<IServiceRepository>(provider => new ServiceDapperRepository(connectionString));
 #endregion
 
 
@@ -99,7 +99,7 @@ builder.Services.AddScoped<IServiceOfferingRepository, ServiceOfferingRepository
 builder.Services.AddScoped<IServiceOfferingService, ServiceOfferingService>();
 
 
-//builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceAppService, ServiceAppService>();
 

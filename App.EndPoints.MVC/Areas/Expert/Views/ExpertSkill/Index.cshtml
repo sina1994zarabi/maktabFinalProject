@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "مهارت‌های من";
-    Layout = "~_Layout";
+    Layout = "_Layout";
 }
 
 
@@ -23,7 +23,6 @@
     <thead>
         <tr>
             <th>عنوان مهارت</th>
-            <th>توضیحات</th>
             <th>عملیات</th>
         </tr>
     </thead>
@@ -33,7 +32,7 @@
             <tr>
                 <td>@skill.Name</td>
                 <td>
-                    <a class="btn btn-danger btn-sm" asp-action = "Delete" asp-route-id="@skill.Id">حذف</a>
+                    <a class="btn btn-danger btn-sm" asp-action = "RemoveServiceFromSkills" asp-route-id="@skill.Id">حذف</a>
                 </td>
             </tr>
         }
