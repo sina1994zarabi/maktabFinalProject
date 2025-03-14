@@ -20,6 +20,8 @@ namespace App.Domain.Core.Contract.AppService
         Task<Expert> GetExpertByUserId(int userId, CancellationToken cancellationToken);
         Task<List<GetServiceDto>> GetExpertSkills(int userId, CancellationToken cancellationToken);
         Task<List<Review>> GetExpertReview(int Id, CancellationToken cancellationToken);
+        Task<List<ServiceOffering>> GetServiceOfferings(int Id, CancellationToken cancellationToken);
+        Task<List<ServiceRequest>> GetServiceRequests(int Id, CancellationToken cancellationToken);
         Task Delete(int id, CancellationToken cancellationToken);
         Task Update(UpdateExpertDto updateExpertDto, CancellationToken cancellationToken,IFormFile Image);
         Task UpdateSkills(int Id, Service service, CancellationToken cancellationToken);

@@ -8,6 +8,13 @@
     Layout = "_Layout";
 }
 
+@if (TempData["Message"] != null)
+{
+    <div class="btn btn-info">
+        @TempData["Message"]
+    </div>
+}
+
 <div class="container">
     <h2>سفارشات من</h2>
     <table class="table table-striped">
@@ -25,11 +32,11 @@
                 <tr>
                     <td>@request.Title</td>
                     <td>@request.Description</td>
-                    <td>@request.Status</td>
+                    <td>@request.Status.ToFarsiStatus()</td>
                     <td>
                         @if (request.Status == StatusEnum.AwaitingOffers)
                         {
-                            <a asp-controller = "ServiceOffering" asp-action = "OfferingsForRequest" class="btn btn-primary btn-sm">بررسی پیشنهادات</a>
+                            <a asp-controller = "ServiceOffering" asp-action = "OfferingsForRequest" asp-route-id = "@request.Id" class="btn btn-primary btn-sm">بررسی پیشنهادات</a>
                             <span class="text-muted mx-1">تایید</span>
                             <span class="text-muted mx-1">اتمام کار</span>
                             <span class="text-muted mx-1">پرداخت</span>

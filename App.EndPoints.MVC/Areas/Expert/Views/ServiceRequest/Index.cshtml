@@ -1,0 +1,52 @@
+﻿@model List<App.Domain.Core.Entities.Services.ServiceRequest>
+@using App.Domain.Core.Enums;
+@using FrameWork;
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Service Requests";
+}
+
+<h2 class="text-center mb-4">درخواست های مرتبط</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <div class="btn btn-Info">
+        درخواستی موجود نیست
+    </div>
+}
+else {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>عنوان درخواست</th>
+                <th>تاریخ رزرو</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in 
+            Model)
+            {
+                <tr>
+                    <td>@request.Title</td>
+                    <td>@request.BookingDate.ToString("yyyy/MM/dd")</td>
+                    <td>@request.Status.ToFarsiStatus()</td>
+                    <td>
+                        <a class="btn btn-Info btn-sm" 
+                           asp-area = "Client"
+                           asp-controller="ServiceRequest"
+                           asp-action="Details"
+                           asp-route-id="@request.Id">
+                            مشاهده جزییات
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

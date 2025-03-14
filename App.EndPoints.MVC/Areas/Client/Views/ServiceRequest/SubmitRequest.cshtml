@@ -43,6 +43,7 @@
                         <input asp-for = "BookingDate" data-jdp data-jdp-min-date="today" class="form-control rounded" />
                         <span asp-validation-for = "BookingDate" class="text-danger"></span>
                     </div>
+                    <input type="hidden" asp-for="ServiceId" value="@ViewBag.Service.Id"/>
             <button type="submit" class="btn btn-success">ارسال درخواست</button>
         </form>
     </div>

@@ -1,5 +1,6 @@
 ﻿using App.Domain.Core.Contract.AppService;
 using App.Domain.Core.DTOs.ReviewDto;
+using App.Domain.Core.Entities.Services;
 using App.Domain.Core.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace App.EndPoints.MVC.Areas.Client.Controllers
 {
+    [Area("Client")]
     public class ServiceOfferingController : Controller
     {
 
@@ -29,10 +31,23 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
             _memoryCache = memoryCache;
         }
 
-        public async Task<IActionResult> ViewServiceOfferings(int Id)
+
+        public async Task<IActionResult> OfferingsForRequest(int Id)
         {
-            ViewBag.ServiceRequest = await _requestAppService.GetById(Id, default);
             var model = await _clientAppService.GetServicesOffering(Id, default);
+            return View(model);
+        }
+
+        public async Task<IActionResult> ViewCompletedServiceOfferings()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var client = await _clientAppService.GetClientByUserId(user.Id, default);
+            var requests = await _clientAppService.GetServiceRequests(client.Id, default);
+            var model = new List<ServiceOffering>();
+            foreach (var request in requests)
+            {
+                model.AddRange(request.ServiceOfferings);
+            };
             return View(model);
         }
 
@@ -59,12 +74,9 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
                 ClientId = request.ClientId,
                 ServiceOfferingId = request.ServiceOfferings.FirstOrDefault()?.Id ?? 0
             };
-
             ViewBag.ServiceRequestId = request.Id;
             ViewBag.ServiceOfferingId = createReviewDto.ServiceOfferingId;
             ViewBag.ClientId = createReviewDto.ClientId;
-
-
             return View(createReviewDto);
         }
 

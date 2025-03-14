@@ -54,6 +54,8 @@ namespace App.Infra.DataAccess.EfCore.Repositories
 			return await _context.ServiceOfferings
 							     .Include(so => so.Expert)
 									.ThenInclude(e => e.AppUser)
+								 .Include(so => so.ServiceRequest)
+									.ThenInclude(sr => sr.Client)
 								 .ToListAsync(cancellationToken);
 		}
 

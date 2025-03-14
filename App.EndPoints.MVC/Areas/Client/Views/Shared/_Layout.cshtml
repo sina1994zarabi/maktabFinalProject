@@ -30,8 +30,8 @@
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand" asp-action = "Index" asp-area="">
-                            <img src="~/assets/img/logo.jpg" style="height:43px" />
+                        <a class="nav-brand" asp-area= "" asp-controller = "Home" asp-action = "Index" >
+                            <img src="~/ClientPanel/images.png" style="height:43px" />
                         </a>
                     </div>
                 </nav>
@@ -48,14 +48,14 @@
                         <ul data-submenu-title="منو">
                             <li><a asp-action = "Index"><i class="lni lni-dashboard ms-2"></i>داشبورد</a></li>
                             <li><a asp-controller = "ServiceRequest" asp-action = "ViewServiceRequests"><i class="lni lni-files ms-2"></i>سفارشات من</a></li>
-                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedOffers" ><i class="lni lni-add-files ms-2"></i> سفارشات انجام شده</a></li>
+                            <li><a asp-controller = "ServiceOffering" asp-action = "ViewCompletedServiceOfferings"><i class="lni lni-add-files ms-2"></i> سفارشات انجام شده</a></li>
                         </ul>
                         <ul data-submenu-title="حساب کاربری">
-                            <li><a asp-controller = "Dashboard" asp-action="ViewProfile"><i class="lni lni-user ms-2"></i>مشاهده پروفایل </a></li>
+                            <li><a asp-controller = "Dashboard" asp-action = "ViewProfile" ><i class="lni lni-user ms-2"></i>مشاهده پروفایل </a></li>
                             <li><a asp-controller = "Dashboard" asp-action = "EditProfile" ><i class="lni lni-user ms-2"></i>ویرایش پروفایل </a></li>
-                            <li><a asp-controller = "Dashboard" asp-action = "UpdateBalance"><i class="lni lni-user ms-2"></i>افزایش موجودی </a></li>
+                            <li><a asp-controller = "Dashboard" asp-action = "UpdateBalance" ><i class="lni lni-user ms-2"></i>افزایش موجودی </a></li>
                             <li>
-                                <form class="form-inline" asp-area="Account" asp-controller = "Account" asp-action = "LogOut" >
+                                <form class="form-inline" asp-area = "Account" asp-controller = "Account" asp-action = "LogOut" >
                                     <button type="submit" class="nav-link btn btn-link text-dark">خروج<i class="bx bx-power-off me-2"></i></button>
                                 </form>
                             </li>

@@ -31,27 +31,12 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
 			_memoryCache = memoryCache;
 		}
 
-		//public async Task<IActionResult> ViewServices()
-		//{
-		//	string cachKey = "Services";
-		//	if (!_memoryCache.TryGetValue(cachKey, out List<Service> model))
-		//	{
-		//		model = await _serviceAppService.GetAll(default);
-		//		_memoryCache.Set(cachKey, model, TimeSpan.FromMinutes(30));
-		//	}
-		//	return View(model);
-		//}
-
 		public async Task<IActionResult> ViewServiceRequests()
 		{
 			var user = await _userManager.GetUserAsync(User);
 			var client = await _clientAppService.GetClientByUserId(user.Id, default);
-			//string cachKey = "ServiceRequests";
-			//if (!_memoryCache.TryGetValue(cachKey, out List<ServiceRequest> model))
-			//{
 			var model = await _clientAppService.GetServiceRequests(client.Id, default);
-			//_memoryCache.Set(cachKey, model, TimeSpan.FromMinutes(30));
-			//}
+			ViewBag.Message = TempData["Message"] as string;
 			return View(model);
 		}
 
@@ -67,9 +52,12 @@ namespace App.EndPoints.MVC.Areas.Client.Controllers
 		{
 			if (!ModelState.IsValid)
 				return View(model);
-			await _clientAppService.SubmitServiceRequest(model, default);
+            var user = await _userManager.GetUserAsync(User);
+            var client = await _clientAppService.GetClientByUserId(user.Id, default);
+			model.ClientId = client.Id;
+            await _clientAppService.SubmitServiceRequest(model, default);
 			TempData["Message"] = "سفارش با موفقیت ثبت شد";
-			return View();
+			return RedirectToAction("ViewServiceRequests");
 		}
 	}
 }

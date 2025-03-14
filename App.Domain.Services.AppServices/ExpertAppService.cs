@@ -5,6 +5,7 @@ using App.Domain.Core.DTOs.ServiceDto;
 using App.Domain.Core.Entities.Services;
 using App.Domain.Core.Entities.User;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,21 @@ namespace App.Domain.Services.AppServices
     {
         private readonly IExpertService _expertService;
         private readonly IReviewAppService _reviewAppService;
+        private readonly IServiceOfferingAppService _serviceOfferingAppService;
+        private readonly IServiceRequestAppService _servicerequestAppService;
         private readonly IUtilityService _utilityService;
 
-        public ExpertAppService(IExpertService expertService, IUtilityService utilityService, IReviewAppService reviewAppService)
+        public ExpertAppService(IExpertService expertService,
+                                IUtilityService utilityService,
+                                IReviewAppService reviewAppService,
+                                IServiceOfferingAppService serviceOfferingAppService,
+                                IServiceRequestAppService serviceRequestAppService)
         {
             _expertService = expertService;
             _utilityService = utilityService;
             _reviewAppService = reviewAppService;
+            _serviceOfferingAppService = serviceOfferingAppService;
+            _servicerequestAppService = serviceRequestAppService;
         }
 
         public async Task ChangeStatus(int id, CancellationToken cancellationToken)
@@ -55,7 +64,7 @@ namespace App.Domain.Services.AppServices
         public async Task<Expert> GetExpertByUserId(int userId, CancellationToken cancellationToken)
         {
             var Experts = await _expertService.GetAll(default);
-            return (Expert)Experts.Where(c => c.AppUserId == userId).First();
+            return (Expert)Experts.Where(e => e.AppUserId == userId).FirstOrDefault();
         }
 
         public async Task<Expert> GetExpertInfo(int id, CancellationToken cancellationToken)
@@ -84,6 +93,31 @@ namespace App.Domain.Services.AppServices
                 });
             }
             return skills;
+        }
+
+        public async Task<List<ServiceOffering>> GetServiceOfferings(int Id, CancellationToken cancellationToken)
+        {
+            var expert = await GetExpertByUserId(Id,cancellationToken);
+            var model = await _serviceOfferingAppService.GetAll(cancellationToken);
+            return model.Where(x => x.ExpertId == Id).ToList();
+        }
+
+        public async Task<List<ServiceRequest>> GetServiceRequests(int Id, CancellationToken cancellationToken)
+        {
+            var skills = await GetExpertSkills(Id,cancellationToken);
+            var requests = await _servicerequestAppService.GetAll(cancellationToken);
+            var output = new List<ServiceRequest>();
+            foreach (var request in requests)
+            {
+                foreach (var skill in skills)
+                {
+                    if (request.Service.Id == skill.Id)
+                    {
+                        output.Add(request);
+                    }
+                }
+            }
+            return output;
         }
 
         public async Task RemoveSkill(int Id, Service service, CancellationToken cancellationToken)

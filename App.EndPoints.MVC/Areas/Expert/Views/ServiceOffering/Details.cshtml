@@ -1,0 +1,27 @@
+﻿@using FrameWork;
+@model App.Domain.Core.Entities.Services.ServiceOffering
+
+<div class="list-group-item">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <!-- Left Section: Basic Offer Info -->
+        <div class="mb-2">
+            <h5 class="mb-1">شناسه: @Model.Id</h5>
+            <p class="mb-1">توضیحات: @Model.Description</p>
+            <small>کارشناس: @Model.Expert.FullName</small>
+        </div>
+
+        <!-- Middle Section: Request and Customer Details -->
+        <div class="mb-2">
+            <p class="mb-1">درخواست: @Model.ServiceRequest.Client.FullName</p>
+            <p class="mb-1">مشتری: @Model.ServiceRequest.Client.FullName</p>
+            <small>قیمت: @Model.ServiceRequest.Service.Price.ToString("N0") ریال</small>
+        </div>
+
+        <!-- Right Section: Dates and Status -->
+        <div class="mb-2">
+            <p class="mb-1">تاریخ پیشنهادی : @Model.ServiceRequest.BookingDate.ToPersianString()</p>
+            <span class="badge bg-primary">@Model.Status.ToFarsiStatus()</span>
+        </div>
+        <a asp-action = "Confirm" asp-route-id = "@Model.Id" class = "btn btn-primary btn-sm"> تایید</a>
+    </div>
+</div>
