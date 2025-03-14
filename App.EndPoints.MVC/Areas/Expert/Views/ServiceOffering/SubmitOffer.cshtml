@@ -1,0 +1,32 @@
+﻿@model App.Domain.Core.DTOs.ServiceOfferingDto.CreateServiceOfferingDto;
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "ثبت پیشنهاد";
+}
+
+<section class = "gray py-5">
+    <div class = "container">
+        <div class = "row justify-content-center">
+            <div class = "col-xl-8 col-lg-8 col-md-10 col-sm-12">
+                <div class = "card shadow-lg border-0 p-4 rounded-4">
+                    <div class = "card-body">
+                        <h3 class = "card-title text-center mb-4 fw-bold text-primary">ثبت پیشنهاد</h3>
+                        <form method = "post" asp-action ="SubmitOffer" onsubmit="console.log('پیشنهاد ثبت شد');">
+                            <input type = "hidden" asp-for="ExpertId" value="@ViewBag.Expert.Id" />
+                            <input type = "hidden" asp-for="ServiceRequestId" value="@ViewBag.ServiceRequest.Id" />
+                            <div class = "mb-3">
+                                <label asp-for = "Description" class = "form-label fw-semibold">توضیحات پیشنهاد</label>
+                                <textarea class = "form-control rounded-3 border-secondary" asp-for = "Description" rows="5"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold">ثبت پیشنهاد</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -40,7 +40,7 @@ else
                         }
                     </td>
                     <td>
-                        <a asp-area = "Expert" asp-controller = "Dashboard" asp-action = "ExpertProfileSummary" class = "btn btn-info">مشاهده کارشناس</a>
+                        <a asp-area = "Expert" asp-controller = "Dashboard" asp-action = "ExpertInfoSummaryForClient" asp-route-id = "@offering.Expert.Id" class="btn btn-info">مشاهده کارشناس</a>
                         <a asp-controller = "ServiceOffering" asp-action = "SelectOffer"  asp-route-id = "@offering.Id" class = "btn btn-Success">انتخاب</a>
                     </td>
                 </tr>

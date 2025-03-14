@@ -31,7 +31,11 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             return View(model.Where(x => x.Status == StatusEnum.AwaitingOffers).ToList());
         }
 
-
+        public async Task<IActionResult> Details(int Id)
+        {
+            var model = await _serviceRequestAppService.GetById(Id, default);
+            return View(model);
+        }
 
     }
 }

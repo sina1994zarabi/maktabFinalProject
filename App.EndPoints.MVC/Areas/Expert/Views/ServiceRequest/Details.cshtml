@@ -1,0 +1,55 @@
+﻿@using App.Domain.Core.Enums;
+@using FrameWork;
+@model App.Domain.Core.Entities.Services.ServiceRequest
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Service Request Details";
+}
+
+<h2 class="text-center mb-4">جزییات درخواست خدمات</h2>
+
+<div class="card shadow-sm p-4">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>عنوان درخواست</th>
+                <td>@Model.Title</td>
+            </tr>
+            <tr>
+                <th>توضیحات</th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th>مشتری</th>
+                <td>@Model.Client.FullName</td>
+            </tr>
+            <tr>
+                <th>وضعیت</th>
+                <td>
+                    <span class="badge bg-primary">@Model.Status.ToFarsiStatus()</span>
+                </td>
+            </tr>
+            <tr>
+                <th>قیمت</th>
+                <td>@Model.Service.Price.ToString("N0") ریال</td>
+            </tr>
+            <tr>
+                <th>تاریخ رزرو</th>
+                <td>@Model.BookingDate.ToPersianString()</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        @if (Model.Status == StatusEnum.AwaitingOffers)
+        {
+            <a asp-controller = "Serviceoffering" asp-action = "SubmitOffer" asp-route-id = "@Model.Id" class="btn btn-success"> ارسال پیشنهاد</a>
+        }
+        else if (Model.Status == StatusEnum.PendingProviderConfirmation)
+        {
+            <a asp-controller = "Serviceoffering" asp-action = "Confirm" asp-route-id = "@Model.Id" class="btn btn-success"> تایید</a>
+        }
+        <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+    </div>
+</div>

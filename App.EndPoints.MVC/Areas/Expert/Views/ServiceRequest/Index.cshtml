@@ -16,7 +16,8 @@
         درخواستی موجود نیست
     </div>
 }
-else {
+else 
+{
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -37,10 +38,9 @@ else {
                     <td>@request.Status.ToFarsiStatus()</td>
                     <td>
                         <a class="btn btn-Info btn-sm" 
-                           asp-area = "Client"
-                           asp-controller="ServiceRequest"
-                           asp-action="Details"
-                           asp-route-id="@request.Id">
+                           asp-controller = "ServiceRequest"
+                           asp-action = "Details"
+                           asp-route-id = "@request.Id">
                             مشاهده جزییات
                         </a>
                     </td>

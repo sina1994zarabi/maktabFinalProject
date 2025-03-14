@@ -1,0 +1,155 @@
+﻿@using FrameWork;
+@model List<App.Domain.Core.Entities.Services.Review>;
+
+@{
+    ViewData["Title"] = "Expert Profile Summary For Client";
+    Layout = "_Layout";
+}
+
+
+<section class="gray">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="author-wrap-ngh">
+                    <div class="author-wrap-head-ngh">
+                        @if (ViewBag.Expert.AppUser.ProfilePicture == null)
+                        {
+                            <div class="author-wrap-ngh-thumb">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="author-wrap-ngh-thumb">
+                                <img src="@ViewBag.Expert.AppUser.ProfilePicture" class="img-fluid circle" style="object-fit:cover; width: 100%; height: 100%;" />
+                            </div>
+                        }
+                        <div class="author-wrap-ngh-info">
+                            <h5>@ViewBag.Expert.FullName</h5>
+                        </div>
+                    </div>
+
+                    <div class="author-wrap-caption-ngh">
+                        <div class="author-wrap-jhyu-ngh">
+                            <ul>
+                                <li>
+                                    <div class="gdup-kvty">
+                                        <div class="gdup-kvty-icon bg-light-sky text-sky"><i class="fas fa-file"></i></div>
+                                        <div class="gdup-kvty-ctr"><h6 class="count">@Model.Count</h6></div>
+                                        <div class="gdup-kvty-text">کامنت‌ها</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="author-wrap-footer-ngh">
+                        <ul>
+                            <li>
+                                <div class="jhk-list-inf">
+                                    <div class="jhk-list-inf-ico"><i class="fas fa-envelope"></i></div>
+                                    <div class="jhk-list-inf-caption"><h5>جنسیت</h5><p>@ViewBag.Expert.Gender</p></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="jhk-list-inf">
+                                    <div class="jhk-list-inf-ico"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="jhk-list-inf-caption">
+                                        <h5>تخصص‌ها</h5>
+                                        @foreach (var skill in @ViewBag.Expert.Services)
+                                        {
+                                            <p>@skill.Title</p>
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="auth-filter-headers">
+                    <h3 class=" m-0 theme-cl px-2">نظرات</h3>
+                </div>
+
+                <!-- row -->
+                <div class="row justify-content-center gx-3">
+
+                    <div class="bg-white rounded mb-4">
+                        <div class="jbd-01 px-4 py-4">
+                            <div class="jbd-details mb-4">
+                                <h5 class="ft-bold fs-lg ff-second">امتیاز و نظر کاربران</h5>
+                                <div class="reviews-comments-wrap">
+                                    @foreach (var review in Model)
+                                    {
+                                        <!-- reviews-comments-item -->
+                                        <div class="reviews-comments-item">
+                                            <div class="reviews-comments-item-text">
+                                                <h4>@review.Client.FullName <span class="reviews-comments-item-date d-flex align-items-center"><i class="ti-calendar theme-cl ms-1"></i></span></h4>
+                                                <div class="listing-rating high">
+                                                    @if (review.Rating == 1)
+                                                    {
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                    }
+                                                    else if (review.Rating == 2)
+                                                    {
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                    }
+                                                    else if (review.Rating == 3)
+                                                    {
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                    }
+                                                    else if (review.Rating == 4)
+                                                    {
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star "></i>
+                                                    }
+                                                    else if (review.Rating == 5)
+                                                    {
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                        <i class="fas fa-star active"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                        <i class="fas fa-star "></i>
+                                                    }
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <p>"@review.Comment"</p>
+                                            </div>
+                                        </div>
+                                        <!--reviews-comments-item end-->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+    </div>
+</section>
