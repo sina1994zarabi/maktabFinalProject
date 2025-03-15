@@ -22,6 +22,7 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             _expertAppService = expertAppService;
         }
 
+
         public async Task<IActionResult> Index(string username)
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -38,6 +39,7 @@ namespace App.EndPoints.MVC.Areas.Expert.Controllers
             var model = await _expertAppService.GetExpertReview(expert.Id, default);
             return View(model);
         }
+
 
         public async Task<IActionResult> ExpertInfoSummaryForClient(int Id)
         {
