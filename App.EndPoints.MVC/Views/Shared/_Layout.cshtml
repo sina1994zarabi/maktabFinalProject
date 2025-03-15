@@ -41,7 +41,6 @@
                         <a class="nav-brand" href="#">
                             <img src = "~/ClientPanel//images.png" class="logo" alt="" style="width: 50px; height: auto;" />
                         </a>
-
                     </div>
                     <div class="nav-menus-wrapper" style="transition-property: none;">
                         <ul class="nav-menu">
@@ -50,13 +49,12 @@
                                 <a href="javascript:void(0);">صفحه اصلی</a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a asp-action = "Index">صفحه اصلی</a></li>
-                                    <li><a asp-action = "Categories"> دسته بندی ها</a></li>
-                                    <li><a asp-action = "Service"> خدمات</a></li>
+                                    <li><a asp-action = "Categories" > دسته بندی ها</a></li>
+                                    <li><a asp-controller  = "Services" asp-action = "Index" > خدمات</a></li>
                                 </ul>
                             </li>
                             <partial name="_LoginPartial" />
                         </ul>
-
                     </div>
                 </nav>
             </div>

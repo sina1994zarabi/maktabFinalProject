@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Services\" />
     <Folder Include="wwwroot\ClientPanel\PreviousPanel\js\" />
     <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>

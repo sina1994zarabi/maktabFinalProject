@@ -1,0 +1,43 @@
+﻿@model List<App.Domain.Core.Entities.Services.Service>
+
+@{
+    ViewData["Title"] = "Services";
+    Layout = "_Layout";
+}
+
+<section class="gray py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" id="hotels">
+                <div class="row justify-content-center gx-3">
+                    @foreach (var service in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
+                            <div class="service-card shadow-sm p-3 text-center rounded">
+                                <a asp-action="" asp-route-id="@service.Id" class="service-link">
+                                    <div class="service-image">
+                                        @if (!string.IsNullOrEmpty(service.Image))
+                                        {
+                                            <img src="@service.Image" class="img-fluid rounded" alt="Category Image">
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">بدون عکس</span>
+                                        }
+                                    </div>
+                                    <div class="service-content mt-3">
+                                        <h5 class="text-primary fw-bold">@service.Title</h5>
+                                        <p class="text-dark">📌 دسته‌بندی: @service.Subcategory.Title</p>
+                                        <p class="text-muted">📝 @service.Description</p>
+                                        <h6 class="text-success fw-bold">💰 قیمت: @service.Price.ToString("N0") تومان</h6>
+                                    </div>
+                                </a>
+                                <a asp-action="ServiceDetails" asp-route-id="@service.Id" class="btn btn-outline-primary mt-2">مشاهده جزئیات</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
