@@ -38,22 +38,21 @@
             <div class="container">
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
-                        <a class="nav-brand" href="#">
+                        <a class="nav-brand" asp-controller = "Home" asp-action = "Index">
                             <img src = "~/ClientPanel//images.png" class="logo" alt="" style="width: 50px; height: auto;" />
                         </a>
                     </div>
                     <div class="nav-menus-wrapper" style="transition-property: none;">
                         <ul class="nav-menu">
-
                             <li class="active">
                                 <a href="javascript:void(0);">صفحه اصلی</a>
                                 <ul class="nav-dropdown nav-submenu">
-                                    <li><a asp-action = "Index">صفحه اصلی</a></li>
-                                    <li><a asp-action = "Categories" > دسته بندی ها</a></li>
-                                    <li><a asp-controller  = "Services" asp-action = "Index" > خدمات</a></li>
+                                    <li><a asp-area = "" asp-action = "Index">صفحه اصلی</a></li>
+                                    <li><a asp-area = "" asp-action = "Categories"> دسته بندی ها</a></li>
+                                    <li><a asp-area = "" asp-controller = "Services" asp-action = "Index"> خدمات</a></li>
                                 </ul>
                             </li>
-                            <partial name="_LoginPartial" />
+                            <partial name = "_LoginPartial" />
                         </ul>
                     </div>
                 </nav>

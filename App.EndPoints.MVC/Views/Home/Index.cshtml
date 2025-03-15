@@ -29,6 +29,7 @@
     <div class="row">
         @foreach (var cat in Model)
         {
+            <a asp-action="SubCategories" asp-route-id="@cat.Id" class="col-6 col-md-3 mb-2 d-flex justify-content-center">
             <div class="col-6 col-md-3 mb-2 d-flex justify-content-center">
                 <div class="card category-card small-card text-center">
                     <div class="card-body p-1">
@@ -37,6 +38,7 @@
                     </div>
                 </div>
             </div>
+            </a>
         }
     </div>
 </div>
