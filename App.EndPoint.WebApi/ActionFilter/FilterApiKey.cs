@@ -8,7 +8,7 @@ public class ApiKeyAuthFilter : IActionFilter
 
     public ApiKeyAuthFilter(IConfiguration configuration)
     {
-        _apiKey = configuration["ApiKey"];
+        _apiKey = configuration.GetValue<string>("ApiKey");
     }
 
     public void OnActionExecuting(ActionExecutingContext context)
