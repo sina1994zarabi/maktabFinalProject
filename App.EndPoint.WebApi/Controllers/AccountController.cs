@@ -24,7 +24,7 @@ namespace App.EndPoint.WebApi.Controllers
 
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] AccountRegisterDto?  account, CancellationToken cancellationToken)
+        public async Task<IActionResult> Register([FromBody] AccountRegisterDto?  account)
         {
             if (account is null)
                 return BadRequest(new { message = "اطلاعات برای ثبت نام کافی نیست" });
