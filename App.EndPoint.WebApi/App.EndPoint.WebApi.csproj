@@ -11,4 +11,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App.Domain.Services.AppServices\App.Domain.Services.AppServices.csproj" />
+    <ProjectReference Include="..\App.Infra.DataAccess.EfCore\App.Infra.DataAccess.EfCore.csproj" />
+  </ItemGroup>
+
 </Project>

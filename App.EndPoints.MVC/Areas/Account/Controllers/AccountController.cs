@@ -10,19 +10,13 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
     {
 
         private readonly IAccountAppService _accountAppService;
-        private readonly IClientAppService _clientAppService;
-        private readonly IExpertAppService _expertAppService;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(IAccountAppService accountAppService,
-                                 IClientAppService clientAppService,
-                                 IExpertAppService expertAppService,
                                  ILogger<AccountController> logger
                                  )
         {
             _accountAppService = accountAppService;
-            _clientAppService = clientAppService;
-            _expertAppService = expertAppService;
             _logger = logger;
         }
 
@@ -46,7 +40,6 @@ namespace App.EndPoints.MVC.Areas.Account.Controllers
                 _logger.LogInformation("[{Timestamp}] ورود موفق کاربر: {Username}."
                     , timestamp,
                     model.Username);
-                
 				string redirectUrl = await _accountAppService.GetRedirectUrlForUser(model.Username);
                 return Redirect(redirectUrl);
             }
